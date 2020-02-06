@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="libraryTable">
+    <library name="mineacademy">
+      <CLASSES>
+        <root url="file://$MAVEN_REPOSITORY$/org/mineacademy" />
+      </CLASSES>
+      <JAVADOC />
+      <NATIVE>
+        <root url="file://$MAVEN_REPOSITORY$/org/mineacademy" />
+      </NATIVE>
+      <SOURCES />
+      <jarDirectory url="file://$MAVEN_REPOSITORY$/org/mineacademy" recursive="false" />
+    </library>
+  </component>
+</project>

@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<project name="CustomCommands" default="Build">
+
+    <!--
+        To make it easier to develop on multiple computers, I included three paths to
+        your test server below. Change the ones that are relevant for you.
+
+        Also make sure you change the name="Orion" above to the name of your plugin.
+     -->
+
+    <!-- Your MC test server location for Windows -->
+    <condition property="serverPath" value="C:\Users\Lenovo\Desktop\TestServer">
+        <os family="windows" />
+    </condition>
+
+    <!-- Your MC test server location for Linux -->
+    <condition property="serverPath" value="C:\Users\Titan\Desktop\TestServer">
+        <os family="unix" />
+    </condition>
+
+    <!-- Your MC test server location for macOS -->
+    <condition property="serverPath" value="C:\Users\Titan\Desktop\TestServer">
+        <os family="mac" />
+    </condition>
+
+    <!-- Ninja: Read your pom.xml file to find the Foundation version we will be using -->
+    <xmlproperty file="pom.xml" prefix="pom" keeproot="false" />
+    <property name="foundation.version" value="${pom.properties.foundation.version}"/>
+
+    <!-- Finally, compile the plugin -->
+    <target name="Build">
+        <jar jarfile="${serverPath}\plugins\${ant.project.name}.jar" basedir="./target/classes/" includes="**/*">
+
+            <!--
+                Ant can include other plugin's classes however it cannot repackage them.
+
+                By default we use the local Foundation library cached in your m2 folder used by Maven
+
+                However, if you have Foundation downloaded from github.com/kangarko/foundation you can just
+                use the second line instead to include its source code within this plugin directly,
+                just make sure you have Foundation in the same workspace folder where you have this plugin.
+            -->
+
+            <zipgroupfileset dir="${user.home}/.m2/repository/me/titan/lib/TitanLib/" includes="**/*1.0.0.jar" />
+
+            <zipgroupfileset dir="${user.home}/.m2/repository/com/github/kangarko/Foundation/${foundation.version}/" includes="**/*${foundation.version}.jar" />
+            <!-- <fileset dir="../Foundation/target/classes" /> -->
+        </jar>
+    </target>
+
+</project>
