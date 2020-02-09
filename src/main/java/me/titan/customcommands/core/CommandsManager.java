@@ -32,7 +32,7 @@ public class CommandsManager {
 		Common.runLater(10,() ->{
 			command.setup();
 
-			File f = FileUtil.getOrMakeFile("settings.yml");
+			File f = FileUtil.getOrMakeFile("commands.yml");
 			YamlConfiguration yc = FileUtil.loadConfigurationStrict(f);
 
 			command.saveData(Objects.requireNonNull(yc.getConfigurationSection("Commands")));

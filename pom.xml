@@ -6,12 +6,12 @@
 
     <groupId>me.titan.customcommands</groupId>
     <artifactId>CustomCommands</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <properties>
 
         <main.class>me.titan.customcommands.core.CustomCommandsPlugin</main.class>
 
-        <foundation.version>5.1.7</foundation.version>
+        <foundation.version>5.2.0</foundation.version>
 
         <java.version>1.8</java.version>
 

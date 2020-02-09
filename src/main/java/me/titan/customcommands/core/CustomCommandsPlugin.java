@@ -1,9 +1,13 @@
 package me.titan.customcommands.core;
 
 import me.titan.customcommands.commands.CustomCommandsCommands;
-import me.titan.customcommands.common.Config;
 import me.titan.customcommands.common.CustomCommand;
+import me.titan.customcommands.common.ItemCommand;
 import me.titan.customcommands.common.TitanCommand;
+import me.titan.customcommands.configurations.CommandsConfig;
+import me.titan.customcommands.configurations.Config;
+import me.titan.customcommands.configurations.ItemsConfig;
+import me.titan.customcommands.listeners.PlayerListener;
 import me.titan.lib.TitanLib;
 import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -23,12 +27,17 @@ public class CustomCommandsPlugin extends SimplePlugin {
 		TitanLib.setPlugin(this);
 
 
+		registerEvents(new PlayerListener());
 
 	}
 
 	@Override
 	protected void onPluginStop() {
 		getInstance = null;
+
+		for (ItemCommand item : ItemCommand.items.values()) {
+			item.save();
+		}
 	}
 
 	public void registerTitanCommand(TitanCommand cmd){
@@ -49,7 +58,7 @@ public class CustomCommandsPlugin extends SimplePlugin {
 
 	@Override
 	public List<Class<? extends YamlStaticConfig>> getSettings() {
-		return Arrays.asList(Config.class);
+		return Arrays.asList(Config.class, CommandsConfig.class, ItemsConfig.class);
 	}
 
 	@Override

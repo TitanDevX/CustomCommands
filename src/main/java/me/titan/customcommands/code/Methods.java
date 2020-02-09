@@ -26,14 +26,15 @@ public enum Methods {
 
 	Function<String[],Object> function;
 
-	private Methods(String str, int argsAmount, Class<?> returnType) {
+	Methods(String str, int argsAmount, Class<?> returnType) {
 
 		this.str = str;
 		this.argsAmount = argsAmount;
 		this.returnType = returnType;
 
 	}
-	private Methods(String str, int argsAmount, Function<String[],Object> f, Class<?> returnType) {
+
+	Methods(String str, int argsAmount, Function<String[], Object> f, Class<?> returnType) {
 		this.str = str;
 		this.argsAmount = argsAmount;
 		this.returnType = returnType;
@@ -144,7 +145,6 @@ public enum Methods {
 		SEND_TOAST("sendToast",2,(p,o, args) -> {
 
 			CompMaterial icon;
-			System.out.print(Common.joinToString(args));
 			if(args.length >= 2){
 
 				icon = CompMaterial.fromString(args[1].replace(" ", ""));
@@ -176,7 +176,6 @@ public enum Methods {
 		RESPAWN("respawn",0,(p,o, args) -> {
 
 
-			System.out.print("respawn called!");
 			p.setHealth(0);
 			Remain.respawn(p, 5);
 			return null;
@@ -194,7 +193,7 @@ public enum Methods {
 
 		CodeMethod<Player> function;
 
-		private PlayerMethods(String str, int argsAmount, String usage, Class<?>... argsClasses) {
+		PlayerMethods(String str, int argsAmount, String usage, Class<?>... argsClasses) {
 
 			this.str = str;
 			this.usage = usage;
@@ -202,7 +201,8 @@ public enum Methods {
 			this.argsClasses = argsClasses;
 
 		}
-		private PlayerMethods(String str, int argsAmount, CodeMethod<Player> f, String usage, Class<?>... argsClasses) {
+
+		PlayerMethods(String str, int argsAmount, CodeMethod<Player> f, String usage, Class<?>... argsClasses) {
 			this.str = str;
 			this.usage = usage;
 			this.argsAmount = argsAmount;
@@ -263,7 +263,6 @@ public enum Methods {
 		GENERATE_TREE("generateTree",5,(w, p, args) -> {
 			Location loc = getLocation(join(args, 4));
 
-			System.out.print(Common.joinToString(args));
 			TreeType et = Util.getEnum(args[4], TreeType.class);
 
 			if(!p.generateTree(loc,et)){
@@ -347,7 +346,7 @@ public enum Methods {
 
 		CodeMethod<World> function;
 
-		private WorldMethods(String str, int argsAmount,String usage, Class<?>... argsClasses) {
+		WorldMethods(String str, int argsAmount, String usage, Class<?>... argsClasses) {
 
 			this.str = str;
 			this.usage = usage;
@@ -355,7 +354,8 @@ public enum Methods {
 			this.argsClasses = argsClasses;
 
 		}
-		private WorldMethods(String str, int argsAmount, CodeMethod<World> f,String usage, Class<?>... argsClasses) {
+
+		WorldMethods(String str, int argsAmount, CodeMethod<World> f, String usage, Class<?>... argsClasses) {
 			this.str = str;
 			this.usage = usage;
 			this.argsAmount = argsAmount;

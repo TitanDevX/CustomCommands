@@ -5,34 +5,3 @@
 ############################################################################################################################
 Version: 2
 Command_Aliases: [CustomCommands, ccs, cuc]
-
-Commands:
-  MyCommand:
-    Aliases: []
-    Usage: "<Player> [Item]"
-    # The time between each command execution.
-    # Example: 10 Seconds.
-    # Example2: 2 Minutes
-    # Example3: 5 hours.
-    # Example 4: 6 Days.
-    Cooldown: "0 seconds"
-    #Set to null to make this commands allowed for everyone.
-    Permission: null
-    # Put '/' before the command to make this command perform by the player, otherwise it will be performed from the console.
-    # Placeholders: 1.{player}.
-    # 2.{arg:<#>:[Type]} : valid types: player (reads the arg # as a player name),
-    # number (reads the arg # as a number), boolean (reads the arg # as a boolean),
-    # world (reads it as a world name), enum (see number 3).
-    # (TO Do) 3. {arg:#:enum:["enum1", "enum2", "enum3"]}: reads the arg as an enum, if the enum list doesn't contains the arg# it throws an error message.
-    # Note: arguments numbers starts from 0 and not 1. so for example if 'MyCommand MyPlayer' is performed, the 'MyPlayer' argument number is 0.
-    # Note 2: put '*' to make this argument required. or don't put it and specify the replacement after the type or arg number. (see command 3).
-    Commands:
-      - "say 'Hello World'"
-      - "give {player} diamond"
-      - "give {*arg:0:player} {arg:1:diamond}"
-    #These will be sent when this command used as a reply.
-    Reply_Messages:
-      - "Console said 'Hello World'"
-    Code:
-      - " player.teleport(1, 100, 1, world)"
-      - " player.setHealth(player.getHealth() * 2)"

@@ -6,7 +6,7 @@ import org.mineacademy.fo.command.SimpleSubCommand;
 
 public class SetMinArgs extends SimpleSubCommand {
 	protected SetMinArgs() {
-		super("minargs");
+		super("setMinArgs");
 		setMinArguments(2);
 		setUsage("<Command> <Min Arguments>");
 	}

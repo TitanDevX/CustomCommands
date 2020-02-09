@@ -41,7 +41,6 @@ public class CodeReader {
 			}
 		}
 		String result = "";
-		System.out.print(repeats);
 
 			String[] Dots = code.split("\\.");
 			String object = "";

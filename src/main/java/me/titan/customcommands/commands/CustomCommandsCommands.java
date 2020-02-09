@@ -10,6 +10,8 @@ public class CustomCommandsCommands extends SimpleCommandGroup {
 	registerSubcommand(new ReloadCommand());
 	registerSubcommand(new SetMinArgs());
 	registerSubcommand(new SetPermissionCommand());
+		registerSubcommand(new SetItemCommand());
+		registerSubcommand(new GiveItemCommand());
 
 	}
 }

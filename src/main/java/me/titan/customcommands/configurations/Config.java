@@ -1,6 +1,5 @@
-package me.titan.customcommands.common;
+package me.titan.customcommands.configurations;
 
-import org.mineacademy.fo.Common;
 import org.mineacademy.fo.settings.SimpleSettings;
 
 public class Config extends SimpleSettings {
@@ -13,11 +12,6 @@ public class Config extends SimpleSettings {
 
 		private final static void init(){
 
-			Common.log("Registering Custom Commands...");
-
-			pathPrefix("Commands");
-
-			CustomCommandsReader.readCommands(getConfig().getConfigurationSection("Commands"));
 
 		}
 	}
