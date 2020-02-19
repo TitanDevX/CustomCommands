@@ -8,31 +8,139 @@ public class EnchantmentUtils {
 	private static final HashMap<String, Enchantment> enchants = new HashMap();
 
 	static {
-		enchants.put("SHARPNESS", Enchantment.DAMAGE_ALL);
-		enchants.put("POWER", Enchantment.ARROW_DAMAGE);
-		enchants.put("FIRE_PROTECTION", Enchantment.PROTECTION_FIRE);
-		enchants.put("FEATHER_FALLING", Enchantment.PROTECTION_FALL);
-		enchants.put("PROTECTION", Enchantment.PROTECTION_ENVIRONMENTAL);
-		enchants.put("BLAST_PROTECTION", Enchantment.PROTECTION_EXPLOSIONS);
-		enchants.put("PROJECTILE_PROTECTION", Enchantment.PROTECTION_PROJECTILE);
-		enchants.put("RESPIRATION", Enchantment.OXYGEN);
-		enchants.put("INFINITY", Enchantment.ARROW_INFINITE);
-		enchants.put("AQUA_AFFINITY", Enchantment.WATER_WORKER);
-		enchants.put("UNBREAKING", Enchantment.DURABILITY);
-		enchants.put("SMITE", Enchantment.DAMAGE_UNDEAD);
-		enchants.put("BANE_OF_ARTHROPODS", Enchantment.DAMAGE_ARTHROPODS);
-		enchants.put("EFFICIENCY", Enchantment.DIG_SPEED);
-		enchants.put("FIRE_ASPECT", Enchantment.FIRE_ASPECT);
-		enchants.put("SILK_TOUCH", Enchantment.SILK_TOUCH);
-		enchants.put("FORTUNE", Enchantment.LOOT_BONUS_BLOCKS);
-		enchants.put("LOOTING", Enchantment.LOOT_BONUS_MOBS);
-		enchants.put("PUNCH", Enchantment.ARROW_KNOCKBACK);
-		enchants.put("FLAME", Enchantment.ARROW_FIRE);
-		enchants.put("KNOCKBACK", Enchantment.KNOCKBACK);
-		enchants.put("THORNS", Enchantment.THORNS);
-		enchants.put("MENDING", Enchantment.MENDING);
-		enchants.put("DEPTH_STRIDER", Enchantment.DEPTH_STRIDER);
-		enchants.put("FROST_WALKER", Enchantment.FROST_WALKER);
+		try {
+			enchants.put("SHARPNESS", Enchantment.DAMAGE_ALL);
+
+		} catch (NoSuchFieldError e) {
+
+		}
+		try {
+			enchants.put("POWER", Enchantment.ARROW_DAMAGE);
+
+
+		} catch (NoSuchFieldError e) {
+
+
+		}
+		try {
+			enchants.put("FIRE_PROTECTION", Enchantment.PROTECTION_FIRE);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("FEATHER_FALLING", Enchantment.PROTECTION_FALL);
+
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("PROTECTION", Enchantment.PROTECTION_ENVIRONMENTAL);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("BLAST_PROTECTION", Enchantment.PROTECTION_EXPLOSIONS);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("PROJECTILE_PROTECTION", Enchantment.PROTECTION_PROJECTILE);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("RESPIRATION", Enchantment.OXYGEN);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("INFINITY", Enchantment.ARROW_INFINITE);
+		} catch (NoSuchFieldError e) {
+		}
+
+		try {
+			enchants.put("AQUA_AFFINITY", Enchantment.WATER_WORKER);
+		} catch (NoSuchFieldError e) {
+		}
+
+		try {
+			enchants.put("UNBREAKING", Enchantment.DURABILITY);
+		} catch (NoSuchFieldError e) {
+		}
+
+		try {
+			enchants.put("SMITE", Enchantment.DAMAGE_UNDEAD);
+		} catch (NoSuchFieldError e) {
+		}
+
+		try {
+			enchants.put("EFFICIENCY", Enchantment.DIG_SPEED);
+		} catch (NoSuchFieldError e) {
+		}
+
+		try {
+			enchants.put("FIRE_ASPECT", Enchantment.FIRE_ASPECT);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("SILK_TOUCH", Enchantment.SILK_TOUCH);
+		} catch (NoSuchFieldError e) {
+		}
+
+		try {
+			enchants.put("FORTUNE", Enchantment.LOOT_BONUS_BLOCKS);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("LOOTING", Enchantment.LOOT_BONUS_MOBS);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("PUNCH", Enchantment.ARROW_KNOCKBACK);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("FLAME", Enchantment.ARROW_FIRE);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("KNOCKBACK", Enchantment.KNOCKBACK);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("THORNS", Enchantment.THORNS);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("MENDING", Enchantment.MENDING);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("DEPTH_STRIDER", Enchantment.DEPTH_STRIDER);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("FROST_WALKER", Enchantment.FROST_WALKER);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("CHANNELING", Enchantment.CHANNELING);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("RIPTIDE", Enchantment.RIPTIDE);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("BINDING_CURSE", Enchantment.BINDING_CURSE);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("IMPALING", Enchantment.IMPALING);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("LOYALTY", Enchantment.LOYALTY);
+		} catch (NoSuchFieldError e) {
+		}
+		try {
+			enchants.put("LUCK", Enchantment.LUCK);
+		} catch (NoSuchFieldError e) {
+		}
 	}
 
 	public EnchantmentUtils() {

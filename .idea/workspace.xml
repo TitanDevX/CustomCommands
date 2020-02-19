@@ -2,47 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f3ce3f7-3d9b-4b32-8090-e3a14e0672cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/GiveItemCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetItemCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/ItemCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/configurations/CommandsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/configurations/ItemsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/listeners/PlayerListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/EnchantmentUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/TitanItemUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/CodeReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/CodeReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/Methods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/CustomCommandsCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/CustomCommandsCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetMinArgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetMinArgs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetPermissionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetPermissionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/configurations/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/core/CommandsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/core/CommandsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/core/CustomCommandsPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/core/CustomCommandsPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/settings.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/settings.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CustomCommands-1.0.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/CodeReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/CodeReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/ItemCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/ItemCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/EnchantmentUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/EnchantmentUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods$PlayerMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods$PlayerMethods.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods$WorldMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods$WorldMethods.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/commands/CustomCommandsCommands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/commands/CustomCommandsCommands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/commands/SetMinArgs.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/commands/SetMinArgs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/commands/SetPermissionCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/commands/SetPermissionCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/Config$Commands.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/Config.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/core/CommandsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/core/CommandsManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/core/CustomCommandsPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/core/CustomCommandsPlugin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/utils/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/utils/Util.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/settings.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/settings.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/original-CustomCommands-1.0.4.jar" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,7 +192,18 @@
       <option name="presentableId" value="Default" />
       <updated>1579466908144</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update 1.0.5!&#10;Added CommandItems.&#10;Updated Kangarko foundation version.">
+      <created>1581281853160</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581281853160</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -248,6 +228,14 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Update 1.0.5!&#10;Added CommandItems.&#10;Updated Kangarko foundation version." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update 1.0.5!&#10;Added CommandItems.&#10;Updated Kangarko foundation version." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -256,6 +244,11 @@
           <line>26</line>
           <properties field="function" class="me.titan.customcommands.code.Methods" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/CustomCommandsReader.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

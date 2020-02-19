@@ -1,5 +1,5 @@
 name: CustomCommands
-version: 1.0.5
+version: 1.0.6
 main: me.titan.customcommands.core.CustomCommandsPlugin
 author: TitanDev
 api-version: 1.13

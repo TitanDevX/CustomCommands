@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.FileUtil;
 import org.mineacademy.fo.ItemUtil;
+import org.mineacademy.fo.ReflectionUtil;
 import org.mineacademy.fo.menu.model.ItemCreator;
 import org.mineacademy.fo.model.SimpleEnchant;
 import org.mineacademy.fo.remain.CompMaterial;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Getter
 @Setter
@@ -93,6 +96,19 @@ public class ItemCommand {
 			int level = Integer.parseInt(parts[1]);
 
 
+			if (en == null) {
+
+				try {
+					en = ReflectionUtil.getStaticFieldContent(Enchantment.class, parts[0].toUpperCase());
+
+
+				} catch (ReflectionUtil.ReflectionException e) {
+					Logger.getLogger("Minecraft").log(Level.SEVERE, "Unable to find an enchantment with the name " + parts[0] + "!");
+					continue;
+				}
+
+
+			}
 			enchantments.add(new SimpleEnchant(en, level));
 		}
 
