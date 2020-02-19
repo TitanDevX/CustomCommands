@@ -29,6 +29,7 @@ public class TitanCommand extends SimpleCommand {
 		if(args.length < cc.getMinArgs()){
 
 			returnTell("&cUsage: /" + cc.getUsage() + ".");
+			return;
 		}
 
 

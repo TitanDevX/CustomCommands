@@ -1,4 +1,4 @@
-name: CustomCommands
+name: ${project.name}
 version: 1.0.6
 main: me.titan.customcommands.core.CustomCommandsPlugin
 author: TitanDev
