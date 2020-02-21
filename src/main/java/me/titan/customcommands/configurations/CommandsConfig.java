@@ -2,6 +2,7 @@ package me.titan.customcommands.configurations;
 
 import me.titan.customcommands.common.CustomCommandsReader;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.FileUtil;
 import org.mineacademy.fo.settings.YamlStaticConfig;
 
 public class CommandsConfig extends YamlStaticConfig {
@@ -10,7 +11,7 @@ public class CommandsConfig extends YamlStaticConfig {
 
 		pathPrefix("Commands");
 
-		CustomCommandsReader.readCommands(getConfig().getConfigurationSection("Commands"));
+		CustomCommandsReader.readCommands(getConfig(), FileUtil.getFile("commands.yml"));
 
 	}
 

@@ -70,16 +70,16 @@ public class CustomCommand extends YamlSectionConfig {
 
 
 		String path = getName() + ".";
-		if(!sec.contains(path + "Aliases")) {
+
 			sec.set(path + "Aliases", getAliases());
 			sec.set(path + "Permission", perms);
 			sec.set(path + "Commands", getPerformCommands());
-			sec.set(path + "Replay_Messages", getReplyMessages());
+		sec.set(path + "Reply_Messages", getReplyMessages());
 			sec.set(path + "Usage", usage);
 			sec.set(path + "MinArguments", minArgs);
 			sec.set(path + "Code", codes);
 			sec.set(path + "Cooldown", cooldown);
-		}
+
 	}
 	public ObjectsSet<Integer, TimeUnit> getDelayObjects(){
 		if(cooldown == null || cooldown.isEmpty()) return null;

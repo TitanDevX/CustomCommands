@@ -7,6 +7,7 @@ import me.titan.customcommands.common.TitanCommand;
 import me.titan.customcommands.configurations.CommandsConfig;
 import me.titan.customcommands.configurations.Config;
 import me.titan.customcommands.configurations.ItemsConfig;
+import me.titan.customcommands.configurations.MessagesConfig;
 import me.titan.customcommands.listeners.PlayerListener;
 import me.titan.lib.TitanLib;
 import org.mineacademy.fo.command.SimpleCommandGroup;
@@ -58,7 +59,7 @@ public class CustomCommandsPlugin extends SimplePlugin {
 
 	@Override
 	public List<Class<? extends YamlStaticConfig>> getSettings() {
-		return Arrays.asList(Config.class, CommandsConfig.class, ItemsConfig.class);
+		return Arrays.asList(Config.class, CommandsConfig.class, ItemsConfig.class, MessagesConfig.class);
 	}
 
 	@Override

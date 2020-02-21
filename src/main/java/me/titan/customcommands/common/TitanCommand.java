@@ -1,6 +1,7 @@
 package me.titan.customcommands.common;
 
 import me.titan.customcommands.code.CodeReader;
+import me.titan.customcommands.configurations.MessagesConfig;
 import me.titan.customcommands.utils.Util;
 import org.bukkit.Bukkit;
 import org.mineacademy.fo.command.SimpleCommand;
@@ -13,6 +14,10 @@ public class TitanCommand extends SimpleCommand {
 		this.cc = cc;
 
 			setPermission(cc.getPerms());
+		setPermissionMessage(getPermissionMessage().equalsIgnoreCase("none") ? "" : getPermissionMessage());
+
+
+
 			if(cc.getDelayObjects() != null) {
 				setCooldown(cc.getDelayObjects().getFirst(), cc.getDelayObjects().getSecond());
 			}
@@ -28,7 +33,9 @@ public class TitanCommand extends SimpleCommand {
 
 		if(args.length < cc.getMinArgs()){
 
-			returnTell("&cUsage: /" + cc.getUsage() + ".");
+			if (!MessagesConfig.usageMsg.equalsIgnoreCase("none")) {
+				returnTell(MessagesConfig.usageMsg.replace("{Usage}", cc.getUsage()));
+			}
 			return;
 		}
 

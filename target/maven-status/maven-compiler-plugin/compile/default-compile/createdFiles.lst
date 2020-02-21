@@ -9,6 +9,7 @@ PacketWrapper\src\main\java\com\comphenix\packetwrapper\ChunkPacketProcessor$Chu
 me\titan\customcommands\code\PlayerMethods.class
 me\titan\customcommands\common\CustomCommandsReader.class
 PacketWrapper\src\main\java\com\comphenix\packetwrapper\WrapperPlayServerGameStateChange.class
+me\titan\customcommands\configurations\MessagesConfig.class
 me\titan\customcommands\utils\Util.class
 me\titan\customcommands\common\ItemCommand.class
 me\titan\customcommands\common\CustomCommandsReader$1.class

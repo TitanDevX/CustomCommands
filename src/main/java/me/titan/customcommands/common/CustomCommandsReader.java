@@ -2,6 +2,7 @@ package me.titan.customcommands.common;
 
 import me.titan.customcommands.core.CommandsManager;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.PlayerUtil;
@@ -9,13 +10,16 @@ import org.mineacademy.fo.ReflectionUtil;
 import org.mineacademy.fo.Valid;
 import org.mineacademy.fo.remain.Remain;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomCommandsReader {
 
-	public static void readCommands(ConfigurationSection section){
+	public static void readCommands(YamlConfiguration config, File f) {
 
+		ConfigurationSection section = config.getConfigurationSection("Commands");
 		for(String name : section.getKeys(false)){
 
 			CustomCommand cc;
@@ -29,7 +33,19 @@ public class CustomCommandsReader {
 			cc.setPerms(section.getString(path + "Permission"));
 
 			cc.setPerformCommands(section.getStringList(path + "Commands"));
-			cc.setReplyMessages(section.getStringList(path + "Reply_Messages"));
+			if (section.contains(path + "Replay_Messages")) {
+				List<String> list = section.getStringList(path + "Replay_Messages");
+				cc.setReplyMessages(list);
+				section.set(path + "Replay_Messages", null);
+				section.set(path + "Reply_Messages", list);
+				try {
+					config.save(f);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			} else
+				cc.setReplyMessages(section.getStringList(path + "Reply_Messages"));
 			cc.setUsage(section.getString(path + "Usage"));
 			cc.setMinArgs(section.getInt(path + "MinArguments"));
 			cc.setCodes(section.getStringList(path + "Code"));
