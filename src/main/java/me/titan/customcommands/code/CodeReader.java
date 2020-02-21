@@ -130,7 +130,7 @@ public class CodeReader {
 		argsStr = argsStr.replace(" ", "");
 		String[] args = argsStr.replace(" ","").split(",");
 
-		Object b = Methods.WorldMethods.get(argsStrReplaced).invoke(p,w, args);
+		Object b = WorldMethods.get(argsStrReplaced).invoke(p, w, args);
 		return b + "";
 	}
 	public static String readPlayerCode(String code, String method, Player p) {
@@ -154,7 +154,7 @@ public class CodeReader {
 			argsStrReplaced = argsStr;
 		}
 		String[] args = argsStr.replace(" ","").split(",");
-		Object b = Methods.PlayerMethods.get(argsStrReplaced).invoke(p, args);
+		Object b = PlayerMethods.get(argsStrReplaced).invoke(p, args);
 		return b + "";
 
 	}
@@ -184,7 +184,7 @@ public class CodeReader {
 		String method = getMethod(Dots);
 
 		method = "getHealth";
-		return Methods.PlayerMethods.getInvoke(method, p) + "";
+		return PlayerMethods.getInvoke(method, p) + "";
 		//player.getHealth
 
 	}

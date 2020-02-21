@@ -14,6 +14,7 @@ import javax.annotation.RegEx;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class Util {
 
@@ -100,5 +101,24 @@ public class Util {
 
 
 		return s;
+	}
+
+	/**
+	 * @param source
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	public static String getSubStringBetween(String source, String first, String second) {
+		int index1 = source.indexOf(first);
+		int index2 = source.lastIndexOf(second);
+
+		return source.substring(index1, index2).replace("'", "");
+	}
+
+	public static void conoleError(String... msgs) {
+		for (String gg : msgs) {
+			Logger.getLogger("Minecraft").severe(gg);
+		}
 	}
 }

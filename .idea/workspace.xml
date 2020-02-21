@@ -2,10 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f3ce3f7-3d9b-4b32-8090-e3a14e0672cc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/PacketWrapper/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PacketWrapper/src/main/java/com/comphenix/packetwrapper/AbstractPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PacketWrapper/src/main/java/com/comphenix/packetwrapper/ChunkPacketProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PacketWrapper/src/main/java/com/comphenix/packetwrapper/PacketWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PacketWrapper/src/main/java/com/comphenix/packetwrapper/WrapperPlayServerGameStateChange.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PacketWrapper/src/main/resources/plugin.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/PlayerMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/WorldMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/TitanCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/TitanCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/TitanCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/TitanCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/CodeReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/CodeReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetItemCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/commands/SetItemCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/CodeReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/CodeReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods$PlayerMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods$WorldMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/code/Methods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/utils/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/utils/Util.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -72,7 +91,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="LombokPluginEnabledInProject" value="true" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -84,6 +103,7 @@
       <recent name="me.titan.customcommands.configurations" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\Desktop\Java Projects\CustomCommands\src\main\java" />
       <recent name="C:\Users\Lenovo\Desktop\Java Projects\CustomCommands\src\main\resources" />
       <recent name="C:\Users\Lenovo\Desktop\Java Projects\CustomCommands" />
     </key>
@@ -100,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.Unnamed">
+  <component name="RunManager" selected="Maven.CustomCommands [clean,install]">
     <configuration name="Unnamed" type="JarApplication" nameIsGenerated="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/../../TestServer/spigot-1.8.8.jar" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Lenovo\Desktop\TestServer" />
@@ -200,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582133303527</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update 1.0.6!">
+      <created>1582133740393</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1582133740393</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -243,7 +270,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/Methods.java</url>
-          <line>26</line>
+          <line>19</line>
           <properties field="function" class="me.titan.customcommands.code.Methods" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
