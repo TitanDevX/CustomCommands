@@ -6,7 +6,7 @@
 
     <groupId>me.titan.customcommands</groupId>
     <artifactId>CustomCommands</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <properties>
 
         <main.class>me.titan.customcommands.core.CustomCommandsPlugin</main.class>

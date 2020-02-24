@@ -1,7 +1,7 @@
 package me.titan.customcommands.commands;
 
-import me.titan.customcommands.common.CustomCommand;
 import me.titan.customcommands.core.CommandsManager;
+import me.titan.customcommands.customcommands.CustomCommand;
 import org.mineacademy.fo.command.SimpleSubCommand;
 
 public class SetPermissionCommand extends SimpleSubCommand {

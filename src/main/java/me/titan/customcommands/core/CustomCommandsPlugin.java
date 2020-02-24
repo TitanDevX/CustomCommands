@@ -1,14 +1,15 @@
 package me.titan.customcommands.core;
 
 import me.titan.customcommands.commands.CustomCommandsCommands;
-import me.titan.customcommands.common.CustomCommand;
 import me.titan.customcommands.common.ItemCommand;
-import me.titan.customcommands.common.TitanCommand;
 import me.titan.customcommands.configurations.CommandsConfig;
 import me.titan.customcommands.configurations.Config;
 import me.titan.customcommands.configurations.ItemsConfig;
 import me.titan.customcommands.configurations.MessagesConfig;
+import me.titan.customcommands.customcommands.CustomCommand;
 import me.titan.customcommands.listeners.PlayerListener;
+import me.titan.customcommands.titancommands.TitanCommand;
+import me.titan.customcommands.titancommands.TitanCommandGroup;
 import me.titan.lib.TitanLib;
 import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -43,6 +44,11 @@ public class CustomCommandsPlugin extends SimplePlugin {
 
 	public void registerTitanCommand(TitanCommand cmd){
 		registerCommand(cmd);
+
+	}
+
+	public void registerTitanCommandGroup(TitanCommandGroup cmd, String name, List<String> aliases) {
+		registerCommands(name, aliases, cmd);
 	}
 
 	@Override

@@ -1,15 +1,18 @@
-package me.titan.customcommands.common;
+package me.titan.customcommands.titancommands;
 
 import me.titan.customcommands.code.CodeReader;
+import me.titan.customcommands.common.CustomCommandsReader;
 import me.titan.customcommands.configurations.MessagesConfig;
+import me.titan.customcommands.customcommands.CustomCommand;
 import me.titan.customcommands.utils.Util;
 import org.bukkit.Bukkit;
 import org.mineacademy.fo.command.SimpleCommand;
 
-public class TitanCommand extends SimpleCommand {
+public class TitanCommand extends SimpleCommand implements ITitanCommand {
 	CustomCommand cc ;
-	protected TitanCommand(CustomCommand cc) {
-		super(cc.name, Util.toLowerCaseList(cc.getAliases()));
+
+	public TitanCommand(CustomCommand cc) {
+		super(cc.getName(), Util.toLowerCaseList(cc.getAliases()));
 
 		this.cc = cc;
 
@@ -55,4 +58,6 @@ public class TitanCommand extends SimpleCommand {
 		}
 		CodeReader.performCode(cc.getCodes(),getPlayer());
 	}
+
+
 }

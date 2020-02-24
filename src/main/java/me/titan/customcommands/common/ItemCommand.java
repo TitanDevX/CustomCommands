@@ -49,7 +49,6 @@ public class ItemCommand {
 
 	//	public ItemStack getItemStack(){
 //		if(type == null) {
-//			System.out.print("TYPE NULL");
 //			return null;
 //		}
 //		ItemCreator.ItemCreatorBuilder ic = ItemCreator.of(type);

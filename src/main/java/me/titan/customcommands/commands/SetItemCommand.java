@@ -39,12 +39,10 @@ public class SetItemCommand extends SimpleSubCommand {
 
 				String[] parts = all.split(",");
 				for (String part : parts) {
-					System.out.print(part);
 					//int index1 = all.indexOf("'");
 					//int index2 = all.lastIndexOf("'");
 					String command = Util.getSubStringBetween(part, "'", "'");//all.substring(index1, index2);
 
-					System.out.print(command);
 					ic.getCommands().add(command);
 				}
 
@@ -56,7 +54,6 @@ public class SetItemCommand extends SimpleSubCommand {
 
 				ic.getCommands().add(command);
 			}
-			System.out.print(ic.getCommands());
 		}
 
 		ic.save();

@@ -1,9 +1,10 @@
-package me.titan.customcommands.common;
+package me.titan.customcommands.customcommands;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.titan.customcommands.core.CommandsManager;
 import me.titan.customcommands.core.CustomCommandsPlugin;
+import me.titan.customcommands.titancommands.TitanCommand;
 import me.titan.customcommands.utils.ObjectsSet;
 import me.titan.customcommands.utils.Util;
 import org.bukkit.configuration.ConfigurationSection;
@@ -16,11 +17,12 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
-public class CustomCommand extends YamlSectionConfig {
+public class CustomCommand extends YamlSectionConfig implements ICustomCommand {
 
 	final String name;
 
 	TitanCommand command;
+
 
 	List<String> aliases = new ArrayList<>();
 	String perms;
@@ -49,14 +51,15 @@ public class CustomCommand extends YamlSectionConfig {
 		this.command = new TitanCommand(this);
 		loadConfiguration(null, "data.db");
 	}
-	public TitanCommand setup(){
+
+	@Override
+	public void setup() {
 		List<String> ali = this.getAliases();
 		TitanCommand tc = new TitanCommand(this);
 		this.command = tc;
 
 		CustomCommandsPlugin.getInstance.registerTitanCommand(command);
 
-		return tc;
 	}
 
 	@Override
@@ -66,19 +69,21 @@ public class CustomCommand extends YamlSectionConfig {
 	public void reloadCommand(){
 		CommandsManager.reload(this);
 	}
+
+	@Override
 	public void saveData(ConfigurationSection sec) {
 
 
 		String path = getName() + ".";
 
-			sec.set(path + "Aliases", getAliases());
-			sec.set(path + "Permission", perms);
-			sec.set(path + "Commands", getPerformCommands());
+		sec.set(path + "Aliases", getAliases());
+		sec.set(path + "Permission", perms);
+		sec.set(path + "Commands", getPerformCommands());
 		sec.set(path + "Reply_Messages", getReplyMessages());
-			sec.set(path + "Usage", usage);
-			sec.set(path + "MinArguments", minArgs);
-			sec.set(path + "Code", codes);
-			sec.set(path + "Cooldown", cooldown);
+		sec.set(path + "Usage", usage);
+		sec.set(path + "MinArguments", minArgs);
+		sec.set(path + "Code", codes);
+		sec.set(path + "Cooldown", cooldown);
 
 	}
 	public ObjectsSet<Integer, TimeUnit> getDelayObjects(){
