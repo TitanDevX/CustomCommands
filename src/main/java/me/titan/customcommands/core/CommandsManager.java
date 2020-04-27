@@ -79,7 +79,9 @@ public class CommandsManager {
 
 	public static void reload(CustomCommandsGroup cc) {
 		CommandsManager.getInstance().commandsGroups.remove(cc.getName());
-		Remain.unregisterCommand(cc.getName(), true);
+		if (cc.getCommand().isRegistered()) {
+			cc.getCommand().unregister();
+		}
 
 		CommandsManager.register(cc);
 	}

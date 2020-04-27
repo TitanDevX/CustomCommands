@@ -9,7 +9,7 @@
      -->
 
     <!-- Your MC test server location for Windows -->
-    <condition property="serverPath" value="C:\Users\Lenovo\Desktop\TestServer">
+    <condition property="serverPath" value="C:\Users\Lenovo\Desktop\TestServer\1.8">
         <os family="windows" />
     </condition>
 

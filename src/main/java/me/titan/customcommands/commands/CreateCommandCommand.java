@@ -18,7 +18,12 @@ public class CreateCommandCommand extends SimpleSubCommand {
 
 		String name= args[0];
 
+
 		if (args.length > 1) {
+			if (CommandsManager.getInstance().commandsGroups.containsKey(name)) {
+
+				returnTell("&cThis command already exists.");
+			}
 			String[] subs = args[1].split(",");
 			CustomCommandsGroup group = new CustomCommandsGroup(name);
 
@@ -30,6 +35,10 @@ public class CreateCommandCommand extends SimpleSubCommand {
 			}
 			CommandsManager.register(group);
 			returnTell("&aSuccessfully created a commands group &c(" + name + ")&a with sub commands: &c" + args[1].replace(",", ", ") + ".");
+		}
+		if (CommandsManager.getInstance().commands.containsKey(name)) {
+
+			returnTell("&cThis command already exists.");
 		}
 
 		CommandsManager.register(new CustomCommand(name));

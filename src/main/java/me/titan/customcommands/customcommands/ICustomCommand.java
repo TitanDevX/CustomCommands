@@ -1,8 +1,10 @@
 package me.titan.customcommands.customcommands;
 
+import me.titan.customcommands.code.cache.PremadeFunction;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ICustomCommand {
 
@@ -27,6 +29,8 @@ public interface ICustomCommand {
 	String getCooldown();
 
 	void setCooldown(String cool);
+
+	Map<String, PremadeFunction> getCodeMethods();
 
 	List<String> getPerformCommands();
 

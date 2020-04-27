@@ -2,6 +2,7 @@ package me.titan.customcommands.customcommands;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.titan.customcommands.code.cache.PremadeFunction;
 import me.titan.customcommands.core.CommandsManager;
 import me.titan.customcommands.core.CustomCommandsPlugin;
 import me.titan.customcommands.titancommands.TitanCommand;
@@ -12,7 +13,9 @@ import org.mineacademy.fo.ReflectionUtil;
 import org.mineacademy.fo.settings.YamlSectionConfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Getter
@@ -36,6 +39,7 @@ public class CustomCommand extends YamlSectionConfig implements ICustomCommand {
 	List<String> replyMessages = new ArrayList<>();
 	List<String> codes = new ArrayList<>();
 
+	Map<String, PremadeFunction> codeMethods = new HashMap<>();
 
 	/**
 	 * Create a new section config with a section prefix,

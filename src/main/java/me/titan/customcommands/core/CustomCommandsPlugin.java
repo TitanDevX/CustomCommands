@@ -11,6 +11,7 @@ import me.titan.customcommands.listeners.PlayerListener;
 import me.titan.customcommands.titancommands.TitanCommand;
 import me.titan.customcommands.titancommands.TitanCommandGroup;
 import me.titan.lib.TitanLib;
+import org.mineacademy.fo.FileUtil;
 import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mineacademy.fo.remain.Remain;
@@ -30,6 +31,9 @@ public class CustomCommandsPlugin extends SimplePlugin {
 
 
 		registerEvents(new PlayerListener());
+		FileUtil.getOrMakeFile("log.log");
+
+		FileUtil.extract("codes.yml");
 
 	}
 

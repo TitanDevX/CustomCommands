@@ -23,78 +23,33 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CustomCommandsReader {
 
 	public static void readCommands(YamlConfiguration config, File f) {
+		for (CustomCommandsGroup gg : CommandsManager.getInstance().commandsGroups.values()) {
+			gg.getCommand().unregister();
+		}
+		CommandsManager.getInstance().commandsGroups.clear();
+		CommandsManager.getInstance().commands.clear();
 
 		ConfigurationSection section = config.getConfigurationSection("Commands");
-		for(String name : section.getKeys(false)){
+
+		FirstLoop:
+		for (String name : section.getKeys(false)) {
 
 
 			AtomicReference<String> path = new AtomicReference<>(name + ".");
 			if (section.contains(path + "Sub_Commands")) {
 
 				if (!section.getConfigurationSection(path + "Sub_Commands").getKeys(false).isEmpty()) {
-					Common.runLater(20, () -> {
-						CustomCommandsGroup ccg;
-						if (CommandsManager.getInstance().commands.containsKey(name)) {
-							ccg = CommandsManager.getInstance().commandsGroups.get(name);
-						} else {
-							ccg = new CustomCommandsGroup(name);
+					readSubCommands(name, section, path, config, f);
 
-						}
-
-
-						ccg.setAliases(section.getStringList(path + "Aliases"));
-						for (String subname : section.getConfigurationSection(path + "Sub_Commands").getKeys(false)) {
-							CustomSubCommand csc = new CustomSubCommand(subname);
-
-
-							path.set(path + "Sub_Commands." + subname + ".");
-
-							csc.setAliases(section.getStringList(path.get() + "Aliases"));
-							csc.setPerms(section.getString(path.get() + "Permission"));
-
-							csc.setPerformCommands(section.getStringList(path.get() + "Commands"));
-							if (section.contains(path.get() + "Replay_Messages")) {
-								List<String> list = section.getStringList(path.get() + "Replay_Messages");
-								csc.setReplyMessages(list);
-								section.set(path.get() + "Replay_Messages", null);
-								section.set(path.get() + "Reply_Messages", list);
-								try {
-									config.save(f);
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-
-							} else
-								csc.setReplyMessages(section.getStringList(path.get() + "Reply_Messages"));
-							csc.setUsage(section.getString(path.get() + "Usage"));
-							csc.setMinArgs(section.getInt(path.get() + "MinArguments"));
-							csc.setCodes(section.getStringList(path.get() + "Code"));
-							csc.setCooldown(section.getString(path.get() + "Cooldown"));
-							ccg.getSubCommands().add(csc);
-
-
-						}
-
-						CommandsManager.reload(ccg);
-//						if (!CommandsManager.getInstance().commandsGroups.containsKey(name)) {
-//
-//							CommandsManager.register(ccg);
-//						} else {
-//							Remain.unregisterCommand(ccg.getName(), true);
-//							CommandsManager.register(ccg);
-//						}
-
-
-					});
-					continue;
+					continue FirstLoop;
 				}
 
 
 			}
 			CustomCommand cc;
-			if(CommandsManager.getInstance().commands.containsKey(name)){
+			if (CommandsManager.getInstance().commands.containsKey(name)) {
 				cc = CommandsManager.getInstance().commands.get(name);
-			}else{
+			} else {
 				cc = new CustomCommand(name);
 			}
 			setValues(cc, section, path.get(), config, f);
@@ -107,8 +62,58 @@ public class CustomCommandsReader {
 				CommandsManager.register(cc);
 			}
 		}
+
 	}
 
+	public static void readSubCommands(String name, ConfigurationSection section, AtomicReference<String> path, YamlConfiguration config, File f) {
+		Common.runLater(20, () -> {
+			CustomCommandsGroup ccg = new CustomCommandsGroup(name);
+			if (CommandsManager.getInstance().commandsGroups.containsKey(name)) {
+				ccg = CommandsManager.getInstance().commandsGroups.get(name);
+			}
+
+			String apath = path.get();
+
+			System.out.print(ccg);
+			ccg.setAliases(section.getStringList(apath + "Aliases"));
+			ccg.setHelpHeader(section.getStringList(apath + "Help_Header"));
+			ccg.setNoParamsMsg(section.getStringList(apath + "No_Params_Message"));
+
+			for (String subname : section.getConfigurationSection(apath + "Sub_Commands").getKeys(false)) {
+				CustomSubCommand csc = new CustomSubCommand(subname);
+
+
+				apath = path.get() + ".Sub_Commands." + subname + ".";
+
+				csc.setAliases(section.getStringList(apath + "Aliases"));
+				csc.setPerms(section.getString(apath + "Permission"));
+
+				csc.setPerformCommands(section.getStringList(apath + "Commands"));
+
+				csc.setReplyMessages(section.getStringList(apath + "Reply_Messages"));
+				System.out.print(csc.getReplyMessages());
+
+				csc.setUsage(section.getString(apath + "Usage"));
+				csc.setMinArgs(section.getInt(apath + "MinArguments"));
+				csc.setCodes(section.getStringList(apath + "Code"));
+				csc.setCooldown(section.getString(apath + "Cooldown"));
+				ccg.getSubCommands().add(csc);
+
+
+			}
+
+			CommandsManager.reload(ccg);
+//						if (!CommandsManager.getInstance().commandsGroups.containsKey(name)) {
+//
+//							CommandsManager.register(ccg);
+//						} else {
+//							Remain.unregisterCommand(ccg.getName(), true);
+//							CommandsManager.register(ccg);
+//						}
+
+
+		});
+	}
 	public static void setValues(ICustomCommand cc, ConfigurationSection section, String path, YamlConfiguration config, File f) {
 
 		cc.setAliases(section.getStringList(path + "Aliases"));

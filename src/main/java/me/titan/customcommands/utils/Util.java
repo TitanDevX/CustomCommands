@@ -44,6 +44,37 @@ public class Util {
 		return Enum.valueOf(clazz, name);
 	}
 
+	public static boolean isBetween(String str, String str2, String del) {
+		String[] parts = str.split(del);
+		for (int i = 1; i < parts.length; i = i + 2) {
+			String s = parts[i];
+			if (s.equals(str2)) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	public static boolean isBetweenBrackets(String str, String str2, String del1, String del2) {
+		if (!str.contains(del1) || !str.contains(del2)) return false;
+
+		int f = str.indexOf(del1);
+		int e = str.indexOf(del2);
+
+		String n = str.substring(f, e);
+
+
+		return n.equals(str2);
+	}
+
+	public static Float toFloat(String str) {
+		return Float.parseFloat(str.replace("__", ""));
+	}
+
+	public static Double toDouble(String str) {
+		return Double.parseDouble(str.replace("__", ""));
+	}
 	public static ItemStack deserializeItemStack(ConfigurationSection s) {
 
 		String dn = s.getString("Display_Name");

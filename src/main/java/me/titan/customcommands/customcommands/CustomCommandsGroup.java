@@ -21,10 +21,15 @@ public class CustomCommandsGroup extends YamlSectionConfig {
 	List<CustomSubCommand> subCommands = new ArrayList<>();
 	TitanCommandGroup command;
 
+	List<String> noParamsMsg = new ArrayList<>();
+	List<String> helpHeader = new ArrayList<>();
+
 
 	public CustomCommandsGroup(String sectionPrefix) {
 		super(sectionPrefix);
 		this.name = sectionPrefix;
+		this.command = new TitanCommandGroup(this);
+
 
 
 	}
@@ -44,6 +49,9 @@ public class CustomCommandsGroup extends YamlSectionConfig {
 			csc.setup();
 		}
 		this.command = new TitanCommandGroup(this);
+		if (command.isRegistered()) {
+			command.unregister();
+		}
 
 		CustomCommandsPlugin.getInstance.registerTitanCommandGroup(command, name, aliases);
 

@@ -6,7 +6,7 @@
 
     <groupId>me.titan.customcommands</groupId>
     <artifactId>CustomCommands</artifactId>
-    <version>1.0.9</version>
+    <version>1.1.2</version>
     <properties>
 
         <main.class>me.titan.customcommands.core.CustomCommandsPlugin</main.class>
@@ -28,10 +28,6 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
 
 
     </repositories>
@@ -47,14 +43,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.14.3-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>me.lucko.luckperms</groupId>
-            <artifactId>luckperms-api</artifactId>
-            <version>4.4</version>
+            <version>1.15.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 

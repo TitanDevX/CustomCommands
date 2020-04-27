@@ -2,6 +2,7 @@ package me.titan.customcommands.customcommands;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.titan.customcommands.code.cache.PremadeFunction;
 import me.titan.customcommands.titancommands.TitanSubCommand;
 import me.titan.customcommands.utils.ObjectsSet;
 import me.titan.customcommands.utils.Util;
@@ -10,7 +11,9 @@ import org.mineacademy.fo.ReflectionUtil;
 import org.mineacademy.fo.settings.YamlSectionConfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Getter
@@ -34,6 +37,7 @@ public class CustomSubCommand extends YamlSectionConfig implements ICustomComman
 	List<String> codes = new ArrayList<>();
 
 	CustomCommandsGroup mainCommand;
+	Map<String, PremadeFunction> codeMethods = new HashMap<>();
 
 
 	/**

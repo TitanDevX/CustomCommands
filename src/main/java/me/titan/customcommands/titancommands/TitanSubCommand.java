@@ -1,9 +1,9 @@
 package me.titan.customcommands.titancommands;
 
-import me.titan.customcommands.code.CodeReader;
 import me.titan.customcommands.common.CustomCommandsReader;
 import me.titan.customcommands.configurations.MessagesConfig;
 import me.titan.customcommands.customcommands.CustomSubCommand;
+import me.titan.customcommands.newCode.NewCodeReader;
 import org.bukkit.Bukkit;
 import org.mineacademy.fo.command.SimpleSubCommand;
 
@@ -54,6 +54,13 @@ public class TitanSubCommand extends SimpleSubCommand {
 		for (String msg : cc.getReplyMessages()) {
 			tell(msg);
 		}
-		CodeReader.performCode(cc.getCodes(), getPlayer());
+		NewCodeReader ncr = new NewCodeReader(cc, cc.getName(), getPlayer(), args);
+		for (String cmd : cc.getCodes()) {
+			if (cc.getCodeMethods().containsKey(cmd)) {
+				cc.getCodeMethods().get(cmd).apply(getPlayer());
+				continue;
+			}
+			ncr.readCode(cmd);
+		}
 	}
 }

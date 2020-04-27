@@ -7,12 +7,14 @@ public class Config extends SimpleSettings {
 	protected int getConfigVersion() {
 		return 0;
 	}
-	public static class Commands{
 
 
+	public static Boolean DEBUG_MODE;
+	public static Boolean LAG;
 		private final static void init(){
 
-
+			DEBUG_MODE = getBoolean("Debug_Mode");
+			LAG = getBoolean("Is_Server_Lagging");
 		}
-	}
+
 }
