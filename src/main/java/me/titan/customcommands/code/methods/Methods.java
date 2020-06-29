@@ -13,6 +13,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.FileUtil;
+import org.mineacademy.fo.menu.model.ItemCreator;
+import org.mineacademy.fo.remain.CompMaterial;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,7 +38,15 @@ public enum Methods implements MethodsEnum<Nothing> {
 	LOG("Log", "", 1, (args) -> {
 		Common.log(args);
 		return "";
-	}, Object.class);
+	}, Object.class),
+	CREATE_ITEM("createItem", "", 3, (args) -> {
+
+		CompMaterial mat = CompMaterial.fromString(args[0]);
+
+
+		return ItemCreator.of(mat, args[1]).amount(Integer.parseInt(args[2]));
+
+	}, ItemCreator.ItemCreatorBuilder.class);
 
 	final String name;
 	final String usage;
@@ -45,7 +55,7 @@ public enum Methods implements MethodsEnum<Nothing> {
 	final Class<?> returnType;
 
 
-	public static Object getInvoke(String m, String... args){
+	public static Object getInvoke(String m, String... args) {
 		return get(m).invoke(args);
 	}
 

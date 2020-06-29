@@ -8,7 +8,6 @@ import me.titan.customcommands.newCode.NewCodeReader;
 import me.titan.customcommands.utils.Util;
 import org.bukkit.Bukkit;
 import org.mineacademy.fo.command.SimpleCommand;
-import org.mineacademy.fo.debug.LagCatcher;
 
 public class TitanCommand extends SimpleCommand implements ITitanCommand {
 	CustomCommand cc ;
@@ -50,32 +49,30 @@ public class TitanCommand extends SimpleCommand implements ITitanCommand {
 
 		for(String cmd : cc.getPerformCommands()){
 
-			cmd = CustomCommandsReader.replacePlaceholders(cmd,args,getPlayer(), "/" + cc.getUsage());
-			if(cmd == null) continue;
+			cmd = CustomCommandsReader.replacePlaceholders(cmd, args, getPlayer(), "/" + cc.getUsage());
+			if (cmd == null) continue;
 
-			if(cmd.contains("/")){
-				getPlayer().performCommand(cmd);
-			}else{
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(),cmd);
+			if (cmd.contains("/")) {
+				getPlayer().performCommand(cmd.replaceFirst("/", ""));
+			} else {
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
 			}
-			Logger.log("TitanCommand, onCommand:60", "Executed command " + cmd + " for player " + getPlayer().getName());
+			Logger.log("TitanCommand, onCommand:60", "Executed command " + cmd + " fYor player " + getPlayer().getName());
 
 		}
 		for(String msg : cc.getReplyMessages()){
 			tell(msg);
 		}
-		LagCatcher.start("gg");
 
 		NewCodeReader ncr = new NewCodeReader(cc, cc.getName(), getPlayer(), args);
 		for (String cmd : cc.getCodes()) {
-			if (!cmd.contains("var") && cc.getCodeMethods().containsKey(cmd)) {
+			if (!cc.getCodeMethods().containsKey(cmd)) {
 				cc.getCodeMethods().get(cmd).apply(getPlayer());
 				continue;
 			}
-			System.out.print("CMD : " + cmd);
 			ncr.readCode(cmd);
 		}
-		LagCatcher.end("gg", 0);
+
 	}
 
 

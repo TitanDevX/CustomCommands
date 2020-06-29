@@ -19,7 +19,10 @@ import org.mineacademy.fo.Common;
 import org.mineacademy.fo.Valid;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Setter
 @Getter
@@ -101,7 +104,6 @@ public class NewCodeReader {
 				String s = code.replace(" ", "").split("=")[1];
 				dots = getDots(s, false);
 
-				System.out.print(s + " " + Arrays.toString(dots));
 			}
 
 			for (String dot : dots) {
@@ -109,7 +111,6 @@ public class NewCodeReader {
 					World w = Bukkit.getWorld(dot);
 
 					code = code.replace(dot, "methods.getWorld(" + w.getName() + ")");
-					System.out.print("REPLACEING>>>>>>>>>>..");
 				}
 			}
 		}
@@ -142,31 +143,26 @@ public class NewCodeReader {
 	public void readCode(String code) {
 
 		currentCode = code;
-		System.out.print("1: " + code);
 		Logger.log("CodeReader, readCode:130", "Reading code " + code + "...");
 		if (code.contains("//")) {
 			int in = code.indexOf("/");
 			code = code.replace(code.substring(in), "");
-			System.out.print("2: " + code);
 
 			Logger.log("CodeReader, readCode:135", "clearing comments from " + code + ", which are: " + code.substring(in));
 
 ////			int gg = code.lastIndexOf(")") + 1;
 ////
 ////			code = code.replace(code.substring(gg), "");
-//			System.out.print("3: " + code);
 
 		}
 
 		Logger.log("CodeReader, readCode:145", "Replacing replacePredefined Vars in code " + code);
 
 		code = replacePredefinedVars(code);
-		System.out.print("4: " + code);
 
 
 		if (code.startsWith("var") && !code.startsWith("vars*")) {
 			Logger.log("CodeReader, readCode:151", "Reading variable in code " + code);
-			System.out.print("5: " + code);
 
 			readVariable(code);
 		} else if (code.startsWith("vars*") && code.contains("=>")) {
@@ -307,7 +303,6 @@ public class NewCodeReader {
 		String[] args = null;
 		String[] parts = null;
 
-		System.out.print("CODE: " + code);
 		if (code.contains("=") && !code.contains("=>")) {
 
 			parts = code.split("=");
@@ -320,7 +315,6 @@ public class NewCodeReader {
 		} else {
 			args = code.split(" ");
 		}
-		System.out.print("ARGS: " + Arrays.toString(args));
 		String typeS = args[1];
 		String nameS = args[2];
 		CodeVariable.VariableType type = Util.getEnum(typeS, CodeVariable.VariableType.class);
@@ -421,7 +415,6 @@ public class NewCodeReader {
 									return "null";
 								}
 								o = pm.invoke(p, command, w, currentCode, propose, argsStr.split(" "));
-								System.out.print("O:::::::::W:: " + o);
 								if (pm.getReturnType() == Player.class) {
 									t = (Player) o;
 								} else if (pm.getReturnType() == World.class) {
@@ -480,23 +473,19 @@ public class NewCodeReader {
 
 		} else {
 
-			System.out.print("RETURNING CODE..............");
 			return code;
 		}
-		System.out.print("RETURNING CODE..............");
 
 		return code;
 	}
 
 	public String getArgsString(String method, String propose) {
-		System.out.print("METHOD " + method);
 		int fi = method.indexOf('(');
 		int si = method.indexOf(')');
 
 
 		String argsString = method.substring(fi, si).replace("(", "").replace(")", "");
 
-		System.out.print("METHOD2 " + argsString);
 
 		argsString = argsString.replace(" ", "");
 		String[] args = argsString.split(",");
@@ -515,19 +504,14 @@ public class NewCodeReader {
 				argsString = argsString.replace(arg, doMath(math));
 
 			}
-			System.out.print("METHOD3 " + argsString);
 
 			if (arg.contains(".")) {
 				argsString = argsString.replace(arg, readDef(arg, propose) + "");
-				System.out.print("METHOD4 " + argsString);
 
 			} else if (arg.startsWith("vars")) {
 				String vn = arg.replace("vars*", "");
 				CodeVariable v = getVariable(vn);
-				System.out.print(v.getValue());
-				System.out.print("V TYPE " + v.getType() + " " + v.getValueString());
 				argsString = argsString.replace(arg, v.getValueString());
-				System.out.println("ARG " + argsString);
 			} else if (arg.contains("!")) {
 				// player.setHealth(!player.getHealth() * 2!)
 
@@ -565,7 +549,6 @@ public class NewCodeReader {
 					def = readDef(p, "mathcalc");
 
 				if (!(def instanceof Number)) {
-					System.out.print("RETURNED 0");
 					return "0";
 				}
 

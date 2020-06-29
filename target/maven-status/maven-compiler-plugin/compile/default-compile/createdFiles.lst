@@ -1,5 +1,6 @@
 me\titan\customcommands\code\methods\ConfigMethods.class
 me\titan\customcommands\code\CodeVariable$VariableType.class
+me\titan\customcommands\code\methods\EntityMethods.class
 me\titan\customcommands\customcommands\CustomCommand.class
 me\titan\customcommands\commands\SetItemCommand.class
 me\titan\customcommands\common\CustomCommandsReader.class

@@ -2,6 +2,7 @@ package me.titan.customcommands.titancommands;
 
 import me.titan.customcommands.customcommands.CustomCommandsGroup;
 import me.titan.customcommands.customcommands.CustomSubCommand;
+import org.bukkit.command.CommandSender;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -33,7 +34,7 @@ public class TitanCommandGroup extends SimpleCommandGroup {
 
 
 	@Override
-	protected String[] getNoParamsHeader() {
+	protected String[] getNoParamsHeader(CommandSender sender) {
 		List<String> gg = new ArrayList<>();
 		for (String g : customCommand.getNoParamsMsg()) {
 

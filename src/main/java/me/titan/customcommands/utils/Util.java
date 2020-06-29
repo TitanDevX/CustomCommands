@@ -75,6 +75,17 @@ public class Util {
 	public static Double toDouble(String str) {
 		return Double.parseDouble(str.replace("__", ""));
 	}
+
+	public static boolean isInteger(String raw) {
+		try {
+
+			Integer.parseInt(raw);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
+
 	public static ItemStack deserializeItemStack(ConfigurationSection s) {
 
 		String dn = s.getString("Display_Name");

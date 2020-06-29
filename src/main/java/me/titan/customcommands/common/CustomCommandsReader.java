@@ -27,7 +27,10 @@ public class CustomCommandsReader {
 			gg.getCommand().unregister();
 		}
 		CommandsManager.getInstance().commandsGroups.clear();
-		CommandsManager.getInstance().commands.clear();
+		//CommandsManager.getInstance().commands.clear();
+		for (CustomCommand cc : CommandsManager.getInstance().commands.values()) {
+			cc.setCodeMethods(null);
+		}
 
 		ConfigurationSection section = config.getConfigurationSection("Commands");
 
@@ -58,6 +61,7 @@ public class CustomCommandsReader {
 
 				CommandsManager.register(cc);
 			} else {
+
 				Remain.unregisterCommand(cc.getName(), true);
 				CommandsManager.register(cc);
 			}
@@ -74,7 +78,6 @@ public class CustomCommandsReader {
 
 			String apath = path.get();
 
-			System.out.print(ccg);
 			ccg.setAliases(section.getStringList(apath + "Aliases"));
 			ccg.setHelpHeader(section.getStringList(apath + "Help_Header"));
 			ccg.setNoParamsMsg(section.getStringList(apath + "No_Params_Message"));
@@ -91,7 +94,6 @@ public class CustomCommandsReader {
 				csc.setPerformCommands(section.getStringList(apath + "Commands"));
 
 				csc.setReplyMessages(section.getStringList(apath + "Reply_Messages"));
-				System.out.print(csc.getReplyMessages());
 
 				csc.setUsage(section.getString(apath + "Usage"));
 				csc.setMinArgs(section.getInt(apath + "MinArguments"));
@@ -120,6 +122,7 @@ public class CustomCommandsReader {
 		cc.setPerms(section.getString(path + "Permission"));
 
 		cc.setPerformCommands(section.getStringList(path + "Commands"));
+
 		if (section.contains(path + "Replay_Messages")) {
 			List<String> list = section.getStringList(path + "Replay_Messages");
 			cc.setReplyMessages(list);
@@ -133,6 +136,7 @@ public class CustomCommandsReader {
 
 		} else
 			cc.setReplyMessages(section.getStringList(path + "Reply_Messages"));
+
 		cc.setUsage(section.getString(path + "Usage"));
 		cc.setMinArgs(section.getInt(path + "MinArguments"));
 		cc.setCodes(section.getStringList(path + "Code"));

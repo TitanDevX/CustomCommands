@@ -28,8 +28,16 @@ public enum PlayerMethods {
 		p.teleport(Methods.getLocation(Methods.join(args)));
 		return null;
 	}, "teleport(x, y, z, world)", Nothing.class),
+	PERFORM_COMMAND("performCommand", 4, (p, o, args) -> {
+		String cmd = args[0];
+		if (cmd.startsWith("/")) {
+			cmd = cmd.replaceFirst("/", "");
+		}
+
+		p.performCommand(cmd);
+		return null;
+	}, "performCommand(Cmd)", Nothing.class),
 	SET_HEALTH("setHealth", 1, (p, o, args) -> {
-		System.out.print("GG");
 		p.setHealth(Util.toDouble(args[0]));
 		return null;
 	}, "setHealth(newHealth)", Nothing.class),
@@ -65,7 +73,7 @@ public enum PlayerMethods {
 		p.setWalkSpeed(Util.toFloat(args[0].replace("__", ".")));
 
 		return null;
-	}, "setWalkSpeed(WalkSpeed)", Float.class),
+	}, "setWalkSpeed(WalkSpeed)", Nothing.class),
 	GET_WALK_SPEED("getWalkSpeed", 0, (p, o, args) -> {
 		return p.getWalkSpeed();
 	}, "getWalkSpeed", Float.class),
@@ -140,7 +148,7 @@ public enum PlayerMethods {
 		p.setHealth(0);
 		Remain.respawn(p, 5);
 		return null;
-	}, "respawn()", Boolean.class),
+	}, "respawn()", Nothing.class),
 	PLAY_SOUND("playSound", 1, (p, o, args) -> {
 		ReflectionUtil.getEnum(args[0], args[0].toUpperCase(), CompSound.class).play(p);
 		return null;
@@ -224,7 +232,8 @@ public enum PlayerMethods {
 	public Object invoke(Player p, ICustomCommand command, String code, String pr, String... args) {
 		//command.getCodeMethods().put(code,getFunction());
 
-		Methods.registerPremadeFunc(command, code, p, getFunction(), args, pr);
+		if (getReturnType().equals(Nothing.class))
+			Methods.registerPremadeFunc(command, code, p, getFunction(), args, pr);
 		if (args.length < argsAmount) {
 
 			Common.throwError(new FoException("Invalid arguments amount for method: " + this.str + ". Correct usage: " + this.usage));
