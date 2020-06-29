@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f3ce3f7-3d9b-4b32-8090-e3a14e0672cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CustomCommands.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/methods/EntityMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="5f3ce3f7-3d9b-4b32-8090-e3a14e0672cc" name="Default Changelist" comment="Update to 1.1.4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/CodeVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/CodeVariable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/cache/PremadeFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/cache/PremadeFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/methods/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/methods/Methods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/methods/PlayerMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/code/methods/PlayerMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/CustomCommandsReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/common/CustomCommandsReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/newCode/NewCodeReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/newCode/NewCodeReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/titancommands/TitanCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/titancommands/TitanCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/titancommands/TitanCommandGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/titancommands/TitanCommandGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/titan/customcommands/utils/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommandsReader$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommandsReader$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommandsReader$ArgTypes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommandsReader$ArgTypes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommandsReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/common/CustomCommandsReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/titan/customcommands/utils/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/titan/customcommands/utils/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,18 +55,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-  <component name="Git.Update.Project.Info.Tabs.Properties">
-    <option name="FILTERS">
-      <map>
-        <entry key="roots">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/CustomCommands" />
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="36cb0b83-5c0d-4656-ac38-9b6acdafdd0f" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/build.xml" root0="SKIP_INSPECTION" />
@@ -92,7 +77,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -242,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588020021980</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Update to 1.1.4">
+      <created>1593429149363</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593429149364</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -278,32 +270,65 @@
     <MESSAGE value="Update 1.0.9! (check spigotmc resource for more information)" />
     <MESSAGE value="1.0.0" />
     <MESSAGE value="Update to 1.1.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update to 1.1.2" />
+    <MESSAGE value="Update to 1.1.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update to 1.1.4" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="226" key="GridCell.Tab.0.bottom" timestamp="1593428633344">
+    <state x="364" y="0" key="CommitChangelistDialog2" timestamp="1593429841482">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593428633344" />
-    <state width="1493" height="226" key="GridCell.Tab.0.center" timestamp="1593428633344">
+    <state x="364" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1593429841482" />
+    <state x="142" y="65" key="DiffContextDialog" timestamp="1593429680815">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593428633344" />
-    <state width="1493" height="226" key="GridCell.Tab.0.left" timestamp="1593428633344">
+    <state x="142" y="65" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1593429680815" />
+    <state x="629" y="315" key="Github.Dialog.Accounts.Choose" timestamp="1593429819486">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593428633344" />
-    <state width="1493" height="226" key="GridCell.Tab.0.right" timestamp="1593428633344">
+    <state x="629" y="315" key="Github.Dialog.Accounts.Choose/0.0.1536.824@0.0.1536.824" timestamp="1593429819486" />
+    <state x="567" y="292" key="Github.ShareDialog" timestamp="1593429773068">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593428633344" />
-    <state x="277" y="0" key="SettingsEditor" timestamp="1593428849813">
+    <state x="567" y="292" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1593429773068" />
+    <state width="745" height="226" key="GridCell.Tab.0.bottom" timestamp="1593429731382">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1593428849813" />
+    <state width="745" height="226" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593429731382" />
+    <state width="745" height="226" key="GridCell.Tab.0.center" timestamp="1593429731382">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="745" height="226" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593429731382" />
+    <state width="745" height="226" key="GridCell.Tab.0.left" timestamp="1593429731381">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="745" height="226" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593429731381" />
+    <state width="745" height="226" key="GridCell.Tab.0.right" timestamp="1593429731382">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="745" height="226" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593429731382" />
+    <state x="471" y="115" key="RollbackChangesDialog" timestamp="1593429652014">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="471" y="115" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1593429652014" />
+    <state x="277" y="0" key="SettingsEditor" timestamp="1593429522658">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1593429522658" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1593429904559">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1593429904559" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593429694181">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1593429694181" />
+    <state x="490" y="274" key="git4idea.rebase.GitRebaseDialog" timestamp="1593429795773">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="490" y="274" key="git4idea.rebase.GitRebaseDialog/0.0.1536.824@0.0.1536.824" timestamp="1593429795773" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
