@@ -3,3 +3,5 @@ version: ${project.version}
 main: ${main.class}
 author: TitanDev
 api-version: 1.13
+description: A simple plugin to create custom commands. ^_^
+

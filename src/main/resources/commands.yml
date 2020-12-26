@@ -1,0 +1,109 @@
+# Your command label goes here.
+ExampleCommand:
+
+  # Your command aliases so players can do /excmd instead of typing whole /exmaplecommand.
+  Aliases: [ 'excmd' ]
+
+  # permission node, only people with this permission will be able to use this command.
+  Permission: 'mypermission.example'
+
+  # How many times can a player use this command? set this to -1 for unlimited use.
+  # Optional, the default value for this is -1 (unlimited).
+  Uses: 2
+
+  # Limit the use of this command per permission, overrides 'Uses' value if the player has one of the permissions.
+  # Optional.
+  UsesPerPermission:
+    - "mypermission.example.unlimiteduse:-1"
+
+
+  # Command description, completely optional.
+  Description: "Custom commands example command."
+
+  # Required args, will be shown in the usage message between < and > and is required..
+  # in this case: /examplecommand <example player>
+  # the ':OnlinePlayer' suffix is to make plugin check if the given arg is an online player.
+  # valid suffixes are: num, offlinePlayer, onlinePlayer.
+  RequiredArgs: [ 'example player:OnlinePlayer' ]
+
+  # Optiona args, will be shown in the usage message between [ and ] and is not required..
+  # in this case: /examplecommand [example optional player]
+  OptionalArgs: [ 'example optional player:OnlinePlayer' ]
+
+  # Who can use commands, players, console or all!
+  Who_Can_Use_Command: all
+
+    # Commands will be executed when this command used.
+    # If this command sender is player, commands starting with / will be executed as the player (Legacy).
+    # If the command sender is console, commands starting with / will be ignored (Legacy).
+  # You can use given args like this {arg:<number>}.
+  # For example, if this executed command like this '/examplecommand player1 player2', {arg:0} is player1
+  # and {arg:1} is player2.
+  # do note if you use optional args in execute commands and is not provided the command will be ignored.
+  # You can also use {player} for player name.
+  #
+  # ------------ NEW: Command Tags (use these to choose by and/or for whom each command will be executed advanced) ------------------------
+  # !!New Code 'tags': [CONSOLE]: command will be excuted by console.
+  # [ALL_ONLINE]: command will be executed BY every online player, variable '{oplayer} = other player we are executing the command by.
+  # [ALL_ONLINE_CONSOLE]: command will be executed for every online player BY console,
+  #   variable '{oplayer} = other player we are executing the command for.
+  # [PLAYER]: command will be executed by the player.
+  # [PLAYER_CERTAIN][<player name>]: executes command by a specific player. <player name> can be a variable (like '{arg:x}').
+  ExecuteCommands:
+    - '[CONSOLE]give {arg:0} diamond'
+    - '[CONSOLE]give {arg:1} gold_ingot'
+    - '[ALL_ONLINE_CONSOLE]'
+
+  # Messages will be sent to sender as a reply.
+  # Like execute commands, you can use {arg:<number} variable(s).
+  # And {player} for player name.
+  #
+  # ------ NEW: Message Tags -------------
+  # Use [BROADCAST] Tag to make it broadcast message for all online player. using {oplayer} for the other player's (that is receiving the message) name.
+  # Use [SEND_OTHER][<player>] Tag to make it sends the message to another player.
+  ReplyMessages:
+    - '&bYou have given {arg:0} a diamond!'
+    - '&6You have also given {arg:1} a gold ingot!'
+    - '[BROADCAST]&6{player} has received a golden ingot. &b{oplayer} &6you can do it too!'
+ExampleCommandWithChildren:
+
+  Aliases: [ ecwc ]
+  Permission: 'mypermission.example'
+  # Note: this does not override
+  Who_Can_Use_Command: all
+
+  HelpMessage:
+    # leave empty to use the value in messages.yml.
+    Header: [ ]
+    # leave empty to use the value in messages.yml.
+    Each: ''
+    # leave empty to use the value in messages.yml.
+    Footer: [ ]
+  SubCommands:
+    ExampleSubCommand:
+      Aliases: [ 'exsubcmd' ]
+
+      Permission: 'mypermission.examplesubperm'
+
+      Description: "Custom commands example sub command."
+
+
+      RequiredArgs: [ ]
+
+
+      OptionalArgs: [ ]
+
+      Who_Can_Use_Command: all
+
+
+      ExecuteCommands:
+        - 'say example sub command has been executed!'
+        - '!wait 10'
+        - 'say this message was executed after 10 ticks.'
+
+      ReplyMessages:
+        - '&b&lYessir!'
+
+
+
+

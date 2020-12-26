@@ -1,8 +1,6 @@
 package me.titan.customcommands.utils;
 
-import lombok.Setter;
 
-@Setter
 public class ObjectsSet<FIRST, SECOND> {
 
 	FIRST first;

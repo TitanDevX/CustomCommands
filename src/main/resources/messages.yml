@@ -1,4 +1,15 @@
-#Messages Config - Set any message to "none" to disable it.
-
-No_Permission_Message: "&cInsufficient permission ({permission})."
-Invaild_Usage_Message: "&cUsage: /{Usage}."
+No_Perms: "&cYou don't have permission to do this."
+Usage: "&cUsage: {usage}."
+Must_Be_Player: "&cOnly players can use this command."
+Must_Be_Console: "&cThis command can only be executed from the console!"
+Help_Message:
+  Header:
+    - "&b----------------------------------------------------"
+    - "               &3&lCustomCommands Sub Commands"
+    - ""
+  Each: "&8/{label} &7{sublabel} {usage}&8: &7{description}"
+  Footer:
+    - ""
+    - "&b----------------------------------------------------"
+Player_Is_Not_Online: "&cPlayer {arg} is not online!"
+Cannot_Use_Command_Limited: "&4You are not allowed to run this command more than {cmdUses} times!"
