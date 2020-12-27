@@ -4,7 +4,7 @@ import me.titan.customcommands.cmd.Messages;
 import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.CommandTarget;
 import me.titan.customcommands.cmd.lib.TitanCommand;
-import me.titan.customcommands.container.execution.CommandExecuteOperation;
+import me.titan.customcommands.container.execution.ExecuteOperation;
 import me.titan.customcommands.data.player.PlayerCache;
 import me.titan.customcommands.utils.Common;
 
@@ -185,19 +185,21 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 		// getItem <player> <item> [gg]
 		// give {arg:0} {arg:1}
 
-		new CommandExecuteOperation(getExecuteCommands()) {
+		new ExecuteOperation(getExecuteCommands()) {
 			@Override
-			public void doCmd(String cmd, CommandContext con, Map<Integer, Object> parsedArgs) {
-				SingleCustomCommand.this.doCmd(cmd, con, parsedArgs, this);
+			public void doAction(String item, CommandContext con, Map<Integer, Object> parsedArgs) {
+				SingleCustomCommand.this.doCmd(item, con, parsedArgs, this);
 			}
 		}.start(con, parsedArgs);
 //		for (String cmd : getExecuteCommands()) {
 //			doCmd(cmd,con,parsedArgs);
 //		}
-		for (String msg : getReplyMessages()) {
-
-			sendMessage(msg, con, parsedArgs);
-		}
+		new ExecuteOperation(getReplyMessages()) {
+			@Override
+			public void doAction(String item, CommandContext con, Map<Integer, Object> parsedArgs) {
+				SingleCustomCommand.this.sendMessage(item, con, parsedArgs, this);
+			}
+		}.start(con, parsedArgs);
 		return true;
 	}
 

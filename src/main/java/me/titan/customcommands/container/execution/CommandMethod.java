@@ -1,6 +1,4 @@
-package me.titan.customcommands.container;
-
-import me.titan.customcommands.container.execution.CommandExecuteOperation;
+package me.titan.customcommands.container.execution;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +17,7 @@ public abstract class CommandMethod {
 		commandMethods.put(name.toLowerCase(), this);
 	}
 
-	public static CommandMethod findAndExecute(String cmd, CommandExecuteOperation op) {
+	public static CommandMethod findAndExecute(String cmd, ExecuteOperation op) {
 		if (!cmd.startsWith("!")) return null;
 		cmd = cmd.substring(1);
 		String[] c = cmd.split(" ");
@@ -34,12 +32,12 @@ public abstract class CommandMethod {
 		return m;
 	}
 
-	abstract void perform(CommandExecuteOperation op, String... args);
+	abstract void perform(ExecuteOperation op, String... args);
 
 	public enum DefaultCommandMethods {
 		WAIT() {
 			@Override
-			void perform(CommandExecuteOperation op, String... args) {
+			void perform(ExecuteOperation op, String... args) {
 				long time = Long.parseLong(args[0]);
 				op.setWaitTime(time);
 			}
@@ -50,7 +48,7 @@ public abstract class CommandMethod {
 		DefaultCommandMethods() {
 			instance = new CommandMethod(name()) {
 				@Override
-				void perform(CommandExecuteOperation op, String... args) {
+				void perform(ExecuteOperation op, String... args) {
 					DefaultCommandMethods.this.perform(op, args);
 				}
 			};
@@ -60,7 +58,7 @@ public abstract class CommandMethod {
 
 		}
 
-		void perform(CommandExecuteOperation op, String... args) {
+		void perform(ExecuteOperation op, String... args) {
 
 		}
 	}

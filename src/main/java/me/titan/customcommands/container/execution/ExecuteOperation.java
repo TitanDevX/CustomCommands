@@ -7,28 +7,28 @@ import me.titan.customcommands.core.CustomCommandsPlugin;
 import java.util.List;
 import java.util.Map;
 
-public class CommandExecuteOperation implements Waitable {
+public class ExecuteOperation implements Waitable {
 
-	final List<String> commands;
+	final List<String> list;
 
 	boolean started;
 
 	long waitTime;
 
-	protected CommandExecuteOperation(List<String> commands) {
-		this.commands = commands;
+	protected ExecuteOperation(List<String> commands) {
+		this.list = commands;
 	}
 
-	public void doCmd(String cmd, CommandContext con, Map<Integer, Object> parsedArgs) {
+	public void doAction(String item, CommandContext con, Map<Integer, Object> parsedArgs) {
 	}
 
 	public void start(CommandContext con, Map<Integer, Object> parsedArgs) {
 		if (started) return;
 		started = true;
-		for (int i = 0; i < commands.size(); i++) {
-			String cmd = commands.get(i);
+		for (int i = 0; i < list.size(); i++) {
+			String cmd = list.get(i);
 			if (waitTime == 0) {
-				doCmd(cmd, con, parsedArgs);
+				doAction(cmd, con, parsedArgs);
 			} else {
 
 				iterate(i, con, parsedArgs);
@@ -45,12 +45,12 @@ public class CommandExecuteOperation implements Waitable {
 
 
 			waitTime = 0;
-			for (int i = startIndex; i < commands.size(); i++) {
-				String cmd = commands.get(i);
+			for (int i = startIndex; i < list.size(); i++) {
+				String cmd = list.get(i);
 
 
 				if (waitTime == 0) {
-					doCmd(cmd, con, parsedArgs);
+					doAction(cmd, con, parsedArgs);
 				} else {
 
 
