@@ -5,7 +5,6 @@ import me.titan.customcommands.Permissions;
 import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.TitanSubCommand;
 import me.titan.customcommands.core.CustomCommandsPlugin;
-import me.titan.customcommands.data.player.PlayerCache;
 
 public class CmdReload extends TitanSubCommand {
 
@@ -26,7 +25,6 @@ public class CmdReload extends TitanSubCommand {
 		if (!plugin.getCommandsConfig().getFile().exists()) {
 			plugin.saveResource(plugin.getCommandsConfig().getFile().getName(), false);
 		}
-		PlayerCache.players.clear();
 		plugin.getCommandsConfig().forceReload();
 		plugin.getCommandsConfig().init();
 		plugin.getMessagesConfig().forceReload();

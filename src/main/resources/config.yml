@@ -1,1 +1,8 @@
 Debug: false
+
+# makes the plugin execute a task after 5 seconds of plugin loading to register and load commands again
+# which makes it override other plugins commands.
+# for example if another plugin have a command with label 'rank'
+# and you have a custom command with label 'rank' as well
+# custom commands will override the other plugin command
+Override_Other_Commands: false
