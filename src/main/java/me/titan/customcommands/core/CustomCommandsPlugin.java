@@ -14,22 +14,25 @@ import java.io.File;
 public class CustomCommandsPlugin extends JavaPlugin {
 
 
-	private final String supportedVersions = "1.8-1.16.2";
 	CommandsRegistrar commandsRegistrar;
-	CommandsBoard commandsBoard;
-	CommandsConfig commandsConfig;
-	MessagesConfig messagesConfig;
-	CmdParent parentCmd;
-	boolean shouldStopEnabling;
-	long currentTime;
 
-	public static CustomCommandsPlugin getPlugin() {
-		return getPlugin(CustomCommandsPlugin.class);
-	}
+	CommandsBoard commandsBoard;
+
+	CommandsConfig commandsConfig;
+
+	MessagesConfig messagesConfig;
+
+	CmdParent parentCmd;
+
+	private final String supportedVersions = "1.8-1.16.2";
 
 	public CommandsRegistrar getCommandsRegistrar() {
 		return commandsRegistrar;
 	}
+
+	boolean shouldStopEnabling;
+
+	long currentTime;
 
 	public CommandsBoard getCommandsBoard() {
 		return commandsBoard;
@@ -37,6 +40,10 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 	public MessagesConfig getMessagesConfig() {
 		return messagesConfig;
+	}
+
+	public static CustomCommandsPlugin getPlugin() {
+		return getPlugin(CustomCommandsPlugin.class);
 	}
 
 	@Override

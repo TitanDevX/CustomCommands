@@ -63,7 +63,6 @@ public class CommandExecuteOperation implements Waitable {
 			}
 		});
 	}
-
 	@Override
 	public long getWaitTime() {
 		return waitTime;

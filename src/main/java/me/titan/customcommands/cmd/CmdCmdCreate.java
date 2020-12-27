@@ -12,8 +12,8 @@ import java.io.File;
 
 public class CmdCmdCreate extends TitanSubCommand {
 
-	public Yaml defaults;
 	CustomCommandsPlugin plugin;
+	public Yaml defaults;
 
 	public CmdCmdCreate(CustomCommandsPlugin plugin) {
 		super("createCommand");

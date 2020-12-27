@@ -9,8 +9,8 @@ import me.titan.customcommands.data.player.PlayerCache;
 
 public class CmdReload extends TitanSubCommand {
 
-	public Yaml defaults;
 	CustomCommandsPlugin plugin;
+	public Yaml defaults;
 
 	public CmdReload(CustomCommandsPlugin plugin) {
 		super("reload");

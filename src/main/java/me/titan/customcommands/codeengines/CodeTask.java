@@ -62,7 +62,6 @@ public abstract class CodeTask {
 		}
 		CacheEngine.resolveMethod(clazz, obj, dots[1], args);
 	}
-
 	public abstract void execute();
 
 

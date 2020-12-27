@@ -5,26 +5,36 @@ import java.util.*;
 public abstract class TitanSubCommand {
 
 	final String sublabel;
-	protected CommandRequirements requirements = new CommandRequirements();
 	String permission;
+	protected CommandRequirements requirements = new CommandRequirements();
+	String cachedUsage;
 	TitanCommand parent;
 	String description;
+
 	boolean changed;
-	String cachedUsage;
+
+	protected abstract void onCommand(CommandContext context);
+
 	private List<String> aliases;
 
 	public TitanSubCommand(String sublabel) {
 		this.sublabel = sublabel;
 	}
 
-	protected abstract void onCommand(CommandContext context);
+	public void setParent(TitanCommand parent) {
+		this.parent = parent;
+	}
 
 	public void setTarget(CommandTarget t) {
 		this.requirements.commandTarget = t;
 	}
 
-	public void setParent(TitanCommand parent) {
-		this.parent = parent;
+	public String getSublabel() {
+		return sublabel;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public void addAlias(String... ali) {
@@ -38,14 +48,6 @@ public abstract class TitanSubCommand {
 		}
 
 
-	}
-
-	public String getSublabel() {
-		return sublabel;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public void notifyChange() {

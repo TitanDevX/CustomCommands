@@ -7,7 +7,6 @@ import me.titan.customcommands.core.CustomCommandsPlugin;
 
 public class CmdParent extends TitanCommand {
 	CustomCommandsPlugin plugin;
-
 	public CmdParent(CustomCommandsPlugin plugin) {
 		super("customcommands");
 		aliases("cuc", "ccmd", "customcmd");

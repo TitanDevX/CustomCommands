@@ -59,12 +59,13 @@ public class CommandRequirements {
 
 		public static CmdCheckResult NotPlayer = new CmdCheckResult(null, false, true, false);
 		public static CmdCheckResult NotConsole = new CmdCheckResult(null, false, false, true);
-		public static CmdCheckResult ArgsLengthNotMet;
-		public static CmdCheckResult EMPTY = new CmdCheckResult(null, false, false, false);
+		final public boolean notPlayer;
 		final List<String> optionalArgs;
 		final boolean argsLength;
-		final boolean notPlayer;
 		final boolean notConsole;
+
+		public static CmdCheckResult ArgsLengthNotMet;
+		public static CmdCheckResult EMPTY = new CmdCheckResult(null, false, false, false);
 
 		public CmdCheckResult(List<String> optionlArgs, boolean argsLength, boolean notPlayer, boolean notConsole) {
 			this.optionalArgs = optionlArgs;

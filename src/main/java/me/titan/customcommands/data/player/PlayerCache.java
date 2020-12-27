@@ -15,9 +15,12 @@ import java.util.UUID;
 public class PlayerCache {
 
 
-	public static Map<UUID, PlayerCache> players = new HashMap<>();
-	public static Json json = new Json(new File(CustomCommandsPlugin.getPlugin().getDataFolder(), "players.json"));
 	UUID id;
+
+	public static Map<UUID, PlayerCache> players = new HashMap<>();
+
+	public static Json json = new Json(new File(CustomCommandsPlugin.getPlugin().getDataFolder(), "players.json"));
+
 	Map<Integer, Integer> commandUses = new HashMap<>();
 
 	public PlayerCache(UUID id) {

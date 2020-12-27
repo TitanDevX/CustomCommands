@@ -1,5 +1,6 @@
 package me.titan.customcommands.cmd.lib;
 
+import com.google.common.collect.Lists;
 import me.titan.customcommands.cmd.Messages;
 import me.titan.customcommands.utils.Common;
 import me.titan.customcommands.utils.Replacer;
@@ -23,6 +24,7 @@ public abstract class TitanCommand extends Command {
 	protected TitanCommand(String name) {
 		super(name);
 
+		setAliases(Lists.newArrayList());
 	}
 
 	@Override
@@ -53,17 +55,7 @@ public abstract class TitanCommand extends Command {
 	public final boolean execute(CommandSender sender, String commandLabel, String[] args) {
 
 		if (subCommands.isEmpty()) registerSubCommands();
-		if (getPermission() != null && !getPermission().isEmpty() && !sender.hasPermission(getPermission())) {
-
-			if (getPermissionMessage() == null || getPermissionMessage().isEmpty()) {
-
-				Common.tell(sender, Messages.No_Perms.get());
-
-			} else {
-				Common.tell(sender, getPermissionMessage());
-			}
-			return false;
-		}
+		if (!checkPerms(sender, getPermission())) return false;
 		CommandRequirements.CmdCheckResult checkResult = requirements.check(sender, args);
 		if (checkResult.notPlayer) {
 			Common.tell(sender, Messages.Must_Be_Player.get());
@@ -92,6 +84,7 @@ public abstract class TitanCommand extends Command {
 				return false;
 			}
 			TitanSubCommand cmd = subCommands.get(sub);
+			if (!checkPerms(sender, cmd.getPermission())) return false;
 			con.args = Arrays.copyOfRange(args, 1, args.length);
 			CommandRequirements.CmdCheckResult subCheckResult = cmd.requirements.check(sender, con.args);
 			if (subCheckResult.notPlayer) {
@@ -108,6 +101,21 @@ public abstract class TitanCommand extends Command {
 		}
 		changed = false;
 		return false;
+	}
+
+	public boolean checkPerms(CommandSender sender, String perms) {
+		if (perms != null && !perms.isEmpty() && !sender.hasPermission(perms)) {
+
+			if (getPermissionMessage() == null || getPermissionMessage().isEmpty()) {
+
+				Common.tell(sender, Messages.No_Perms.get());
+
+			} else {
+				Common.tell(sender, getPermissionMessage());
+			}
+			return false;
+		}
+		return true;
 	}
 
 	public void notifyChange() {

@@ -59,16 +59,13 @@ public interface AdvancedCustomCommand extends CustomCommand {
 	void setSourceOptionalArgs(List<String> list);
 
 	List<String> getExecuteCommands();
-
 	void setExecuteCommands(List<String> list);
 
 	List<String> getReplyMessages();
-
 	void setReplyMessages(List<String> list);
-
 	CommandTarget getTarget();
-
 	void setTarget(CommandTarget t);
+
 
 
 	default String formatArgRequester(String cmd, CommandContext con, Map<Integer, Object> parsedArgs) {

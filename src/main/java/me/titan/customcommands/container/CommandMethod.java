@@ -8,12 +8,11 @@ import java.util.Map;
 public abstract class CommandMethod {
 
 	public static Map<String, CommandMethod> commandMethods = new HashMap<>();
+	String name;
 
 	static {
 		DefaultCommandMethods.load();
 	}
-
-	String name;
 
 	public CommandMethod(String name) {
 		this.name = name;

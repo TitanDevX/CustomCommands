@@ -23,9 +23,10 @@ public enum Messages implements MessagesEnum {
 	Cannot_Use_Command_Limited("&4You are not allowed to run this command more than {cmdUses} times!");
 
 
-	public static Map<Messages, List<String>> messages = new HashMap<>();
 	final String path;
+
 	boolean isList;
+
 	List<String> defaults = new ArrayList<>();
 
 	Messages(String path, String... defaults) {
@@ -33,12 +34,24 @@ public enum Messages implements MessagesEnum {
 		this.defaults.addAll(Arrays.asList(defaults));
 	}
 
+	public static Map<Messages, List<String>> messages = new HashMap<>();
+
 	Messages(boolean isList, String... defaults) {
 		this.path = name().replace("__", ".");
 		this.isList = isList;
 		this.defaults.addAll(Arrays.asList(defaults));
 	}
 
+
+	@Override
+	public String getPath() {
+		return path;
+	}
+
+	@Override
+	public boolean isList() {
+		return isList;
+	}
 
 	Messages(String defaults) {
 		this.path = name().replace("__", ".");
@@ -49,16 +62,6 @@ public enum Messages implements MessagesEnum {
 	private static void putMessage(MessagesEnum msg, List<String> gg) {
 
 		messages.put((Messages) msg, gg);
-	}
-
-	@Override
-	public String getPath() {
-		return path;
-	}
-
-	@Override
-	public boolean isList() {
-		return isList;
 	}
 
 	public String get() {

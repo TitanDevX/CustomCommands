@@ -4,8 +4,9 @@ import java.util.logging.Level;
 
 public class Logger {
 
-	public static boolean debug = false;
 	private static Logger instance;
+
+	public static boolean debug = false;
 	java.util.logging.Logger source = java.util.logging.Logger.getLogger("Minecraft");
 
 	public static Logger getInstance() {

@@ -16,7 +16,6 @@ public class CacheEngine {
 	public static Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
 	Map<String, Set<Class<?>>> playersMethodCache = new HashMap<>();
-
 	// player.isOnline. player.teleport
 	public static Object performCode(String code, String[] args, Player p, Object current, String type) {
 

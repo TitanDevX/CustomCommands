@@ -31,11 +31,12 @@ public class Util {
 		return s[intIndex];
 	}
 
-	public static <E extends Enum<E>> E getEnum(String name, Class<E> clazz) {
+	public static <E extends java.lang.Enum<E>> E getEnum(String name, Class<E> clazz) {
 		name = name.replace(" ", "_");
 		name = name.toUpperCase();
 
-		return Enum.valueOf(clazz, name);
+
+		return java.lang.Enum.valueOf(clazz, name);
 	}
 
 	public static boolean isBetween(String str, String str2, String del) {
@@ -61,7 +62,6 @@ public class Util {
 
 		return n.equals(str2);
 	}
-
 	public static Location getLocation(String locs) {
 		locs = locs.replace(" ", "");
 		String[] parts = locs.split(",");
@@ -72,7 +72,6 @@ public class Util {
 
 		return new Location(w, x, y, z);
 	}
-
 	public static Float toFloat(String str) {
 		return Float.parseFloat(str.replace("__", "."));
 	}
@@ -150,7 +149,6 @@ public class Util {
 //		return s;
 //	}
 //
-
 	/**
 	 * @param source
 	 * @param first

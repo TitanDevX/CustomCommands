@@ -12,15 +12,21 @@ import me.titan.customcommands.utils.Common;
 import java.util.*;
 
 public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomCommand {
-	public static String[] EMPTY_STRING_ARRAY = new String[0];
 	final String name;
+
+
 	Map<Integer, Map.Entry<String, String>> requiredArgsMap = new HashMap<>();
+
 	Map<Integer, Map.Entry<String, String>> optionalArgsMap = new HashMap<>();
+
 	List<String> rawRequiredArgs = new ArrayList<>();
+
 	List<String> rawOptionalArgs = new ArrayList<>();
 	List<String> executeCommands = new ArrayList<>();
 	List<String> replyMessages = new ArrayList<>();
+
 	CommandTarget target;
+
 	ParentCustomCommand parent;
 	int id;
 	int uses = -1;
@@ -32,23 +38,21 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@Override
-	public int getUses() {
-		return uses;
-	}
+	public static String[] EMPTY_STRING_ARRAY = new String[0];
+
 
 	@Override
 	public void setUses(int uses) {
 		this.uses = uses;
+	}
+
+	@Override
+	public int getId() {
+		return id;
 	}
 
 	@Override
@@ -59,6 +63,11 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	@Override
 	public void setUsesPerPermission(Map<String, Integer> uses) {
 		this.usesPerPerm = uses;
+	}
+
+	@Override
+	public int getUses() {
+		return uses;
 	}
 
 	@Override
@@ -76,6 +85,15 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 		return super.getAliases();
 	}
 
+	public void setParent(ParentCustomCommand parent) {
+		this.parent = parent;
+	}
+
+	@Override
+	public void setReplyMessages(List<String> replyMessages) {
+		this.replyMessages = replyMessages;
+	}
+
 	@Override
 	public void setSourceRequiredArgs(List<String> list) {
 
@@ -87,6 +105,17 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 
 		setOptionalArgs(list);
 	}
+
+	@Override
+	public void setRawOptionalArgs(List<String> rawOptionalArgs) {
+		this.rawOptionalArgs = rawOptionalArgs;
+	}
+
+	@Override
+	public void setRawRequiredArgs(List<String> rawRequiredArgs) {
+		this.rawRequiredArgs = rawRequiredArgs;
+	}
+
 
 	public void error(CommandContext con) {
 		con.tell("&cAn error occurred while trying to execute the command, please check console or contact an admin!");
@@ -104,18 +133,8 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public void setExecuteCommands(List<String> executeCommands) {
-		this.executeCommands = executeCommands;
-	}
-
-	@Override
 	public List<String> getReplyMessages() {
 		return replyMessages;
-	}
-
-	@Override
-	public void setReplyMessages(List<String> replyMessages) {
-		this.replyMessages = replyMessages;
 	}
 
 	@Override
@@ -124,19 +143,10 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public void setRawOptionalArgs(List<String> rawOptionalArgs) {
-		this.rawOptionalArgs = rawOptionalArgs;
-	}
-
-	@Override
 	public List<String> getRawRequiredArgs() {
 		return rawRequiredArgs;
 	}
 
-	@Override
-	public void setRawRequiredArgs(List<String> rawRequiredArgs) {
-		this.rawRequiredArgs = rawRequiredArgs;
-	}
 
 	@Override
 	public String getName() {
@@ -147,6 +157,11 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	public Object setDescription(String de) {
 		setSubDescription(de);
 		return null;
+	}
+
+	@Override
+	public void setExecuteCommands(List<String> executeCommands) {
+		this.executeCommands = executeCommands;
 	}
 
 	@Override
@@ -177,13 +192,10 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 		this.optionalArgsMap = m;
 	}
 
+
 	@Override
 	public boolean isParent() {
 		return false;
-	}
-
-	public void setParent(ParentCustomCommand parent) {
-		this.parent = parent;
 	}
 
 	@Override

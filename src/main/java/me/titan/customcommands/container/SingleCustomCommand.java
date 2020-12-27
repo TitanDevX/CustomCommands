@@ -18,6 +18,7 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	final String name;
 
 
+
 	Map<Integer, Map.Entry<String, String>> requiredArgsMap = new HashMap<>();
 
 	Map<Integer, Map.Entry<String, String>> optionalArgsMap = new HashMap<>();
@@ -34,7 +35,6 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	int uses = -1;
 	Map<String, Integer> usesPerPerm;
 	int id;
-
 	public SingleCustomCommand(String name) {
 		super(name);
 		this.name = name;
@@ -66,11 +66,6 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public void setUses(int uses) {
-		this.uses = uses;
-	}
-
-	@Override
 	public Map<String, Integer> getUsesPerPermission() {
 		return usesPerPerm;
 	}
@@ -91,6 +86,16 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	}
 
 	@Override
+	public void setUses(int uses) {
+		this.uses = uses;
+	}
+
+	@Override
+	public void setReplyMessages(List<String> replyMessages) {
+		this.replyMessages = replyMessages;
+	}
+
+	@Override
 	public void setSourceRequiredArgs(List<String> list) {
 
 		setRequiredArgs(list);
@@ -108,8 +113,23 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	}
 
 	@Override
+	public void setRawOptionalArgs(List<String> rawOptionalArgs) {
+		this.rawOptionalArgs = rawOptionalArgs;
+	}
+
+	@Override
+	public void setRawRequiredArgs(List<String> rawRequiredArgs) {
+		this.rawRequiredArgs = rawRequiredArgs;
+	}
+
+	@Override
 	public TitanCommand getTitanCommand() {
 		return this;
+	}
+
+	@Override
+	public void setExecuteCommands(List<String> executeCommands) {
+		this.executeCommands = executeCommands;
 	}
 
 	@Override
@@ -181,6 +201,7 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 		return true;
 	}
 
+
 	public Object resolveArg(String type, int i, CommandContext con) {
 		if (type.equalsIgnoreCase("OfflinePlayer")) {
 			return con.readOfflinePlayer(con.args[i]);
@@ -198,6 +219,7 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 	}
 
+
 	public void error(CommandContext con) {
 		con.tell("&cAn error occurred while trying to execute the command, please check console or contact an admin!");
 
@@ -214,18 +236,8 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public void setExecuteCommands(List<String> executeCommands) {
-		this.executeCommands = executeCommands;
-	}
-
-	@Override
 	public List<String> getReplyMessages() {
 		return replyMessages;
-	}
-
-	@Override
-	public void setReplyMessages(List<String> replyMessages) {
-		this.replyMessages = replyMessages;
 	}
 
 	@Override
@@ -234,18 +246,8 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public void setRawOptionalArgs(List<String> rawOptionalArgs) {
-		this.rawOptionalArgs = rawOptionalArgs;
-	}
-
-	@Override
 	public List<String> getRawRequiredArgs() {
 		return rawRequiredArgs;
-	}
-
-	@Override
-	public void setRawRequiredArgs(List<String> rawRequiredArgs) {
-		this.rawRequiredArgs = rawRequiredArgs;
 	}
 
 	public void makeCommand() {
@@ -276,14 +278,15 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	}
 
 	@Override
+	public boolean isParent() {
+		return false;
+	}
+
+
+	@Override
 	public void setOptionalArgsMap(Map<Integer, Map.Entry<String, String>> m) {
 
 		this.optionalArgsMap = m;
-	}
-
-	@Override
-	public boolean isParent() {
-		return false;
 	}
 
 
