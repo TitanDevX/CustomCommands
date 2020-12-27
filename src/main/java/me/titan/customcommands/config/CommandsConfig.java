@@ -21,6 +21,7 @@ public class CommandsConfig extends TitanConfig {
 	Yaml defaultsFile;
 
 	int size;
+	public static String id_field = "dont_edit";
 
 	public CommandsConfig(CustomCommandsPlugin plugin) {
 		super("commands.yml", plugin);
@@ -68,6 +69,7 @@ public class CommandsConfig extends TitanConfig {
 
 	}
 
+
 	public AdvancedCustomCommand loadCommand(String cmd, boolean sub, String path) {
 		Logger.getInstance().log("Loading command " + cmd + ".");
 		setPathPrefix(!sub ? cmd : path);
@@ -87,11 +89,16 @@ public class CommandsConfig extends TitanConfig {
 		} else
 			scmd = new SingleCustomCommand(cmd);
 
-		if (!contains("id")) {
+		if (contains("id")) {
+			int i = getInt("id");
+			remove("id");
+			set(id_field, i);
+		}
+		if (!contains(id_field)) {
 			scmd.setId(++size);
-			set("id", size);
+			set(id_field, size);
 		} else {
-			scmd.setId(getInt("id"));
+			scmd.setId(getInt(id_field));
 		}
 		if (contains("Uses")) {
 			scmd.setUses(getInt("Uses"));
@@ -112,6 +119,16 @@ public class CommandsConfig extends TitanConfig {
 				map.put(pe, u);
 			}
 			scmd.setUsesPerPermission(map);
+		}
+		Iterator<String> it = aliases.iterator();
+
+		while (it.hasNext()) {
+			String a = it.next();
+			if (a.equals(scmd.getName())) {
+				Logger.getInstance().forceLog(Level.WARNING, String.format("Found an alias in %s aliases that is the same as the command name/label (%s)" +
+						", please remove it to prevent this warning from showing again.", scmd.getName(), scmd.getName()));
+				it.remove();
+			}
 		}
 		scmd.setAliases(aliases);
 		scmd.setPermission(permission);
@@ -167,8 +184,5 @@ public class CommandsConfig extends TitanConfig {
 		return scmd;
 	}
 
-	public void writeDefaults(String cmd) {
 
-
-	}
 }

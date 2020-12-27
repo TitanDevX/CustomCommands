@@ -19,9 +19,21 @@ public class PlayerCache {
 
 	public static Map<UUID, PlayerCache> players = new HashMap<>();
 
-	public static Json json = new Json(new File(CustomCommandsPlugin.getPlugin().getDataFolder(), "players.json"));
-
+	public static Json json;
 	Map<Integer, Integer> commandUses = new HashMap<>();
+
+	static {
+		json = new Json(new File(CustomCommandsPlugin.getPlugin().getDataFolder(), "data/players.json"));
+
+		File oldStorage = new File(CustomCommandsPlugin.getPlugin().getDataFolder(), "players.json");
+		if (oldStorage.exists()) {
+			Json oj = new Json(oldStorage);
+			for (String d : oj.singleLayerKeySet("")) {
+				json.set(d, oj.get(d));
+			}
+		}
+		oldStorage.delete();
+	}
 
 	public PlayerCache(UUID id) {
 		this.id = id;
