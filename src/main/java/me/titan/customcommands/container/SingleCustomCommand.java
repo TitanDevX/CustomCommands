@@ -216,7 +216,6 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 			String msg = String.join(" ",
 					Arrays.copyOfRange(con.args, i, con.args.length));
-			System.out.println("MESSAGE " + msg);
 			return msg;
 
 		} else {
