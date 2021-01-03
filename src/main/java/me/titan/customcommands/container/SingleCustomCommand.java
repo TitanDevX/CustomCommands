@@ -8,10 +8,7 @@ import me.titan.customcommands.container.execution.ExecuteOperation;
 import me.titan.customcommands.data.player.PlayerCache;
 import me.titan.customcommands.utils.Common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SingleCustomCommand extends TitanCommand implements AdvancedCustomCommand, Waitable {
 
@@ -214,6 +211,11 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 		} else if (type.equalsIgnoreCase("num")) {
 			return con.readInt(con.args[i]);
+
+		} else if (type.equalsIgnoreCase("message")) {
+
+			return String.join(" ",
+					Arrays.copyOfRange(con.args, i, con.args.length));
 
 		} else {
 			return con.args[i];

@@ -7,6 +7,7 @@ import me.titan.customcommands.config.Tags;
 import me.titan.customcommands.container.execution.CommandMethod;
 import me.titan.customcommands.container.execution.ExecuteOperation;
 import me.titan.customcommands.container.execution.ReplyMessageMethod;
+import me.titan.customcommands.core.CustomCommandsPlugin;
 import me.titan.customcommands.utils.Common;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -89,7 +90,9 @@ public interface AdvancedCustomCommand extends CustomCommand {
 			cmd = cmd.replace("{player}", con.player.getName());
 			cmd = cmd.replace("{Player}", con.player.getName());
 		}
-		cmd = PlaceholderAPI.setPlaceholders(con.player, cmd);
+		if (CustomCommandsPlugin.getPlugin().checkPlaceHolderApiHook()) {
+			cmd = PlaceholderAPI.setPlaceholders(con.player, cmd);
+		}
 
 		return cmd;
 	}
@@ -152,12 +155,10 @@ public interface AdvancedCustomCommand extends CustomCommand {
 	}
 
 	default void sendMessage(String msg, CommandContext con, Map<Integer, Object> parsedArgs, ExecuteOperation op) {
-
+		if (ReplyMessageMethod.findAndExecute(msg, op) != null) return;
 		msg = formatArgRequester(msg, con, parsedArgs);
 		if (msg == null) return;
 		if (msg.isEmpty()) return;
-
-		if (ReplyMessageMethod.findAndExecute(msg, op) != null) return;
 
 
 		Object[] tagData = Tags.Message.getCommandTagData(msg);

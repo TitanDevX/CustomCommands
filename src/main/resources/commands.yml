@@ -24,7 +24,9 @@ ExampleCommand:
   # Required args, will be shown in the usage message between < and > and is required..
   # in this case: /examplecommand <example player>
   # the ':OnlinePlayer' suffix is to make plugin check if the given arg is an online player.
-  # valid suffixes are: num, offlinePlayer, onlinePlayer.
+  # valid suffixes are: num, offlinePlayer, onlinePlayer and message.
+  # [NEW] message suffix: if u use this suffix it will take every arg after this arg as one arg.
+  # [!] Don't use the message suffix two times or the behaviour of the plugin will be unexpectable
   RequiredArgs: [ 'example player:OnlinePlayer' ]
 
   # Optiona args, will be shown in the usage message between [ and ] and is not required..

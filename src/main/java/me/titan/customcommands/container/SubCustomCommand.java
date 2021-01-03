@@ -275,6 +275,11 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 
 		} else if (type.equalsIgnoreCase("num")) {
 			return con.readInt(con.args[i]);
+		} else if (type.equalsIgnoreCase("message")) {
+
+			return String.join(" ",
+					Arrays.copyOfRange(con.args, i, con.args.length));
+
 
 		} else {
 			return con.args[i];

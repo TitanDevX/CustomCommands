@@ -3,6 +3,7 @@ package me.titan.customcommands.core;
 import me.titan.customcommands.cmd.CmdParent;
 import me.titan.customcommands.cmd.Messages;
 import me.titan.customcommands.config.CommandsConfig;
+import me.titan.customcommands.config.MainSettings;
 import me.titan.customcommands.config.MessagesConfig;
 import me.titan.customcommands.container.CustomCommand;
 import me.titan.customcommands.log.Logger;
@@ -18,11 +19,14 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 	CommandsBoard commandsBoard;
 
+	MainSettings mainSettings;
+
 	CommandsConfig commandsConfig;
 
 	MessagesConfig messagesConfig;
 
 	CmdParent parentCmd;
+
 
 	private final String supportedVersions = "1.8-1.16.2";
 
@@ -64,7 +68,9 @@ public class CustomCommandsPlugin extends JavaPlugin {
 		tryCatchThrow(() -> commandsBoard = new CommandsBoard(),
 				new Throwable("An exception occurred while initializing commands board."));
 		if (shouldStopEnabling) return;
-
+		tryCatchThrow(() -> mainSettings = new MainSettings(this),
+				new Throwable("An exception occurred while initializing commands config."));
+		if (shouldStopEnabling) return;
 		tryCatchThrow(() -> commandsConfig = new CommandsConfig(this),
 				new Throwable("An exception occurred while initializing commands config."));
 		if (shouldStopEnabling) return;
@@ -99,6 +105,10 @@ public class CustomCommandsPlugin extends JavaPlugin {
 		long timeToEnable = (System.currentTimeMillis() - currentTime) / 1000L;
 		Logger.getInstance().forceLog("Plugin successfully loaded in " + timeToEnable + "s.");
 
+	}
+
+	public boolean checkPlaceHolderApiHook() {
+		return Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
 	}
 
 	public void tryCatchThrow(Runnable run, Throwable exp) {
