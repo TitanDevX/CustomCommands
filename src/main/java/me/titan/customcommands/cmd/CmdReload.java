@@ -25,9 +25,21 @@ public class CmdReload extends TitanSubCommand {
 		if (!plugin.getCommandsConfig().getFile().exists()) {
 			plugin.saveResource(plugin.getCommandsConfig().getFile().getName(), false);
 		}
-		plugin.getCommandsConfig().forceReload();
+		try {
+			plugin.getCommandsConfig().forceReload();
+
+		} catch (Exception ex) {
+			con.tell("&cYaml formatting issues in commands.yml. check console for more details.");
+			return;
+		}
 		plugin.getCommandsConfig().init();
-		plugin.getMessagesConfig().forceReload();
+
+		try {
+			plugin.getMessagesConfig().forceReload();
+		} catch (Exception ex) {
+			con.tell("&cYaml formatting issues in messages.yml. check console for more details.");
+			return;
+		}
 		plugin.getMessagesConfig().init();
 		con.tell("&6Successfully reloaded the plugin. and loaded " + plugin.getCommandsBoard().size() + " commands.");
 
