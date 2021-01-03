@@ -61,19 +61,29 @@ public class CommandsRegistrar {
 	}
 
 	public void unregisterCommand(Command cmd) {
+		System.out.println(cmd.getAliases());
 		for (String ali : cmd.getAliases()) {
 
 			removeKnownCommand(cmd.getLabel() + ":" + ali);
+			removeKnownCommand(ali);
 			Logger.getInstance().log("Unregistered alias " + ali + " for command " + cmd.getLabel());
 		}
+
 		removeKnownCommand(cmd.getLabel());
+
+
+		cmd.unregister(getCommandMap());
+
 		Logger.getInstance().log("Unregistered command " + cmd.getLabel());
 
 	}
 
 	private void removeKnownCommand(String str) {
 
+
 		try {
+
+
 			MapRemoveMethod.invoke(getKnownCommandsField.get(getCommandMap()), str);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();

@@ -27,8 +27,8 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 	CmdParent parentCmd;
 
-
-	private final String supportedVersions = "1.8-1.16.2";
+	private static CustomCommandsPlugin instance;
+	private final String supportedVersions = "1.8-1.16.4";
 
 	public CommandsRegistrar getCommandsRegistrar() {
 		return commandsRegistrar;
@@ -37,6 +37,7 @@ public class CustomCommandsPlugin extends JavaPlugin {
 	boolean shouldStopEnabling;
 
 	long currentTime;
+	private PluginUpdateManager updateManager;
 
 	public CommandsBoard getCommandsBoard() {
 		return commandsBoard;
@@ -47,11 +48,13 @@ public class CustomCommandsPlugin extends JavaPlugin {
 	}
 
 	public static CustomCommandsPlugin getPlugin() {
-		return getPlugin(CustomCommandsPlugin.class);
+		return instance;
 	}
 
 	@Override
 	public void onEnable() {
+
+		instance = this;
 
 
 		Logger.getInstance().forceLog("Custom Commands plugin made with <3 by TitanDev, loading...");
@@ -85,18 +88,17 @@ public class CustomCommandsPlugin extends JavaPlugin {
 		tryCatchThrow(() -> commandsRegistrar.registerCommand(parentCmd),
 				new Throwable("An exception occurred while registering the main command!"));
 
-		if (shouldStopEnabling) return;
-
-		tryCatchThrow(() -> {
-			makeFile("old/log.log", false);
-
-			makeFile("old/codes.yml", true);
-
-		}, new Throwable("An exception occurred while extracting files!"));
 
 		if (shouldStopEnabling) return;
+
+		this.updateManager = PluginUpdateManager.init(this);
+
 		onPreEnable();
 
+	}
+
+	public PluginUpdateManager getUpdateManager() {
+		return updateManager;
 	}
 
 	public void onPreEnable() {
@@ -134,6 +136,7 @@ public class CustomCommandsPlugin extends JavaPlugin {
 			commandsRegistrar.unregisterCommand(cmd.getTitanCommand());
 		}
 		commandsBoard.clear();
+		commandsBoard.byId.clear();
 	}
 
 	public CommandsConfig getCommandsConfig() {

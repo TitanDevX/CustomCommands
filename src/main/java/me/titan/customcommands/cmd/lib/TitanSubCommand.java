@@ -77,7 +77,7 @@ public abstract class TitanSubCommand {
 		StringBuilder opt = new StringBuilder();
 
 		for (String a : requirements.requiredArgs) {
-			req.append((req.length() == 0 ? "" : " ") + "<" + a + ">");
+			req.append(req.length() == 0 ? "" : " ").append("<").append(a).append(">");
 		}
 		if (!requirements.optionalArgs.isEmpty()) {
 			req.append(" ");

@@ -5,11 +5,41 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class CommandRequirements {
+	public List<String> requiredArgsCopy = new ArrayList<String>();
+	public List<String> requiredArgs = new ArrayList<String>() {
+		@Override
+		public String set(int index, String element) {
+			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 
-	List<String> requiredArgs = new ArrayList<>();
+			return super.set(index, element);
+		}
+
+		@Override
+		public void clear() {
+			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+
+			super.clear();
+		}
+
+		@Override
+		public boolean add(String o) {
+			super.add(o);
+			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+			return true;
+		}
+
+		@Override
+		public boolean addAll(Collection<? extends String> c) {
+			super.addAll(c);
+			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+
+			return true;
+		}
+	};
 	List<String> optionalArgs = new ArrayList<>();
 
 	CommandTarget commandTarget;
@@ -39,7 +69,7 @@ public class CommandRequirements {
 	 */
 	public CmdCheckResult checkArgs(String[] args) {
 
-		int min = requiredArgs.size();
+		int min = requiredArgsCopy.size();
 		if (args.length < min) {
 			return CmdCheckResult.argsLength();
 		}

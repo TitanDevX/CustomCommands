@@ -1,4 +1,0 @@
-#Messages Config - Set any message to "none" to disable it.
-
-No_Permission_Message: "&cInsufficient permission ({permission})."
-Invaild_Usage_Message: "&cUsage: /{Usage}."

@@ -76,9 +76,15 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 		for (int i : parsedArgs.keySet()) {
 			String str = "{arg:" + i + "}";
+
 			if (cmd.contains(str)) {
 
 				String arg = con.args[i];
+				if (getRequiredArgsMap().get(i).getValue().equalsIgnoreCase("message")) {
+
+
+					arg = (String) parsedArgs.get(i);
+				}
 				cmd = cmd.replace(str, arg);
 
 

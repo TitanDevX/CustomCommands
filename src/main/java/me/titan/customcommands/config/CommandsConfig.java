@@ -154,7 +154,7 @@ public class CommandsConfig extends TitanConfig {
 			i++;
 		}
 		scmd.setRawRequiredArgs(rReqArgs);
-		scmd.setSourceRequiredArgs(rReqArgs);
+		scmd.setSourceRequiredArgs(new ArrayList<>(rReqArgs));
 
 		List<String> rOptArgs = new ArrayList<>();
 		for (String r : optArgs) {
@@ -178,6 +178,8 @@ public class CommandsConfig extends TitanConfig {
 			plugin.getCommandsBoard().put(cmd, scmd);
 			plugin.getCommandsBoard().byId.put(scmd.getId(), scmd);
 		}
+
+
 		Logger.getInstance().log("Registered command " + cmd + " in spigot command map.");
 
 		setPathPrefix(null);

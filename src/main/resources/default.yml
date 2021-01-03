@@ -2,23 +2,23 @@
 ExampleCommand:
 
   # Your command aliases so players can do /excmd instead of typing whole /exmaplecommand.
-  Aliases: [ 'excmd' ]
+  Aliases: [ ]
 
   # permission node, only people with this permission will be able to use this command.
-  Permission: 'mypermission.example'
+  Permission: ''
 
   # Command description, completely optional.
-  Description: "Custom commands example command."
+  Description: ""
 
   # Required args, will be shown in the usage message between < and > and is required..
   # in this case: /examplecommand <example player>
   # the ':OnlinePlayer' suffix is to make plugin check if the given arg is an online player.
   # valid suffixes are: num, offlinePlayer, onlinePlayer.
-  RequiredArgs: [ 'example player:OnlinePlayer' ]
+  RequiredArgs: [ ]
 
   # Optiona args, will be shown in the usage message between [ and ] and is not required..
   # in this case: /examplecommand [example optional player]
-  OptionalArgs: [ 'example optional player' ]
+  OptionalArgs: [ ]
 
   # Who can use commands, players, console or all!
   Who_Can_Use_Command: all
@@ -31,13 +31,10 @@ ExampleCommand:
   # and {arg:1} is player2.
   # do note if you use optional args in execute commands and is not provided the command will be ignored.
   # You can also use {player} for player name.
-  ExecuteCommands:
-    - 'give {arg:0} diamond'
-    - 'give {arg:1} gold_ingot'
+  ExecuteCommands: [ ]
 
   # Messages will be sent to sender as a reply.
   # Like execute commands, you can use {arg:<number} variable(s).
   # And {player} for player name.
   ReplyMessages:
-    - '&bYou have given {arg:0} a diamond!'
-    - '&6You have also given {arg:1} a gold ingot!'
+    - 'test'

@@ -14,7 +14,7 @@ import java.util.*;
 public abstract class TitanCommand extends Command {
 
 	public static String[] EMPTY_STRING_ARRAY = new String[0];
-	private final CommandRequirements requirements = new CommandRequirements();
+	public final CommandRequirements requirements = new CommandRequirements();
 	List<TitanSubCommand> actualSubCommands = new ArrayList<>();
 	Map<String, TitanSubCommand> subCommands = new HashMap<>();
 
@@ -54,7 +54,6 @@ public abstract class TitanCommand extends Command {
 	@Override
 	public final boolean execute(CommandSender sender, String commandLabel, String[] args) {
 
-		if (subCommands.isEmpty()) registerSubCommands();
 		if (!checkPerms(sender, getPermission())) return false;
 		CommandRequirements.CmdCheckResult checkResult = requirements.check(sender, args);
 		if (checkResult.notPlayer) {
@@ -100,6 +99,8 @@ public abstract class TitanCommand extends Command {
 			cmd.onCommand(con);
 		}
 		changed = false;
+
+
 		return false;
 	}
 
@@ -142,8 +143,9 @@ public abstract class TitanCommand extends Command {
 	}
 
 	public final void setRequiredArgs(List<String> arg) {
-		requirements.requiredArgs = arg;
+		requirements.requiredArgsCopy = arg;
 		notifyChange();
+
 	}
 
 	@Override
@@ -195,14 +197,12 @@ public abstract class TitanCommand extends Command {
 
 	@Override
 	public String getUsage() {
-		if (!changed && cachedUsage != null) {
-			return cachedUsage;
-		}
+
 
 		StringBuilder req = new StringBuilder();
 		StringBuilder opt = new StringBuilder();
 
-		for (String a : requirements.requiredArgs) {
+		for (String a : requirements.requiredArgsCopy) {
 			req.append((req.length() == 0 ? "" : " ") + "<" + a + ">");
 		}
 		if (!requirements.optionalArgs.isEmpty()) {

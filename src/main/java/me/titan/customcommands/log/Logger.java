@@ -24,6 +24,15 @@ public class Logger {
 
 	}
 
+	public void logEmpty(String... msg) {
+
+
+		for (String m : msg) {
+			log(Level.INFO, m, true);
+		}
+
+	}
+
 	public void log(Level level, String msg, boolean force) {
 
 
