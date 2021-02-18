@@ -69,7 +69,7 @@ ExampleCommand:
   # Conditions ids are taken from conditions in the CONDITIONS FILE. (conditions.yml).
 
   ExecuteCommands:
-    - '[CONSOLE][If=8]give {arg:0} diamond'
+    - '[CONSOLE][If:8]give {arg:0} diamond'
     - '[CONSOLE]give {arg:1} gold_ingot'
     - '[ALL_ONLINE_CONSOLE]'
 

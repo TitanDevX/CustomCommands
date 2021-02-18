@@ -150,7 +150,6 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 		if (isParent()) return false;
 
-		System.out.println("GGGG " + getReplyMessages() + " " + getExecuteCommands());
 
 		if (con.isPlayer()) {
 			PlayerCache pc = PlayerCache.getPlayerCache(con.player);
@@ -170,7 +169,6 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(conId);
 
-				System.out.println(conId + " " + cond  + " " + CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions());
 				if(!cond.isTrue(con.player,con.args)) {
 					if(cond.getMessage() != null)
 					  con.tell(cond.getMessage());

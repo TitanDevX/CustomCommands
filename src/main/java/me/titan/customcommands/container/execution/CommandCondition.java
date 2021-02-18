@@ -22,7 +22,6 @@ public class CommandCondition {
 			String sp = "=";
 			String comp = "";
 				// %gg%>=10
-			System.out.println(value);
 				int ind = value.indexOf("=");
 				comp =value.charAt(ind-1) +"";
 				if(comp.equals(">") || comp.equals("<") || comp.equals("!")) {
@@ -72,7 +71,6 @@ public class CommandCondition {
 
 			}else {
 				if(comp.isEmpty()){
-					System.out.println("GG" + Boolean.parseBoolean(av) + " " +  Boolean.parseBoolean(v));
 					return Boolean.parseBoolean(av) == Boolean.parseBoolean(v);
 				}else if(comp.equals("!")){
 					return Boolean.parseBoolean(av) != Boolean.parseBoolean(v);

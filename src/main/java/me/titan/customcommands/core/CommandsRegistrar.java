@@ -61,7 +61,6 @@ public class CommandsRegistrar {
 	}
 
 	public void unregisterCommand(Command cmd) {
-		System.out.println(cmd.getAliases());
 		for (String ali : cmd.getAliases()) {
 
 			removeKnownCommand(cmd.getLabel() + ":" + ali);
