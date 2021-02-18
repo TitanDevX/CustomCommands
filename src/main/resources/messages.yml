@@ -13,3 +13,4 @@ Help_Message:
     - "&b----------------------------------------------------"
 Player_Is_Not_Online: "&cPlayer {arg} is not online!"
 Cannot_Use_Command_Limited: "&4You are not allowed to run this command more than {cmdUses} times!"
+Cooldown: "&4&lERROR &cplease wait {time}!"

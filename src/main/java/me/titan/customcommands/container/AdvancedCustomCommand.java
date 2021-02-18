@@ -4,6 +4,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.CommandTarget;
 import me.titan.customcommands.config.Tags;
+import me.titan.customcommands.container.execution.CommandCondition;
 import me.titan.customcommands.container.execution.CommandMethod;
 import me.titan.customcommands.container.execution.ExecuteOperation;
 import me.titan.customcommands.container.execution.ReplyMessageMethod;
@@ -49,6 +50,9 @@ public interface AdvancedCustomCommand extends CustomCommand {
 	void setOptionalArgsMap(Map<Integer, Map.Entry<String, String>> m);
 
 
+	long getCooldown();
+	void setCooldown(long cooldown);
+
 	List<String> getRawRequiredArgs();
 
 	void setRawRequiredArgs(List<String> list);
@@ -64,10 +68,14 @@ public interface AdvancedCustomCommand extends CustomCommand {
 	List<String> getExecuteCommands();
 	void setExecuteCommands(List<String> list);
 
+	List<Integer> getConditions();
+	void setConditions(List<Integer> cons);
+
 	List<String> getReplyMessages();
 	void setReplyMessages(List<String> list);
 	CommandTarget getTarget();
 	void setTarget(CommandTarget t);
+
 
 
 
@@ -113,6 +121,22 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 		Object[] tagData = Tags.Command.getCommandTagData(cmd);
 
+		if(cmd.contains("[If")){
+			int ind = cmd.indexOf("]");
+			String str = cmd.substring(1,ind).replace("If:","");
+			String[] ints = str.split(",");
+			for(String ids : ints){
+
+
+				int id = Integer.parseInt(ids);
+				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(id);
+
+
+				if(!cond.isTrue(con.player,con.args)) return;
+				cmd = cmd.replace(cmd.substring(0,ind+1),"");
+
+			}
+		}
 		if (tagData == null) {
 			if (cmd.startsWith("/") && con.isPlayer()) {
 				con.player.performCommand(cmd.substring(1));
@@ -124,6 +148,7 @@ public interface AdvancedCustomCommand extends CustomCommand {
 		} else {
 			Tags.Command tag = (Tags.Command) tagData[0];
 			cmd = (String) tagData[1];
+
 			Object[] args = null;
 			if (tagData.length > 2) {
 				args = Arrays.copyOfRange(tagData, 2, tagData.length);
@@ -168,6 +193,25 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 
 		Object[] tagData = Tags.Message.getCommandTagData(msg);
+
+		
+		if(msg.contains("[If")){
+			int ind = msg.indexOf("]");
+			String str = msg.substring(1,ind).replace("If:","");
+			String[] ints = str.split(",");
+			for(String ids : ints){
+
+
+				int id = Integer.parseInt(ids);
+				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(id);
+
+
+				if(!cond.isTrue(con.player,con.args)) return;
+				msg = msg.replace(msg.substring(0,ind+1),"");
+
+			}
+		}
+		
 		if (tagData == null) {
 			con.tell(msg);
 			return;

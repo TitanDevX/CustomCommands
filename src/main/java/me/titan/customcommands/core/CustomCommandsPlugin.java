@@ -3,9 +3,11 @@ package me.titan.customcommands.core;
 import me.titan.customcommands.cmd.CmdParent;
 import me.titan.customcommands.cmd.Messages;
 import me.titan.customcommands.config.CommandsConfig;
+import me.titan.customcommands.config.ConditionsConfig;
 import me.titan.customcommands.config.MainSettings;
 import me.titan.customcommands.config.MessagesConfig;
 import me.titan.customcommands.container.CustomCommand;
+import me.titan.customcommands.listeners.PlayerListener;
 import me.titan.customcommands.log.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,10 +27,11 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 	MessagesConfig messagesConfig;
 
+	ConditionsConfig conditionsConfig;
 	CmdParent parentCmd;
 
 	private static CustomCommandsPlugin instance;
-	private final String supportedVersions = "1.8-1.16.4";
+	private final String supportedVersions = "1.8-1.16.5";
 
 	public CommandsRegistrar getCommandsRegistrar() {
 		return commandsRegistrar;
@@ -72,13 +75,16 @@ public class CustomCommandsPlugin extends JavaPlugin {
 				new Throwable("An exception occurred while initializing commands board."));
 		if (shouldStopEnabling) return;
 		tryCatchThrow(() -> mainSettings = new MainSettings(this),
-				new Throwable("An exception occurred while initializing commands config."));
+				new Throwable("An exception occurred while initializing main config."));
 		if (shouldStopEnabling) return;
 		tryCatchThrow(() -> commandsConfig = new CommandsConfig(this),
 				new Throwable("An exception occurred while initializing commands config."));
 		if (shouldStopEnabling) return;
 		tryCatchThrow(() -> messagesConfig = new MessagesConfig(this, Messages.class),
 				new Throwable("An exception occurred while initializing messages config."));
+		if (shouldStopEnabling) return;
+		tryCatchThrow(() -> conditionsConfig = new ConditionsConfig(this),
+				new Throwable("An exception occurred while initializing conditions config."));
 		if (shouldStopEnabling) return;
 		tryCatchThrow(() -> parentCmd = new CmdParent(this)
 				, new Throwable("An exception occurred while initializing main command."));
@@ -93,6 +99,18 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 		this.updateManager = PluginUpdateManager.init(this);
 
+
+
+		Bukkit.getPluginManager().registerEvents(new PlayerListener(),this);
+
+		updateManager.getVersion((vr) -> {
+			if(!updateManager.isUpToDate(vr)){
+				Logger.getInstance().logEmpty("----------------------------------",
+						"You are running an outdated version of CustomCommands!",
+						"Please update to " + vr + "!","----------------------------------"
+				);
+			}
+		});
 		onPreEnable();
 
 	}
@@ -107,6 +125,10 @@ public class CustomCommandsPlugin extends JavaPlugin {
 		long timeToEnable = (System.currentTimeMillis() - currentTime) / 1000L;
 		Logger.getInstance().forceLog("Plugin successfully loaded in " + timeToEnable + "s.");
 
+	}
+
+	public ConditionsConfig getConditionsConfig() {
+		return conditionsConfig;
 	}
 
 	public boolean checkPlaceHolderApiHook() {

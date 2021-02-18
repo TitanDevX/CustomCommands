@@ -1,15 +1,23 @@
 package me.titan.customcommands.utils;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 public class Util {
-
+	private static final long MIN = 60;
+	private static final long HOURS =MIN*60;
+	private static final long DAYS = HOURS*24;
+	private static final long WEEKS = DAYS*7;
+	private static final long MONTHS = WEEKS*4;
+	private static final long YEARS = MONTHS*12;
 	public static List<String> toLowerCaseList(List<String> list) {
 		List<String> s = new ArrayList<>();
 		for (String str : list) {
@@ -18,7 +26,107 @@ public class Util {
 		return s;
 
 	}
+	public static String formatTime(long seconds){
+		long second = seconds % 60L;
+		long minute = seconds / 60L;
+		String hourMsg = "";
+		if (minute >= 60L) {
+			long hour = seconds / 60L / 60L;
+			minute %= 60L;
+			hourMsg = hour + (hour == 1L ? " hour" : " hours") + " ";
+		}
 
+		return hourMsg + (minute != 0L ? minute : "") + (minute > 0L ? (minute == 1L ? " minute" : " minutes") + " " : "") + Long.parseLong(String.valueOf(second)) + (Long.parseLong(String.valueOf(second)) == 1L ? " second" : " seconds");
+
+	}
+	public static long toSecondsFromHumanFormatShort(String string){
+
+		// 1h. 1h,2min
+		if(isInteger(string)){
+			return Long.parseLong(string);
+		}
+
+		String str = string.replace(" ","");
+		List<String> strsToCheck = new ArrayList<>();
+		if(str.contains(",")){
+
+			strsToCheck.addAll(Arrays.asList(str.split(",")));
+
+		}else{
+			strsToCheck.add(str);
+		}
+		long total = 0;
+		for(String s : strsToCheck){
+
+			String time = s.substring(s.length()-1);
+			if(time.equals("n")){
+				time = s.substring(s.length()-3);
+			}
+			int num = Integer.parseInt(s.replace(time,""));
+
+			long subtotal = 0;
+			if(time.equalsIgnoreCase("h")){
+				subtotal = HOURS;
+			}else
+			if(time.equalsIgnoreCase("min")){
+				subtotal = MIN;
+			}else
+			if(time.equalsIgnoreCase("d")){
+				subtotal = DAYS;
+			}else
+			if(time.equalsIgnoreCase("w")){
+				subtotal = WEEKS;
+			}else
+			if(time.equalsIgnoreCase("mo")) {
+				subtotal = MONTHS;
+			}
+
+			if(subtotal == 0){
+				total = total + num;
+				continue;
+			}
+			total = total + subtotal * num;
+
+		}
+		Predicate<String> pre = s -> {
+			List<String> matches = Arrays.asList("minutes","hours","seconds","days","weeks","months");
+
+			for(int i = 0;i<matches.size();i++){
+				String match = matches.get(i);
+				if(StringUtils.contains(s,match) || StringUtils.contains(s,match.substring(0,match.length()-1))){
+					return true;
+				}
+			}
+			return false;
+		};
+		if(pre.test(string)){
+			String[] ss = string.split(" ");
+			String time = ss[0];
+			int num = Integer.parseInt(ss[1]);
+
+			long subtotal = 1;
+			if(StringUtils.contains(time, "hour")){
+				subtotal = HOURS;
+			}
+
+			if(StringUtils.contains(time, "minute")){
+				subtotal = MIN;
+			}
+			if(StringUtils.contains(time, "day")){
+				subtotal = DAYS;
+			}
+			if(StringUtils.contains(time, "week")){
+				subtotal = WEEKS;
+			}
+			if(StringUtils.contains(time, "month")){
+				subtotal = MONTHS;
+			}
+
+			total = total + subtotal * num;
+		}
+		return total;
+
+	}
 	public static int getIntegerParsed(String fullStr, String splitation, int intIndex) {
 		String[] s = fullStr.split(splitation);
 
@@ -36,7 +144,25 @@ public class Util {
 		name = name.toUpperCase();
 
 
-		return java.lang.Enum.valueOf(clazz, name);
+		try{
+			return  java.lang.Enum.valueOf(clazz, name);
+
+		}catch (IllegalArgumentException ex){
+			return null;
+		}
+	}
+	public static String joinList(String del, Object[] list){
+
+		StringBuilder b = new StringBuilder();
+		for(Object ob : list){
+
+			if(ob != list[0]) {
+				b.append(del);
+			}
+			b.append(ob.toString());
+
+		}
+		return b.toString();
 	}
 
 	public static boolean isBetween(String str, String str2, String del) {

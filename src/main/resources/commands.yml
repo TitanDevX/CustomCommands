@@ -1,4 +1,5 @@
 
+
 # Your command label goes here.
 ExampleCommand:
 
@@ -7,6 +8,9 @@ ExampleCommand:
 
   # permission node, only people with this permission will be able to use this command.
   Permission: 'mypermission.example'
+
+  # Example: 10s, 10min, 10h, 10d, 10w, 10mo
+  Cooldown: 10s
 
   # How many times can a player use this command? set this to -1 for unlimited use.
   # Optional, the default value for this is -1 (unlimited).
@@ -33,6 +37,12 @@ ExampleCommand:
   # in this case: /examplecommand [example optional player]
   OptionalArgs: [ 'example optional player:OnlinePlayer' ]
 
+
+  # check conditions.yml.
+  # If one of these conditions check result is false it will send the condition error message to the player,
+  # and it will stop the command execution.
+  Conditions: [1]
+
   # Who can use commands, players, console or all!
   Who_Can_Use_Command: all
 
@@ -45,17 +55,27 @@ ExampleCommand:
   # do note if you use optional args in execute commands and is not provided the command will be ignored.
   # You can also use {player} for player name.
   #
-  # ------------ NEW: Command Tags (use these to choose by and/or for whom each command will be executed advanced) ------------------------
+  # ------------  Command Tags (use these to choose by and/or for whom each command will be executed advanced) ------------------------
   # !!New Code 'tags': [CONSOLE]: command will be excuted by console.
   # [ALL_ONLINE]: command will be executed BY every online player, variable '{oplayer} = other player we are executing the command by.
   # [ALL_ONLINE_CONSOLE]: command will be executed for every online player BY console,
   #   variable '{oplayer} = other player we are executing the command for.
   # [PLAYER]: command will be executed by the player.
   # [PLAYER_CERTAIN][<player name>]: executes command by a specific player. <player name> can be a variable (like '{arg:x}').
+  #
+  # NEW -- Command Conditions --
+  # Add [If:<conditions ids>] tag to use conditions.
+  # So if and only if all conditions are true the command will be executed, the condition message will be ignored.
+  # Conditions ids are taken from conditions in the CONDITIONS FILE. (conditions.yml).
+
   ExecuteCommands:
-    - '[CONSOLE]give {arg:0} diamond'
+    - '[CONSOLE][If=8]give {arg:0} diamond'
     - '[CONSOLE]give {arg:1} gold_ingot'
     - '[ALL_ONLINE_CONSOLE]'
+
+
+
+
 
   # Messages will be sent to sender as a reply.
   # Like execute commands, you can use {arg:<number} variable(s).

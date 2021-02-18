@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
@@ -16,7 +17,14 @@ public class PlayerListener implements Listener {
 		Player p = e.getPlayer();
 		if (p.hasPermission("customcommands.admin") && PluginUpdateManager.updated) {
 
-			Common.tell(p, CustomCommandsPlugin.getPlugin().getUpdateManager().getFeaturesMessage());
+			new BukkitRunnable(){
+				@Override
+				public void run() {
+					Common.tell(p, CustomCommandsPlugin.getPlugin().getUpdateManager().getFeaturesMessage());
+					PluginUpdateManager.updated = false;
+				}
+			}.runTaskLater(CustomCommandsPlugin.getPlugin(), 20);
+
 		}
 	}
 }

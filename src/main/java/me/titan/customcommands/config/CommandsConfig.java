@@ -1,6 +1,5 @@
 package me.titan.customcommands.config;
 
-import de.leonhard.storage.Yaml;
 import me.titan.customcommands.cmd.lib.CommandTarget;
 import me.titan.customcommands.container.AdvancedCustomCommand;
 import me.titan.customcommands.container.ParentCustomCommand;
@@ -15,16 +14,18 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.logging.Level;
 
-public class CommandsConfig extends TitanConfig {
+public class CommandsConfig  extends TitanConfig{
 	CustomCommandsPlugin plugin;
 
-	Yaml defaultsFile;
 
 	int size;
 	public static String id_field = "dont_edit";
 
 	public CommandsConfig(CustomCommandsPlugin plugin) {
-		super("commands.yml", plugin);
+		super( "commands.yml", plugin);
+		//file = new File(plugin.getDataFolder(),"commands.yml");
+		//config = YamlConfiguration.loadConfiguration(file);
+		//super("commands.yml", plugin);
 		this.plugin = plugin;
 		InputStream i = plugin.getResource("default.yml");
 		File f = new File("default.yml");
@@ -39,21 +40,21 @@ public class CommandsConfig extends TitanConfig {
 		plugin.unregisterAllCommands();
 
 		Logger.getInstance().log("Loading custom commands from config...");
-		size = singleLayerKeySet().size();
-		for (String cmd : singleLayerKeySet()) {
+		size = config.getKeys(false).size();
+		for (String cmd : config.getKeys(false)) {
 
-			if (contains(cmd + ".SubCommands")) {
+			if (config.contains(cmd + ".SubCommands")) {
 
 				setPathPrefix(cmd);
 				ParentCustomCommand parent = new ParentCustomCommand(cmd);
 
 				parent.setAliases(getStringList("Aliases"));
 				parent.setPermission(getString("Permission"));
-				parent.setTarget(Util.getEnum(getOrDefault("Who_Can_Use_Command", "ALL"), CommandTarget.class));
+				parent.setTarget(Util.getEnum(getString("Who_Can_Use_Command", "ALL"), CommandTarget.class));
 				parent.setHelpMessageHeader(getStringList("HelpMessage.Header"));
 				parent.setHelpMessageEach(getString("HelpMessage.Each"));
 				parent.setHelpMessageFooter(getStringList("HelpMessage.Footer"));
-				for (String sub : singleLayerKeySet(cmd + ".SubCommands")) {
+				for (String sub : singleLayerKeySet("SubCommands")) {
 					parent.getSubCustomCommands().add((SubCustomCommand) loadCommand(sub, true, cmd + ".SubCommands." + sub));
 				}
 				setPathPrefix(null);
@@ -77,7 +78,7 @@ public class CommandsConfig extends TitanConfig {
 		String permission = getString("Permission");
 		List<String> reqArgs = getStringList("RequiredArgs");
 		List<String> optArgs = getStringList("OptionalArgs");
-		CommandTarget cmdTarget = Util.getEnum(getOrDefault("Who_Can_Use_Command", "ALL"), CommandTarget.class);
+		CommandTarget cmdTarget = Util.getEnum(getString("Who_Can_Use_Command", "ALL"), CommandTarget.class);
 
 		List<String> executeCommands = getStringList("ExecuteCommands");
 		List<String> replyMessages = getStringList("ReplyMessages");
@@ -103,6 +104,12 @@ public class CommandsConfig extends TitanConfig {
 		if (contains("Uses")) {
 			scmd.setUses(getInt("Uses"));
 		}
+		if (contains("Cooldown")) {
+			scmd.setCooldown(Util.toSecondsFromHumanFormatShort(getString("Cooldown")));
+		}
+		if(contains("Conditions")){
+			scmd.setConditions(getConfig().getIntegerList(getPathPrefix() + "Conditions"));
+		}
 		if (contains("UsesPerPermission")) {
 
 			Map<String, Integer> map = new HashMap<>();
@@ -120,24 +127,30 @@ public class CommandsConfig extends TitanConfig {
 			}
 			scmd.setUsesPerPermission(map);
 		}
-		Iterator<String> it = aliases.iterator();
+		if(aliases != null) {
+			Iterator<String> it = aliases.iterator();
 
-		while (it.hasNext()) {
-			String a = it.next();
-			if (a.equals(scmd.getName())) {
-				Logger.getInstance().forceLog(Level.WARNING, String.format("Found an alias in %s aliases that is the same as the command name/label (%s)" +
-						", please remove it to prevent this warning from showing again.", scmd.getName(), scmd.getName()));
-				it.remove();
+			while (it.hasNext()) {
+				String a = it.next();
+				if (a.equals(scmd.getName())) {
+					Logger.getInstance().forceLog(Level.WARNING, String.format("Found an alias in %s aliases that is the same as the command name/label (%s)" +
+							", please remove it to prevent this warning from showing again.", scmd.getName(), scmd.getName()));
+					it.remove();
+				}
 			}
+			scmd.setAliases(aliases);
 		}
-		scmd.setAliases(aliases);
 		scmd.setPermission(permission);
 		scmd.setTarget(cmdTarget);
-		scmd.setDescription(getOrDefault("Description", ""));
-		scmd.setExecuteCommands(executeCommands);
-		scmd.setReplyMessages(replyMessages);
-		scmd.setSourceRequiredArgs(reqArgs);
-		scmd.setSourceOptionalArgs(optArgs);
+		scmd.setDescription(getString("Description", ""));
+		if(executeCommands != null)
+		 scmd.setExecuteCommands(executeCommands);
+		if(replyMessages != null)
+		 scmd.setReplyMessages(replyMessages);
+		if(reqArgs != null)
+		 scmd.setSourceRequiredArgs(reqArgs);
+		if(optArgs != null)
+		 scmd.setSourceOptionalArgs(optArgs);
 
 
 		List<String> rReqArgs = new ArrayList<>();

@@ -20,7 +20,8 @@ public enum Messages implements MessagesEnum {
 	Help_Message__Footer(true, ""
 			, "&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-"),
 	Player_Is_Not_Online("&cPlayer {arg} is not online!"),
-	Cannot_Use_Command_Limited("&4You are not allowed to run this command more than {cmdUses} times!");
+	Cannot_Use_Command_Limited("&4You are not allowed to run this command more than {cmdUses} times!"),
+	Cooldown("&4&lERROR &cplease wait {time}!");
 
 
 	final String path;

@@ -4,9 +4,12 @@ import me.titan.customcommands.cmd.Messages;
 import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.CommandTarget;
 import me.titan.customcommands.cmd.lib.TitanCommand;
+import me.titan.customcommands.container.execution.CommandCondition;
 import me.titan.customcommands.container.execution.ExecuteOperation;
+import me.titan.customcommands.core.CustomCommandsPlugin;
 import me.titan.customcommands.data.player.PlayerCache;
 import me.titan.customcommands.utils.Common;
+import me.titan.customcommands.utils.Util;
 
 import java.util.*;
 
@@ -29,6 +32,8 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	CommandTarget target;
 	long waitTime;
 
+	List<Integer> conditions = new ArrayList<>();
+	long cooldown;
 	int uses = -1;
 	Map<String, Integer> usesPerPerm;
 	int id;
@@ -45,6 +50,16 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 		}
 
 
+	}
+
+	@Override
+	public List<Integer> getConditions() {
+		return conditions;
+	}
+
+	@Override
+	public void setConditions(List<Integer> conditions) {
+		this.conditions = conditions;
 	}
 
 	@Override
@@ -126,6 +141,7 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 	@Override
 	public void setExecuteCommands(List<String> executeCommands) {
+		if(executeCommands == null) return;
 		this.executeCommands = executeCommands;
 	}
 
@@ -134,6 +150,7 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 
 		if (isParent()) return false;
 
+		System.out.println("GGGG " + getReplyMessages() + " " + getExecuteCommands());
 
 		if (con.isPlayer()) {
 			PlayerCache pc = PlayerCache.getPlayerCache(con.player);
@@ -144,6 +161,24 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 				return false;
 			}
 			pc.IncreaseUses(this);
+			long can = pc.canDo(this);
+			if(can > 0){
+				con.tell(Messages.Cooldown.getReplaced("{time}", Util.formatTime(can)));
+				return false;
+			}
+			for(int conId : getConditions()){
+
+				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(conId);
+
+				System.out.println(conId + " " + cond  + " " + CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions());
+				if(!cond.isTrue(con.player,con.args)) {
+					if(cond.getMessage() != null)
+					  con.tell(cond.getMessage());
+					return false;
+
+				}
+
+			}
 		}
 		Map<Integer, Object> parsedArgs = new HashMap<>();
 
@@ -292,6 +327,17 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 	public void setOptionalArgsMap(Map<Integer, Map.Entry<String, String>> m) {
 
 		this.optionalArgsMap = m;
+	}
+
+	@Override
+	public long getCooldown() {
+		return cooldown;
+	}
+
+	@Override
+	public void setCooldown(long cooldown) {
+
+		this.cooldown= cooldown;
 	}
 
 

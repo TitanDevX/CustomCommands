@@ -34,11 +34,12 @@ public class CmdCmdCreate extends TitanSubCommand {
 		plugin.getCommandsConfig().setPathPrefix(null);
 		for (String str : defaults.keySet("ExampleCommand")) {
 
-			plugin.getCommandsConfig().set(label + "." + str, defaults.get("ExampleCommand." + str));
+			plugin.getCommandsConfig().setNoSave(label + "." + str, defaults.get("ExampleCommand." + str));
 
 		}
-		SingleCustomCommand scc = new SingleCustomCommand(label);
-		plugin.getCommandsRegistrar().registerCommand(scc);
+		plugin.getCommandsConfig().save();
+		SingleCustomCommand scc = (SingleCustomCommand) CustomCommandsPlugin.getPlugin().getCommandsConfig().loadCommand(label,false,"");
+
 		con.tell("&aSuccessfully created command " + label + ", now you can configure it in commands.yml!");
 
 

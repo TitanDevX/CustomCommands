@@ -22,6 +22,8 @@ public class PlayerCache {
 	public static Json json;
 	Map<Integer, Integer> commandUses = new HashMap<>();
 
+	Map<Integer, Long> commandCooldowns = new HashMap<>();
+
 	static {
 		json = new Json(new File(CustomCommandsPlugin.getPlugin().getDataFolder(), "data/players.json"));
 
@@ -75,6 +77,20 @@ public class PlayerCache {
 		}
 	}
 
+	public long getCooldown(CustomCommand cmd){
+		return commandCooldowns.getOrDefault(cmd.getId(),0L);
+	}
+	public long canDo(AdvancedCustomCommand cmd){
+
+		long last = getCooldown(cmd);
+		if(last == 0) return 0;
+		long current = System.currentTimeMillis();
+
+		long dif = current-last;
+
+		return dif;
+
+	}
 	public int getUses(CustomCommand cmd) {
 		return commandUses.getOrDefault(cmd.getId(), 0);
 	}

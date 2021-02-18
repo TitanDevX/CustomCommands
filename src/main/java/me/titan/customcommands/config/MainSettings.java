@@ -19,7 +19,7 @@ public class MainSettings extends TitanConfig {
 
 	@Override
 	public void init() {
-		debug = getOrSetDefault("Debug", false);
+		debug = (boolean) getOrSetDefault("Debug", false);
 		Logger.debug = debug;
 		override = getBoolean("Override_Other_Commands");
 		if (override) {

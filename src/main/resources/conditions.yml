@@ -1,0 +1,39 @@
+# Condition Format: type: value
+# Valid types:
+# papi_int: checks a PlaceHolderAPI/arg placeholder (the placeholder is a number),
+# value format: %placeholder% = (number).
+
+# papi_string: checks a PlaceHolderAPI/arg placeholder (the placeholder is a string).
+# value format: %placeholder% = (string).
+
+# papi_boolean: checks a PlaceHolderAPI/arg placeholder (the placeholder is a true/false value).
+# value format: %placeholder% = true/false.
+
+# has_permission: checks if the player has the permission value.
+# If you use a condition on a command, on this command executed if the condition check result is false it will send
+# the custom message you put on the 'Message' section.
+Conditions:
+  1:
+    Condition: "papi_int: %player_level% >= 10"
+    Message: "You must have at least 10 level."
+  2:
+    Condition: "has_permission: myperms.perm"
+    Message: "You don't have perms!"
+  3:
+    Condition: "papi_string: %player_name% = TitanDev"
+    Message: "you must be TitanDev!"
+  4:
+    Condition: "papi_boolean: %mypapi% = true"
+    Message: ""
+  5:
+    Condition: "papi_string: {arg:1} = me"
+    Message: null
+  6:
+    Condition: "papi_int: {arg:2} = 3"
+    Message: null
+  7:
+    Condition: "papi_boolean: {arg:3} = true"
+    Message: null
+  8:
+    Condition: "papi_boolean: {arg:4} = true"
+    Message: null

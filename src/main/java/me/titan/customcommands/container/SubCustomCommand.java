@@ -5,9 +5,12 @@ import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.CommandTarget;
 import me.titan.customcommands.cmd.lib.TitanCommand;
 import me.titan.customcommands.cmd.lib.TitanSubCommand;
+import me.titan.customcommands.container.execution.CommandCondition;
 import me.titan.customcommands.container.execution.ExecuteOperation;
+import me.titan.customcommands.core.CustomCommandsPlugin;
 import me.titan.customcommands.data.player.PlayerCache;
 import me.titan.customcommands.utils.Common;
+import me.titan.customcommands.utils.Util;
 
 import java.util.*;
 
@@ -28,6 +31,8 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	CommandTarget target;
 
 	ParentCustomCommand parent;
+	List<Integer> conditions = new ArrayList<>();
+	long cooldown;
 	int id;
 	int uses = -1;
 	Map<String, Integer> usesPerPerm;
@@ -44,6 +49,25 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 
 	public static String[] EMPTY_STRING_ARRAY = new String[0];
 
+	@Override
+	public long getCooldown() {
+		return cooldown;
+	}
+
+	@Override
+	public void setCooldown(long cooldown) {
+
+		this.cooldown= cooldown;
+	}
+	@Override
+	public List<Integer> getConditions() {
+		return conditions;
+	}
+
+	@Override
+	public void setConditions(List<Integer> conditions) {
+		this.conditions = conditions;
+	}
 
 	@Override
 	public void setUses(int uses) {
@@ -215,6 +239,23 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 				return;
 			}
 			pc.IncreaseUses(this);
+			long can = pc.canDo(this);
+			if(can > 0){
+				con.tell(Messages.Cooldown.getReplaced("{time}", Util.formatTime(can)));
+				return ;
+			}
+			for(int conId : getConditions()){
+
+				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(conId);
+				if(!cond.isTrue(con.player,con.args)) {
+					if(cond.getMessage() != null)
+						con.tell(cond.getMessage());
+					return;
+
+				}
+
+			}
+
 		}
 		int i = 0;
 		for (Map.Entry<Integer, Map.Entry<String, String>> en : getRequiredArgsMap().entrySet()) {
