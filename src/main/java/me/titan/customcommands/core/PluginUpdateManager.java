@@ -17,9 +17,11 @@ import java.util.function.Consumer;
 public class PluginUpdateManager {
 
 	private static final List<String> features = Arrays.asList(
-			"Added Command cool down."
-			, "Added command conditions.",
-			"Bug fixing."
+			"Fixed bugs with command cooldown."
+			, "Added custom commands in game edit commands!",
+			"Changed default commands.yml",
+			"Added bypass permission for cmd cooldown.",
+			"Other Bugs fixing."
 	);
 	public static boolean updated = false;
 	private final Json json;
@@ -29,13 +31,14 @@ public class PluginUpdateManager {
 		this.json = json;
 		String current = CustomCommandsPlugin.getPlugin().getDescription().getVersion();
 
+		updated = false;
 		if (!json.contains("LastVersion")) {
 			updated = true;
 		} else {
 			lastVersion = json.getString("LastVersion");
-			int lastV = parseVersion(lastVersion);
-			int currentVersion = parseVersion(current);
-			if (lastV < currentVersion) {
+			int c = compare(lastVersion, current);
+			System.out.println("V " + c + " " + updated);
+			if (c == -1) {
 				updated = true;
 			}
 
@@ -71,33 +74,44 @@ public class PluginUpdateManager {
 
 	public boolean isUpToDate(String vr){
 		String current = CustomCommandsPlugin.getPlugin().getDescription().getVersion();
-		int currentVersion = parseVersion(current);
 
-		int ver = parseVersion(vr);
-		return currentVersion >= ver;
+
+		int c = compare(current, vr);
+		return c >= 0;
 	}
-	public static int parseVersion(String str) {
+	public static int compare(String v1, String v2){
 
-		int result = 100;
-		if (str.contains("SNAPSHOT")) {
-			str = str.replace("-SNAPSHOT", "");
-			result = 0;
+		String[] args1 = v1.split("\\.");
+		String[] args2 = v2.split("\\.");
+
+		int l1 = args1.length-1;
+		int l2 = args2.length-1;
+		// 2.3.1 - 2
+		// 2.3 - 1
+		// 2.1.1 - 2
+		for(int i =0;i<5;i++){
+			if(l1 < i && l2 >= i){
+				return -1;
+			}else if(l2 < i && l1 >= i){
+				return 1;
+			}
+			if(l2 < i && l1 < i){
+				return 0;
+			}
+			int arg1 = Integer.parseInt(args1[i]);
+			int arg2 = Integer.parseInt(args2[i]);
+
+				if(arg1 > arg2){
+					return 1;
+				}else if(arg2 > arg1){
+					return -1;
+				}
+
 		}
+		return 0;
 
-		String[] dots = str.split("\\.");
-
-
-		int i = dots.length;
-		for (String s : dots) {
-			if(i == dots.length){
-				result += Integer.parseInt(s) * 10;
-			}else
-			 result += Integer.parseInt(s) * i;
-
-			i--;
-		}
-		return result;
 	}
+
 
 	public List<String> getFeaturesMessage() {
 		//https://www.spigotmc.org/resources/customcommands-2-1-8-1-16.74642/

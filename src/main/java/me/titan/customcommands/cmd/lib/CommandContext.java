@@ -12,25 +12,23 @@ public class CommandContext {
 
 	final public CommandSender sender;
 	final public Player player;
-	final public CommandRequirements.CmdCheckResult ReqCheckResult;
 	public String[] args;
 
 	public boolean foundError = false;
 
 
-	public CommandContext(CommandSender sender, Player player, CommandRequirements.CmdCheckResult argCheckResult, String[] args) {
+	public CommandContext(CommandSender sender, Player player, String[] args) {
 		this.sender = sender;
 		this.player = player;
-		this.ReqCheckResult = argCheckResult;
 		this.args = args;
 	}
 
-	public static CommandContext of(CommandSender sender, CommandRequirements.CmdCheckResult c, String[] args) {
+	public static CommandContext of(CommandSender sender,  String[] args) {
 		Player p = null;
 		if (sender instanceof Player) {
 			p = (Player) sender;
 		}
-		return new CommandContext(sender, p, c, args);
+		return new CommandContext(sender, p, args);
 	}
 
 	public boolean isPlayer() {

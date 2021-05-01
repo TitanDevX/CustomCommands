@@ -13,9 +13,39 @@ public abstract class TitanSubCommand {
 
 	boolean changed;
 
-	protected abstract void onCommand(CommandContext context);
+	Map<String, TitanCommand> subCommands = new HashMap<>();
 
-	private List<String> aliases;
+	List<TitanCommand> actualSubCommands = new ArrayList<>();
+
+	protected abstract void onCommand(CommandContext context);
+	protected void doCommand(CommandContext con){
+		onCommand(con);
+		System.out.println("gg0" + subCommands);
+
+		// label sublabel label2 <args>
+		if(!subCommands.isEmpty()){
+			if(con.args.length < 1){
+				System.out.println("gg");
+				con.tell(getHelpMessage());
+				return;
+			}
+			TitanCommand cmd = subCommands.get(con.args[0].toLowerCase());
+			if(cmd == null){
+				System.out.println("gg2");
+
+				con.tell(getHelpMessage());
+				return;
+			}
+			System.out.println("gg3");
+
+			con.args = Arrays.copyOfRange(con.args,1,con.args.length);
+			cmd.doExecute(con);
+			System.out.println("gg4");
+
+		}
+	}
+
+	private List<String> aliases = new ArrayList<>();
 
 	public TitanSubCommand(String sublabel) {
 		this.sublabel = sublabel;
@@ -23,6 +53,10 @@ public abstract class TitanSubCommand {
 
 	public void setParent(TitanCommand parent) {
 		this.parent = parent;
+	}
+
+	public Map<String, TitanCommand> getSubCommands() {
+		return subCommands;
 	}
 
 	public void setTarget(CommandTarget t) {
@@ -48,6 +82,9 @@ public abstract class TitanSubCommand {
 		}
 
 
+	}
+	public String[] getHelpMessage(){
+		return new String[0];
 	}
 
 	public void notifyChange() {
@@ -88,6 +125,20 @@ public abstract class TitanSubCommand {
 		return "/" + parent.getLabel() + " " + sublabel + " " + req + opt;
 	}
 
+	public void onRegister(){
+		registerSubCommands();
+	}
+	public void registerSubCommands(){
+
+	}
+	public void registerSubCommand(TitanCommand cmd){
+		subCommands.put(cmd.getLabel().toLowerCase(), cmd);
+		for (String ali : cmd.getAliases()) {
+			subCommands.put(ali.toLowerCase(), cmd);
+		}
+		actualSubCommands.add(cmd);
+		cmd.registerSubCommands();
+	}
 	public String getHelpMessageUsage() {
 
 		if (!changed && cachedUsage != null) {

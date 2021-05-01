@@ -1,42 +1,50 @@
-version: 2.2.1-SNAPSHOT
+version: 2.3
 
 # Your command label goes here.
 ExampleCommand:
+  # aliases, typing on of these in the chat will execute the command as well, optional.
+  Aliases: []
 
-  # Your command aliases so players can do /excmd instead of typing whole /exmaplecommand.
-  Aliases: [ ]
+  # Only people with this permission node will be able to execute the command, optional.
+  # NOTE: If you want this command accessible by every player, delete the Permission: option.
+  Permission: ""
 
-  # permission node, only people with this permission will be able to use this command.
-  Permission: ''
-
-  # Command description, completely optional.
+  # Description for your command, optional.
   Description: ""
 
-  # Required args, will be shown in the usage message between < and > and is required..
-  # in this case: /examplecommand <example player>
-  # the ':OnlinePlayer' suffix is to make plugin check if the given arg is an online player.
-  # valid suffixes are: num, offlinePlayer, onlinePlayer.
-  RequiredArgs: [ ]
-
-  # Optiona args, will be shown in the usage message between [ and ] and is not required..
-  # in this case: /examplecommand [example optional player]
-  OptionalArgs: [ ]
-
-  # Who can use commands, players, console or all!
-  Who_Can_Use_Command: all
-
-  # Commands will be executed when this command used.
-  # If this command sender is player, commands starting with / will be executed as the player.
-  # If the command sender is console, commands starting with / will be ignored.
-  # You can use given args like this {arg:<number>}.
-  # For example, if this executed command like this '/examplecommand player1 player2', {arg:0} is player1
-  # and {arg:1} is player2.
-  # do note if you use optional args in execute commands and is not provided the command will be ignored.
-  # You can also use {player} for player name.
-  ExecuteCommands: [ ]
+  # Each one of these will be executed upon command executions.
+  # Use {player} for the command sender name.
+  # {arg:<arg number starting from 0>} is a placerholder for given args (that you type in chat after the command).
+  #
+  # -----------  Command Tags (use these to choose by and/or for whom each command will be executed) ------------------------
+  # !!New Code 'tags': [CONSOLE]: command will be excuted by console.
+  # [ALL_ONLINE]: command will be executed BY every online player, variable '{oplayer} = other player we are executing the command by.
+  # [ALL_ONLINE_CONSOLE]: command will be executed for every online player BY console,
+  #   variable '{oplayer} = other player we are executing the command for.
+  # [PLAYER]: command will be executed by the player.
+  # [PLAYER_CERTAIN][<player name>]: executes command by a specific player. <player name> can be a variable (like '{arg:x}').
+  #
+  # ----------- Command Conditions -----------
+  # Add [If:<conditions ids>] tag to use conditions.
+  # So if and only if all conditions are true the command will be executed, the condition message will be ignored.
+  # Conditions ids are taken from conditions in the CONDITIONS FILE. (conditions.yml).
+  ExecuteCommands: []
 
   # Messages will be sent to sender as a reply.
   # Like execute commands, you can use {arg:<number} variable(s).
   # And {player} for player name.
-  ReplyMessages:
-    - 'test'
+  #
+  # -----------  Message Tags -----------
+  # Use [BROADCAST] Tag to make it broadcast message for all online player. using {oplayer} for the other player's (that is receiving the message) name.
+  # Use [SEND_OTHER][<player>] Tag to make it sends the message to another player.
+  ReplyMessages: []
+
+  # Cooldown between command uses.
+  # With the permission to bypass, the permission is <command id>.cooldown.bypass.
+  Cooldown: 0
+
+  # The maximum amount default players can use this command.
+  Uses: -1
+
+  # Format: 'permission:uses'
+  UsesPerPermission: []

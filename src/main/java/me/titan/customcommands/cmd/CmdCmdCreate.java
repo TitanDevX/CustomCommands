@@ -7,6 +7,7 @@ import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.TitanSubCommand;
 import me.titan.customcommands.container.SingleCustomCommand;
 import me.titan.customcommands.core.CustomCommandsPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 
@@ -22,7 +23,18 @@ public class CmdCmdCreate extends TitanSubCommand {
 
 		setPermission(Permissions.CustomCommands_create.perm);
 		this.plugin = plugin;
-		defaults = LightningBuilder.fromFile(new File(plugin.getDataFolder(), "default.yml")).addInputStream(plugin.getResource("default.yml")).createYaml();
+		File f= new File(plugin.getDataFolder(), "default.yml");
+
+		if(f.exists()){
+			f.delete();
+		}
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				defaults = LightningBuilder.fromFile(f).addInputStream(plugin.getResource("default.yml")).createYaml();
+
+			}
+		}.runTaskLater(plugin,5);
 	}
 
 	@Override

@@ -21,6 +21,9 @@ public abstract class TitanCommand extends Command {
 	boolean changed;
 	String cachedUsage;
 
+	int drag = 0;
+	//cmd sub1 sub2 <arg0> <arg1> cmd
+
 	protected TitanCommand(String name) {
 		super(name);
 
@@ -46,60 +49,64 @@ public abstract class TitanCommand extends Command {
 		}
 		cmd.setParent(this);
 		actualSubCommands.add(cmd);
+		cmd.onRegister();
 	}
 
 	public void registerSubCommands() {
 	}
 
-	@Override
-	public final boolean execute(CommandSender sender, String commandLabel, String[] args) {
+	public void doExecute(CommandContext con){
+		CommandRequirements.CmdCheckResult checkResult = requirements.check(con.sender, con.args);
+		if (!checkPerms(con.sender, getPermission())) return;
 
-		if (!checkPerms(sender, getPermission())) return false;
-		CommandRequirements.CmdCheckResult checkResult = requirements.check(sender, args);
 		if (checkResult.notPlayer) {
-			Common.tell(sender, Messages.Must_Be_Player.get());
-			return false;
+			Common.tell(con.sender, Messages.Must_Be_Player.get());
+			return;
 		} else if (checkResult.notConsole) {
-			Common.tell(sender, Messages.Must_Be_Console.get());
-			return false;
+			Common.tell(con.sender, Messages.Must_Be_Console.get());
+			return;
 		} else if (checkResult.argsLength) {
 
-			Common.tell(sender, getUsageMessage());
-			return false;
+			Common.tell(con.sender, getUsageMessage());
+			return;
 		}
-		CommandContext con = CommandContext.of(sender, checkResult, args);
 
 
-		if (!onCommand(con)) return false;
+		if (!onCommand(con)) return;
 		if (!subCommands.isEmpty()) {
 
-			if (args.length < 1) {
-				Common.tell(sender, getHelpMessage(sender));
-				return false;
+			if (con.args.length < 1+drag) {
+				Common.tell(con.sender, getHelpMessage(con.sender));
+				return;
 			}
-			String sub = args[0].toLowerCase();
+			String sub = con.args[0+drag].toLowerCase();
 			if (!subCommands.containsKey(sub)) {
-				Common.tell(sender, getHelpMessage(sender));
-				return false;
+				Common.tell(con.sender, getHelpMessage(con.sender));
+				return;
 			}
 			TitanSubCommand cmd = subCommands.get(sub);
-			if (!checkPerms(sender, cmd.getPermission())) return false;
-			con.args = Arrays.copyOfRange(args, 1, args.length);
-			CommandRequirements.CmdCheckResult subCheckResult = cmd.requirements.check(sender, con.args);
+			if (!checkPerms(con.sender, cmd.getPermission())) return;
+			con.args = Arrays.copyOfRange(con.args, 1+drag, con.args.length);
+			CommandRequirements.CmdCheckResult subCheckResult = cmd.requirements.check(con.sender, con.args);
 			if (subCheckResult.notPlayer) {
-				Common.tell(sender, Messages.Must_Be_Player.get());
-				return false;
+				Common.tell(con.sender, Messages.Must_Be_Player.get());
+				return;
 			} else if (subCheckResult.notConsole) {
-				Common.tell(sender, Messages.Must_Be_Console.get());
-				return false;
+				Common.tell(con.sender, Messages.Must_Be_Console.get());
+				return;
 			} else if (subCheckResult.argsLength) {
-				Common.tell(sender, cmd.getUsage());
-				return false;
+				Common.tell(con.sender, cmd.getUsage());
+				return;
 			}
-			cmd.onCommand(con);
+			cmd.doCommand(con);
 		}
 		changed = false;
+	}
+	@Override
+	public final boolean execute(CommandSender sender, String commandLabel, String[] args) {
+		CommandContext con = CommandContext.of(sender, args);
 
+		doExecute(con);
 
 		return false;
 	}
@@ -226,11 +233,11 @@ public abstract class TitanCommand extends Command {
 			(@NotNull CommandSender sender, @NotNull String alias,
 			 @NotNull String[] args) throws IllegalArgumentException {
 
-		if (args.length == 1) {
+		if (args.length == 1+drag) {
 			if (!subCommands.isEmpty()) {
 				List<String> strs = new ArrayList<>();
 				for (String str : subCommands.keySet()) {
-					if (str.startsWith(args[0])) {
+					if (str.startsWith(args[0+drag])) {
 						strs.add(str);
 					}
 					//strs.add(str);
@@ -243,5 +250,9 @@ public abstract class TitanCommand extends Command {
 
 		return super.tabComplete(sender, alias, args);
 
+	}
+
+	public void setDrag(int drag) {
+		//this.drag = drag;
 	}
 }

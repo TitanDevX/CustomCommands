@@ -7,6 +7,7 @@ import me.titan.customcommands.container.SingleCustomCommand;
 import me.titan.customcommands.container.SubCustomCommand;
 import me.titan.customcommands.core.CustomCommandsPlugin;
 import me.titan.customcommands.log.Logger;
+import me.titan.customcommands.utils.TimeUtil;
 import me.titan.customcommands.utils.Util;
 
 import java.io.File;
@@ -50,7 +51,12 @@ public class CommandsConfig  extends TitanConfig{
 
 				parent.setAliases(getStringList("Aliases"));
 				parent.setPermission(getString("Permission"));
-				parent.setTarget(Util.getEnum(getString("Who_Can_Use_Command", "ALL"), CommandTarget.class));
+				if(!contains("WhoCanUseCommand") && contains("Who_Can_Use_Command")){
+					set("WhoCanUseCommand",getString("Who_Can_Use_Command", "ALL"));
+					set("Who_Can_Use_Command",null);
+					save();
+				}
+				parent.setTarget(Util.getEnum(getString("WhoCanUseCommand", "ALL"), CommandTarget.class));
 				parent.setHelpMessageHeader(getStringList("HelpMessage.Header"));
 				parent.setHelpMessageEach(getString("HelpMessage.Each"));
 				parent.setHelpMessageFooter(getStringList("HelpMessage.Footer"));
@@ -78,7 +84,15 @@ public class CommandsConfig  extends TitanConfig{
 		String permission = getString("Permission");
 		List<String> reqArgs = getStringList("RequiredArgs");
 		List<String> optArgs = getStringList("OptionalArgs");
-		CommandTarget cmdTarget = Util.getEnum(getString("Who_Can_Use_Command", "ALL"), CommandTarget.class);
+
+		if(!contains("WhoCanUseCommand") && contains("Who_Can_Use_Command")){
+			set("WhoCanUseCommand",getString("Who_Can_Use_Command", "ALL"));
+			set("Who_Can_Use_Command",null);
+			save();
+
+		}
+		CommandTarget cmdTarget = Util.getEnum(getString("WhoCanUseCommand", "ALL"), CommandTarget.class);
+
 
 		List<String> executeCommands = getStringList("ExecuteCommands");
 		List<String> replyMessages = getStringList("ReplyMessages");
@@ -105,7 +119,7 @@ public class CommandsConfig  extends TitanConfig{
 			scmd.setUses(getInt("Uses"));
 		}
 		if (contains("Cooldown")) {
-			scmd.setCooldown(Util.toSecondsFromHumanFormatShort(getString("Cooldown")));
+			scmd.setCooldown(TimeUtil.parseToken(getString("Cooldown")) / 1000);
 		}
 		if(contains("Conditions")){
 			scmd.setConditions(getConfig().getIntegerList(getPathPrefix() + "Conditions"));

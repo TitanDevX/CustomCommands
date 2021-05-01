@@ -19,6 +19,7 @@ public class CmdParent extends TitanCommand {
 
 		registerSubCommand(new CmdCmdCreate(plugin));
 		registerSubCommand(new CmdReload(plugin));
+		registerSubCommand(new CmdCmdEdit(plugin));
 	}
 
 	@Override

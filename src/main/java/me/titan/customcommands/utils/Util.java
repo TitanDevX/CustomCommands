@@ -127,6 +127,7 @@ public class Util {
 		return total;
 
 	}
+
 	public static int getIntegerParsed(String fullStr, String splitation, int intIndex) {
 		String[] s = fullStr.split(splitation);
 

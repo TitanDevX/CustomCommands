@@ -232,16 +232,16 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 
 		if (con.isPlayer()) {
 			PlayerCache pc = PlayerCache.getPlayerCache(con.player);
-			if (!pc.canExecuteCommand(this)) {
+			if (!pc.checkUses(this)) {
 				Common.tell(con.sender,
 						Messages.Cannot_Use_Command_Limited.
 								getReplaced("{cmdUses}", pc.getUsesAd(this) + ""));
 				return;
 			}
 			pc.IncreaseUses(this);
-			long can = pc.canDo(this);
-			if(can > 0){
-				con.tell(Messages.Cooldown.getReplaced("{time}", Util.formatTime(can)));
+			long cooldown = pc.checkCooldown(this);
+			if(cooldown != -1){
+				con.tell(Messages.Cooldown.getReplaced("{time}", Util.formatTime(cooldown)));
 				return ;
 			}
 			for(int conId : getConditions()){
@@ -286,7 +286,7 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 
 		}
 
-
+		PlayerCache.getPlayerCache(con.player).getCommandCooldowns().put(getId(),System.currentTimeMillis()/1000);
 		int optionalStarting = getRawRequiredArgs().size();
 
 		// getItem <player> <item> [gg]

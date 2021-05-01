@@ -5,6 +5,7 @@ import me.titan.customcommands.Permissions;
 import me.titan.customcommands.cmd.lib.CommandContext;
 import me.titan.customcommands.cmd.lib.TitanSubCommand;
 import me.titan.customcommands.core.CustomCommandsPlugin;
+import me.titan.customcommands.core.PluginUpdateManager;
 import me.titan.customcommands.log.Logger;
 
 public class CmdReload extends TitanSubCommand {
@@ -50,6 +51,7 @@ public class CmdReload extends TitanSubCommand {
 		}
 		plugin.getConditionsConfig().init();
 		plugin.getMessagesConfig().init();
+		PluginUpdateManager.init(CustomCommandsPlugin.getPlugin());
 		plugin.getUpdateManager().getVersion((vr) -> {
 			if(!plugin.getUpdateManager().isUpToDate(vr)){
 				Logger.getInstance().logEmpty("----------------------------------",

@@ -196,7 +196,7 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 		
 		if(msg.contains("[If")){
-			int ind = msg.indexOf("]");
+			int ind = msg.indexOf("]",msg.indexOf("[If"));
 			String str = msg.substring(1,ind).replace("If:","");
 			String[] ints = str.split(",");
 			for(String ids : ints){
@@ -221,7 +221,6 @@ public interface AdvancedCustomCommand extends CustomCommand {
 		Object[] args = null;
 		if (tagData.length > 2) {
 			args = Arrays.copyOfRange(tagData, 2, tagData.length);
-
 		}
 		if (tag == Tags.Message.BROADCAST) {
 			for (Player p : Bukkit.getOnlinePlayers()) {
@@ -234,6 +233,7 @@ public interface AdvancedCustomCommand extends CustomCommand {
 		}
 
 	}
+
 
 	boolean isParent();
 
