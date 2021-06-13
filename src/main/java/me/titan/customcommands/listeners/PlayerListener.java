@@ -15,7 +15,8 @@ public class PlayerListener implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 
 		Player p = e.getPlayer();
-		if (p.hasPermission("customcommands.admin") && PluginUpdateManager.updated) {
+ 		if (p.hasPermission("customcommands.admin") && PluginUpdateManager.updated) {
+
 
 			new BukkitRunnable(){
 				@Override

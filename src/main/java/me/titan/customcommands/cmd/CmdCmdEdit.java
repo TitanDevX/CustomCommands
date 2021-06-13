@@ -52,7 +52,8 @@ public class CmdCmdEdit extends TitanSubCommand {
 				"&a/cuc edit setCooldown <cmd> <cooldown>",
 				"&a/cuc edit setUses <cmd> <uses>",
 				"&a/cuc edit setWhoCanUse <cmd> <whoCanUse (all, players, console)>",
-				"&a/cuc edit addRequiredArg <cmd> <arg name> <arg type ( can be onlinePlayer, offlinePlayer, text, message, number)>," +
+				"&a/cuc edit addRequiredArg <cmd> <arg name> <arg type ( can be onlinePlayer, offlinePlayer, text, message, number)>",
+
 						"&a/cuc edit addOptionalArg <arg name> <arg type>",
 				"&b-----------------------------------------------------");
 

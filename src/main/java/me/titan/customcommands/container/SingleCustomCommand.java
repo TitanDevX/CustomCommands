@@ -208,7 +208,8 @@ public class SingleCustomCommand extends TitanCommand implements AdvancedCustomC
 			i++;
 
 		}
-		PlayerCache.getPlayerCache(con.player).getCommandCooldowns().put(getId(),System.currentTimeMillis()/1000);
+		if (con.isPlayer())
+			PlayerCache.getPlayerCache(con.player).getCommandCooldowns().put(getId(),System.currentTimeMillis()/1000);
 
 
 		int optionalStarting = getRawRequiredArgs().size();

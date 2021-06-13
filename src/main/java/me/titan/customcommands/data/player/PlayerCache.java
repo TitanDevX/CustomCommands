@@ -127,7 +127,6 @@ public class PlayerCache {
 		// 10 - 5
 		long current = System.currentTimeMillis()/1000;
 		long dif = current-cooldown;
-		System.out.println("COOL " + cmd.getCooldown() + " "+ current + " " + cooldown + " " + dif + " " + commandCooldowns);
 		if(dif > cmd.getCooldown()){
 			return -1;
 		}else

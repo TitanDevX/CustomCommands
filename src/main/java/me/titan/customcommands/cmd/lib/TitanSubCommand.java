@@ -20,27 +20,22 @@ public abstract class TitanSubCommand {
 	protected abstract void onCommand(CommandContext context);
 	protected void doCommand(CommandContext con){
 		onCommand(con);
-		System.out.println("gg0" + subCommands);
 
 		// label sublabel label2 <args>
 		if(!subCommands.isEmpty()){
 			if(con.args.length < 1){
-				System.out.println("gg");
 				con.tell(getHelpMessage());
 				return;
 			}
 			TitanCommand cmd = subCommands.get(con.args[0].toLowerCase());
 			if(cmd == null){
-				System.out.println("gg2");
 
 				con.tell(getHelpMessage());
 				return;
 			}
-			System.out.println("gg3");
 
 			con.args = Arrays.copyOfRange(con.args,1,con.args.length);
 			cmd.doExecute(con);
-			System.out.println("gg4");
 
 		}
 	}
