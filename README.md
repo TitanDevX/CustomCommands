@@ -1,1 +1,1 @@
-CustomCommands project is discontinued.
+
