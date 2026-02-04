@@ -23,11 +23,11 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 	String getDescription();
 
-	Object setDescription(String de);
+	void setDescription(String de);
 
 	Collection<String> getAliases();
 
-	Object setAliases(List<String> aliases);
+	void setAliases(List<String> aliases);
 
 	String getPermission();
 

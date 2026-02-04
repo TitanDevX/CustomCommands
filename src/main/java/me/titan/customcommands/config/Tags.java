@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Tags {
 	public enum Command {
-		CONSOLE(), PLAYER, PLAYER_CERTAIN(1), ALL_ONLINE(),
+		CONSOLE(), PLAYER, PLAYER_CERTAIN(), ALL_ONLINE(),
 		ALL_ONLINE_CONSOLE;
 		final int argsAmount;
 
-		Command(int argsAmount) {
-			this.argsAmount = argsAmount;
+		Command() {
+			this.argsAmount = 1;
 		}
 
 		Command() {
@@ -47,11 +47,11 @@ public class Tags {
 		}
 	}
 	public enum Message {
-		BROADCAST, SEND_OTHER(1);
+		BROADCAST, SEND_OTHER();
 		final int argsAmount;
 
-		Message(int argsAmount) {
-			this.argsAmount = argsAmount;
+		Message() {
+			this.argsAmount = 1;
 		}
 
 		Message() {

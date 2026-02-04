@@ -18,7 +18,7 @@ public class ReflectionalCodeEngine {
 	Map<String, Set<Class<?>>> playersMethodCache = new HashMap<>();
 
 	// player.isOnline. player.teleport
-	public static Object performCode(String code, String[] args, Player p, Object current, String type) {
+	public static Object performCode(String code, String[] args, Player p, Object current) {
 
 		String[] sections = code.split("\\.");
 
@@ -26,6 +26,7 @@ public class ReflectionalCodeEngine {
 		for (String sec : sections) {
 			if (first) {
 
+				String type;
 				if (sec.equals("player")) {
 					current = p;
 					type = "P";
@@ -100,17 +101,16 @@ public class ReflectionalCodeEngine {
 
 					classesList.add(int.class);
 					objectsList.add(Integer.parseInt(arg));
-					currentListsIndex++;
-				} else {// (Valid.isDecimal(arg.replace("__", "."))) {
+                } else {// (Valid.isDecimal(arg.replace("__", "."))) {
 
 					classesList.add(Double.class);
 					objectsList.add(Double.parseDouble(arg.replace("__", ".")));
 					deprecatedTypesIndexes.put(Double.class, currentListsIndex);
 
-					currentListsIndex++;
-				}
+                }
+                currentListsIndex++;
 
-			}
+            }
 			Class<?>[] classes = classesList.toArray(EMPTY_CLASS_ARRAY);
 			Object[] objects = objectsList.toArray(EMPTY_OBJECT_ARRAY);
 

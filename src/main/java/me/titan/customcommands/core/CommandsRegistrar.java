@@ -49,7 +49,8 @@ public class CommandsRegistrar {
 
 	private SimpleCommandMap getCommandMap() {
 		try {
-			return (SimpleCommandMap) getCommandMapMethod.invoke(CraftServerClass.cast(Bukkit.getServer()));
+            assert CraftServerClass != null;
+            return (SimpleCommandMap) getCommandMapMethod.invoke(CraftServerClass.cast(Bukkit.getServer()));
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}

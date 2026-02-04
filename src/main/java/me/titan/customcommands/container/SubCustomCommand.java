@@ -190,9 +190,8 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public Object setDescription(String de) {
+	public void setDescription(String de) {
 		setSubDescription(de);
-		return null;
 	}
 
 	@Override
@@ -201,9 +200,8 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	}
 
 	@Override
-	public Object setAliases(List<String> aliases) {
+	public void setAliases(List<String> aliases) {
 		this.addAlias(aliases.toArray(EMPTY_STRING_ARRAY));
-		return null;
 	}
 
 	@Override

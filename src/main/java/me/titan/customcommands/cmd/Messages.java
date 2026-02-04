@@ -12,12 +12,12 @@ public enum Messages implements MessagesEnum {
 	Usage("&cUsage: {usage}."),
 	Must_Be_Player("&cOnly players can use this command."),
 	Must_Be_Console("&cThis command can only be executed from the console!"),
-	Help_Message__Header(true
-			, "&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-"
+	Help_Message__Header(
+			"&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-"
 			, "               &b&l{label} Sub Commands"
 			, ""),
 	Help_Message__Each("&8/{label} &7{sublabel} {usage}&8: &7{description}"),
-	Help_Message__Footer(true, ""
+	Help_Message__Footer(""
 			, "&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-"),
 	Player_Is_Not_Online("&cPlayer {arg} is not online!"),
 	Cannot_Use_Command_Limited("&4You are not allowed to run this command more than {cmdUses} times!"),
@@ -39,9 +39,9 @@ public enum Messages implements MessagesEnum {
 
 	public static final Map<Messages, List<String>> messages = new HashMap<>();
 
-	Messages(boolean isList, String... defaults) {
+	Messages(String... defaults) {
 		this.path = name().replace("__", ".");
-		this.isList = isList;
+		this.isList = true;
 		this.defaults.addAll(Arrays.asList(defaults));
 	}
 
@@ -85,10 +85,7 @@ public enum Messages implements MessagesEnum {
 		if (msgs == null) {
 			msgs = defaults;
 		}
-		if (msgs == null) {
-			msgs = Collections.singletonList("&kAbCd&r&bSending this default message because no default message has been set for message " + name() + "!");
-		}
-		return msgs;
+        return msgs;
 	}
 
 	public List<String> getListReplaced(String... rep) {

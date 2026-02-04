@@ -17,7 +17,7 @@ public class CacheEngine {
 
 	Map<String, Set<Class<?>>> playersMethodCache = new HashMap<>();
 	// player.isOnline. player.teleport
-	public static Object performCode(String code, String[] args, Player p, Object current, String type) {
+	public static Object performCode(String code, String[] args, Player p, Object current) {
 
 		String[] sections = code.split("\\.");
 
@@ -25,7 +25,8 @@ public class CacheEngine {
 		for (String sec : sections) {
 			if (first) {
 
-				if (sec.equals("player")) {
+                String type;
+                if (sec.equals("player")) {
 					current = p;
 					type = "P";
 				} else if (sec.startsWith("P:")) {
@@ -46,7 +47,7 @@ public class CacheEngine {
 	}
 
 
-	public static Object resolveMethod(Class<?> clazz, Object object, String method, String[] args) {
+	public static void resolveMethod(Class<?> clazz, Object object, String method, String[] args) {
 
 		List<Method> suspectedMethods = new ArrayList<>();
 		for (Method m : clazz.getMethods()) {
@@ -57,7 +58,7 @@ public class CacheEngine {
 		if (suspectedMethods.isEmpty()) {
 
 			//Common.log("Cannot find method '" + method + "' for player!");
-			return null;
+			return;
 		}
 
 
@@ -98,17 +99,16 @@ public class CacheEngine {
 
 					classesList.add(int.class);
 					objectsList.add(Integer.parseInt(arg));
-					currentListsIndex++;
-				} else { //(Valid.isDecimal(arg.replace("__", "."))) {
+                } else { //(Valid.isDecimal(arg.replace("__", "."))) {
 
 					classesList.add(Double.class);
 					objectsList.add(Double.parseDouble(arg.replace("__", ".")));
 					deprecatedTypesIndexes.put(Double.class, currentListsIndex);
 
-					currentListsIndex++;
-				}
+                }
+                currentListsIndex++;
 
-			}
+            }
 
 		}
 		Class<?>[] classes = classesList.toArray(EMPTY_CLASS_ARRAY);
@@ -154,10 +154,10 @@ public class CacheEngine {
 		}
 		if (meth == null) {
 			//Common.log("Invalid args given for player method " + method + ", given " + classesList + ", required: " + suspectedMethods);
-			return null;
+			return;
 		}
 		try {
-			return meth.invoke(object, objects);
+			meth.invoke(object, objects);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 
 
@@ -165,7 +165,6 @@ public class CacheEngine {
 
 			e.printStackTrace();
 		}
-		return null;
 	}
 
 
