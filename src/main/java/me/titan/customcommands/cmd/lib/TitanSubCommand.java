@@ -6,16 +6,16 @@ public abstract class TitanSubCommand {
 
 	final String sublabel;
 	String permission;
-	protected CommandRequirements requirements = new CommandRequirements();
+	protected final CommandRequirements requirements = new CommandRequirements();
 	String cachedUsage;
 	TitanCommand parent;
 	String description;
 
 	boolean changed;
 
-	Map<String, TitanCommand> subCommands = new HashMap<>();
+	final Map<String, TitanCommand> subCommands = new HashMap<>();
 
-	List<TitanCommand> actualSubCommands = new ArrayList<>();
+	final List<TitanCommand> actualSubCommands = new ArrayList<>();
 
 	protected abstract void onCommand(CommandContext context);
 	protected void doCommand(CommandContext con){
@@ -114,7 +114,7 @@ public abstract class TitanSubCommand {
 		if (!requirements.optionalArgs.isEmpty()) {
 			req.append(" ");
 			for (String a : requirements.optionalArgs) {
-				opt.append((opt.length() == 0 ? "" : " ") + "<" + a + ">");
+				opt.append(opt.length() == 0 ? "" : " ").append("<").append(a).append(">");
 			}
 		}
 		return "/" + parent.getLabel() + " " + sublabel + " " + req + opt;
@@ -144,15 +144,15 @@ public abstract class TitanSubCommand {
 		StringBuilder opt = new StringBuilder();
 
 		for (String a : requirements.requiredArgs) {
-			req.append((req.length() == 0 ? "" : " ") + "<" + a + ">");
+			req.append(req.length() == 0 ? "" : " ").append("<").append(a).append(">");
 		}
 		if (!requirements.optionalArgs.isEmpty()) {
 			req.append(" ");
 			for (String a : requirements.optionalArgs) {
-				opt.append((opt.length() == 0 ? "" : " ") + "<" + a + ">");
+				opt.append(opt.length() == 0 ? "" : " ").append("<").append(a).append(">");
 			}
 		}
-		cachedUsage = req.toString() + opt.toString();
+		cachedUsage = req.toString() + opt;
 		return cachedUsage;
 	}
 

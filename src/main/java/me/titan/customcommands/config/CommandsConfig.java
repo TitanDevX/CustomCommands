@@ -16,18 +16,15 @@ import java.util.*;
 import java.util.logging.Level;
 
 public class CommandsConfig  extends TitanConfig{
-	CustomCommandsPlugin plugin;
+	final CustomCommandsPlugin plugin;
 
 
 	int size;
-	public static String id_field = "dont_edit";
+	public static final String id_field = "dont_edit";
 
 	public CommandsConfig(CustomCommandsPlugin plugin) {
 		super( "commands.yml", plugin);
-		//file = new File(plugin.getDataFolder(),"commands.yml");
-		//config = YamlConfiguration.loadConfiguration(file);
-		//super("commands.yml", plugin);
-		this.plugin = plugin;
+        this.plugin = plugin;
 		InputStream i = plugin.getResource("default.yml");
 		File f = new File("default.yml");
 
@@ -118,6 +115,9 @@ public class CommandsConfig  extends TitanConfig{
 		if (contains("Uses")) {
 			scmd.setUses(getInt("Uses"));
 		}
+		if(contains("ResetUsesEvery")){
+			scmd.setUsesResetTime(TimeUtil.parseToken(getString("ResetUsesEvery")) / 1000);
+		}
 		if (contains("Cooldown")) {
 			scmd.setCooldown(TimeUtil.parseToken(getString("Cooldown")) / 1000);
 		}
@@ -169,7 +169,7 @@ public class CommandsConfig  extends TitanConfig{
 
 		List<String> rReqArgs = new ArrayList<>();
 		int i = 0;
-		for (String r : reqArgs) {
+		for (String r : Objects.requireNonNull(reqArgs)) {
 			if (r.contains(":")) {
 				String[] gg = r.split(":");
 				scmd.getRequiredArgsMap().put(i, new AbstractMap.SimpleEntry<>(gg[0], gg[1]));
@@ -184,7 +184,7 @@ public class CommandsConfig  extends TitanConfig{
 		scmd.setSourceRequiredArgs(new ArrayList<>(rReqArgs));
 
 		List<String> rOptArgs = new ArrayList<>();
-		for (String r : optArgs) {
+		for (String r : Objects.requireNonNull(optArgs)) {
 			if (r.contains(":")) {
 				String[] gg = r.split(":");
 				scmd.getOptionalArgsMap().put(i, new AbstractMap.SimpleEntry<>(gg[0], gg[1]));

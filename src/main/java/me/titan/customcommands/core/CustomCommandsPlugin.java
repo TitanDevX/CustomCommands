@@ -31,13 +31,12 @@ public class CustomCommandsPlugin extends JavaPlugin {
 	CmdParent parentCmd;
 
 	private static CustomCommandsPlugin instance;
-	private final String supportedVersions = "1.8-1.16.5";
 
-	public CommandsRegistrar getCommandsRegistrar() {
+    public CommandsRegistrar getCommandsRegistrar() {
 		return commandsRegistrar;
 	}
 
-	boolean shouldStopEnabling;
+	boolean shouldStopEnabling = false;
 
 	long currentTime;
 	private PluginUpdateManager updateManager;
@@ -65,7 +64,8 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 		currentTime = System.currentTimeMillis();
 
-		tryCatchThrow(() -> commandsRegistrar = new CommandsRegistrar(),
+        String supportedVersions = "1.8-1.17";
+        tryCatchThrow(() -> commandsRegistrar = new CommandsRegistrar(),
 				new Throwable("An exception occurred while initialing the commands registrar" +
 						", this might be because you are running an unsupported version!" +
 						" supported versions: " + supportedVersions));
@@ -92,7 +92,7 @@ public class CustomCommandsPlugin extends JavaPlugin {
 		if (shouldStopEnabling) return;
 
 		tryCatchThrow(() -> commandsRegistrar.registerCommand(parentCmd),
-				new Throwable("An exception occurred while registering the main command!"));
+				new Throwable("An exception occurred while registering the main command."));
 
 
 		if (shouldStopEnabling) return;
@@ -104,7 +104,7 @@ public class CustomCommandsPlugin extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(),this);
 
 		updateManager.getVersion((vr) -> {
-			if(!updateManager.isUpToDate(vr)){
+			if(updateManager.isUpToDate(vr)){
 				Logger.getInstance().logEmpty("----------------------------------",
 						"You are running an outdated version of CustomCommands!",
 						"Please update to " + vr + "!","----------------------------------"
@@ -189,7 +189,7 @@ public class CustomCommandsPlugin extends JavaPlugin {
 
 	}
 
-	private final void _$printLogo() {
+	private void _$printLogo() {
 		System.out.println("\n" +
 				"------------------------------------------------------------------------------------------------------" +
 				" _____           _                    _____                                           _     \n" +

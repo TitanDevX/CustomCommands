@@ -7,7 +7,7 @@ public class Logger {
 	private static Logger instance;
 
 	public static boolean debug = false;
-	java.util.logging.Logger source = java.util.logging.Logger.getLogger("Minecraft");
+	final java.util.logging.Logger source = java.util.logging.Logger.getLogger("Minecraft");
 
 	public static Logger getInstance() {
 

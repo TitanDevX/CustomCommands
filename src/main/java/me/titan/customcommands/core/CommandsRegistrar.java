@@ -10,11 +10,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Objects;
 
 public class CommandsRegistrar {
 
 
-	Class<?> CraftServerClass = Reflection.getOBCClass("CraftServer");
+	final Class<?> CraftServerClass = Reflection.getOBCClass("CraftServer");
 	Method getCommandMapMethod;
 	Field getKnownCommandsField;
 	Method MapRemoveMethod;
@@ -24,12 +25,12 @@ public class CommandsRegistrar {
 
 
 		try {
-			getCommandMapMethod = CraftServerClass.getDeclaredMethod("getCommandMap");
+			getCommandMapMethod = Objects.requireNonNull(CraftServerClass).getDeclaredMethod("getCommandMap");
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
 
-		getCommandMapMethod.setAccessible(true);
+		Objects.requireNonNull(getCommandMapMethod).setAccessible(true);
 		try {
 			getKnownCommandsField = SimpleCommandMap.class.getDeclaredField("knownCommands");
 		} catch (NoSuchFieldException e) {
@@ -56,7 +57,7 @@ public class CommandsRegistrar {
 	}
 
 	public void registerCommand(Command cmd) {
-		getCommandMap().register(cmd.getLabel(), cmd);
+		Objects.requireNonNull(getCommandMap()).register(cmd.getLabel(), cmd);
 		Logger.getInstance().log("Register command with label " + cmd.getLabel());
 	}
 
@@ -71,7 +72,7 @@ public class CommandsRegistrar {
 		removeKnownCommand(cmd.getLabel());
 
 
-		cmd.unregister(getCommandMap());
+		cmd.unregister(Objects.requireNonNull(getCommandMap()));
 
 		Logger.getInstance().log("Unregistered command " + cmd.getLabel());
 

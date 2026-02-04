@@ -7,6 +7,6 @@ import java.util.Map;
 
 public class CommandsBoard extends HashMap<String, CustomCommand> {
 
-	public Map<Integer, CustomCommand> byId = new HashMap<>();
+	public final Map<Integer, CustomCommand> byId = new HashMap<>();
 
 }

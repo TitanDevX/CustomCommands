@@ -13,7 +13,7 @@ import java.io.File;
 
 public class CmdCmdCreate extends TitanSubCommand {
 
-	CustomCommandsPlugin plugin;
+	final CustomCommandsPlugin plugin;
 	public Yaml defaults;
 
 	public CmdCmdCreate(CustomCommandsPlugin plugin) {

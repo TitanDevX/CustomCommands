@@ -10,7 +10,7 @@ import me.titan.customcommands.log.Logger;
 
 public class CmdReload extends TitanSubCommand {
 
-	CustomCommandsPlugin plugin;
+	final CustomCommandsPlugin plugin;
 	public Yaml defaults;
 
 	public CmdReload(CustomCommandsPlugin plugin) {
@@ -53,7 +53,7 @@ public class CmdReload extends TitanSubCommand {
 		plugin.getMessagesConfig().init();
 		PluginUpdateManager.init(CustomCommandsPlugin.getPlugin());
 		plugin.getUpdateManager().getVersion((vr) -> {
-			if(!plugin.getUpdateManager().isUpToDate(vr)){
+			if(plugin.getUpdateManager().isUpToDate(vr)){
 				Logger.getInstance().logEmpty("----------------------------------",
 						"You are running an outdated version of CustomCommands!",
 						"Please update to " + vr + "!","----------------------------------"

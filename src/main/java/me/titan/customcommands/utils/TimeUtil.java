@@ -79,8 +79,7 @@ public class TimeUtil {
 		/**
 		 * Return the current date formatted as DAY.MONTH.YEAR HOUR:MINUTES:SECONDS
 		 *
-		 * @return
-		 */
+         */
 		public static String getFormattedDate() {
 			return getFormattedDate(System.currentTimeMillis());
 		}
@@ -89,9 +88,7 @@ public class TimeUtil {
 		 * Return the given date in millis formatted as
 		 * DAY.MONTH.YEAR HOUR:MINUTES:SECONDS
 		 *
-		 * @param time
-		 * @return
-		 */
+         */
 		public static String getFormattedDate(final long time) {
 			return DATE_FORMAT.format(time);
 		}
@@ -99,8 +96,7 @@ public class TimeUtil {
 		/**
 		 * Return the current date formatted as DAY.MONTH.YEAR HOUR:MINUTES
 		 *
-		 * @return
-		 */
+         */
 		public static String getFormattedDateShort() {
 			return DATE_FORMAT_SHORT.format(System.currentTimeMillis());
 		}
@@ -109,9 +105,7 @@ public class TimeUtil {
 		 * Return the given date in millis formatted as
 		 * DAY.MONTH.YEAR HOUR:MINUTES
 		 *
-		 * @param time
-		 * @return
-		 */
+         */
 		public static String getFormattedDateShort(final long time) {
 			return DATE_FORMAT_SHORT.format(time);
 		}
@@ -120,9 +114,7 @@ public class TimeUtil {
 		 * Return the given date in millis formatted as
 		 * dd.MM HH:mm
 		 *
-		 * @param time
-		 * @return
-		 */
+         */
 		public static String getFormattedDateMonth(final long time) {
 			return DATE_FORMAT_MONTH.format(time);
 		}
@@ -200,9 +192,7 @@ public class TimeUtil {
 		 * <p>
 		 * "1 hour 50 minutes 10 seconds" or similar, or less
 		 *
-		 * @param seconds
-		 * @return
-		 */
+         */
 		public static String formatTimeGeneric(final long seconds) {
 			final long second = seconds % 60;
 			long minute = seconds / 60;
@@ -222,9 +212,7 @@ public class TimeUtil {
 		/**
 		 * Format time in "X days Y hours Z minutes Å seconds"
 		 *
-		 * @param seconds
-		 * @return
-		 */
+         */
 		public static String formatTimeDays(final long seconds) {
 			final long minutes = seconds / 60;
 			final long hours = minutes / 60;
@@ -237,9 +225,7 @@ public class TimeUtil {
 		 * Format the time in seconds, for example: 10d 5h 10m 20s or just 5m 10s
 		 * If the seconds are zero, an output 0s is given
 		 *
-		 * @param seconds
-		 * @return
-		 */
+         */
 		public static String formatTimeShort(long seconds) {
 			long minutes = seconds / 60;
 			long hours = minutes / 60;
@@ -254,12 +240,10 @@ public class TimeUtil {
 
 		/**
 		 * Convert the given string token into milliseconds
-		 *
+		 * <p>
 		 * Example: 1y, 1mo, 1w, 1d, 1h, 1m, 1s and these can all be combined together
 		 *
-		 * @param text
-		 * @return
-		 */
+         */
 		public static long parseToken(String text) {
 			final Matcher matcher = TOKEN_PATTERN.matcher(text);
 
@@ -319,7 +303,7 @@ public class TimeUtil {
 								minutes = output;
 							}
 
-							else if (i == 7) {
+							else {
 								checkLimit("seconds", output, 60 * 100);
 
 								seconds = output;

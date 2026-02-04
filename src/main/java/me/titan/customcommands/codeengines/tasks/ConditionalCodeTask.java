@@ -9,9 +9,7 @@ public class ConditionalCodeTask extends CodeTask {
 
 	@Override
 	public void execute() {
-//		List<String> trueC = getCodes().get("True");
-//		List<String> falseC = getCodes().get("False");
 
 
-	}
+    }
 }

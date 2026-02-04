@@ -8,7 +8,7 @@ import me.titan.customcommands.core.CustomCommandsPlugin;
 
 public class CmdCmdEdit extends TitanSubCommand {
 
-	CustomCommandsPlugin plugin;
+	final CustomCommandsPlugin plugin;
 
 	public CmdCmdEdit(CustomCommandsPlugin plugin) {
 		super("edit");

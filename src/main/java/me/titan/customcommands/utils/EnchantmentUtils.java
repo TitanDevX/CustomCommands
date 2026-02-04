@@ -11,135 +11,135 @@ public class EnchantmentUtils {
 		try {
 			enchants.put("SHARPNESS", Enchantment.DAMAGE_ALL);
 
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 
 		}
 		try {
 			enchants.put("POWER", Enchantment.ARROW_DAMAGE);
 
 
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 
 
 		}
 		try {
 			enchants.put("FIRE_PROTECTION", Enchantment.PROTECTION_FIRE);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("FEATHER_FALLING", Enchantment.PROTECTION_FALL);
 
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("PROTECTION", Enchantment.PROTECTION_ENVIRONMENTAL);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("BLAST_PROTECTION", Enchantment.PROTECTION_EXPLOSIONS);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("PROJECTILE_PROTECTION", Enchantment.PROTECTION_PROJECTILE);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("RESPIRATION", Enchantment.OXYGEN);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("INFINITY", Enchantment.ARROW_INFINITE);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 
 		try {
 			enchants.put("AQUA_AFFINITY", Enchantment.WATER_WORKER);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 
 		try {
 			enchants.put("UNBREAKING", Enchantment.DURABILITY);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 
 		try {
 			enchants.put("SMITE", Enchantment.DAMAGE_UNDEAD);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 
 		try {
 			enchants.put("EFFICIENCY", Enchantment.DIG_SPEED);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 
 		try {
 			enchants.put("FIRE_ASPECT", Enchantment.FIRE_ASPECT);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("SILK_TOUCH", Enchantment.SILK_TOUCH);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 
 		try {
 			enchants.put("FORTUNE", Enchantment.LOOT_BONUS_BLOCKS);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("LOOTING", Enchantment.LOOT_BONUS_MOBS);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("PUNCH", Enchantment.ARROW_KNOCKBACK);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("FLAME", Enchantment.ARROW_FIRE);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("KNOCKBACK", Enchantment.KNOCKBACK);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("THORNS", Enchantment.THORNS);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("MENDING", Enchantment.MENDING);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("DEPTH_STRIDER", Enchantment.DEPTH_STRIDER);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("FROST_WALKER", Enchantment.FROST_WALKER);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("CHANNELING", Enchantment.CHANNELING);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("RIPTIDE", Enchantment.RIPTIDE);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("BINDING_CURSE", Enchantment.BINDING_CURSE);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("IMPALING", Enchantment.IMPALING);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("LOYALTY", Enchantment.LOYALTY);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 		try {
 			enchants.put("LUCK", Enchantment.LUCK);
-		} catch (NoSuchFieldError e) {
+		} catch (NoSuchFieldError ignored) {
 		}
 	}
 

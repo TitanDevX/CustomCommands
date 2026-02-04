@@ -37,6 +37,9 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 	void setUses(int uses);
 
+	void setUsesResetTime(long time);
+	long getUsesResetTime();
+
 	Map<String, Integer> getUsesPerPermission();
 
 	void setUsesPerPermission(Map<String, Integer> uses);
@@ -79,21 +82,30 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 
 
-	default String formatArgRequester(String cmd, CommandContext con, Map<Integer, Object> parsedArgs) {
+	default String formatArgRequester(String cmd, CommandContext con, Map<String, Object> parsedArgs) {
 		int optionalStarting = getRawRequiredArgs().size();
 
-		for (int i : parsedArgs.keySet()) {
-			String str = "{arg:" + i + "}";
+		for (String it : parsedArgs.keySet()) {
+			String[] names = it.split(":");
+			String str = "{arg:" + names[0] + "}";
+			String str2 = "{" + names[1] + "}";
 
-			if (cmd.contains(str)) {
+			int i = Integer.parseInt(names[0]);
+			boolean contains1 = cmd.contains(str);
+			if (contains1 || cmd.contains(str2) ) {
 
 				String arg = con.args[i];
 				if (getRequiredArgsMap().get(i).getValue().equalsIgnoreCase("message")) {
 
 
-					arg = (String) parsedArgs.get(i);
+					arg = (String) parsedArgs.get(it);
 				}
-				cmd = cmd.replace(str, arg);
+				if(contains1){
+					cmd = cmd.replace(str, arg);
+				}else {
+					cmd = cmd.replace(str2, arg);
+				}
+
 
 
 			}
@@ -105,13 +117,16 @@ public interface AdvancedCustomCommand extends CustomCommand {
 			cmd = cmd.replace("{Player}", con.player.getName());
 		}
 		if (CustomCommandsPlugin.getPlugin().checkPlaceHolderApiHook()) {
-			cmd = PlaceholderAPI.setPlaceholders(con.player, cmd);
+			if(con.isPlayer()){
+				cmd = PlaceholderAPI.setPlaceholders(con.player, cmd);
+			}else
+			  cmd = PlaceholderAPI.setPlaceholders(Bukkit.getOnlinePlayers().stream().findFirst().orElse(null),cmd) ;
 		}
 
 		return cmd;
 	}
 
-	default void doCmd(String cmd, CommandContext con, Map<Integer, Object> parsedArgs, ExecuteOperation op) {
+	default void doCmd(String cmd, CommandContext con, Map<String, Object> parsedArgs, ExecuteOperation op) {
 
 
 		cmd = formatArgRequester(cmd, con, parsedArgs);
@@ -132,7 +147,7 @@ public interface AdvancedCustomCommand extends CustomCommand {
 				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(id);
 
 
-				if(!cond.isTrue(con.player,con.args)) return;
+				if(con.isPlayer() && cond.isTrue(con.player, con.args)) return;
 				cmd = cmd.replace(cmd.substring(0,ind+1),"");
 
 			}
@@ -185,7 +200,7 @@ public interface AdvancedCustomCommand extends CustomCommand {
 
 	}
 
-	default void sendMessage(String msg, CommandContext con, Map<Integer, Object> parsedArgs, ExecuteOperation op) {
+	default void sendMessage(String msg, CommandContext con, Map<String, Object> parsedArgs, ExecuteOperation op) {
 		if (ReplyMessageMethod.findAndExecute(msg, op) != null) return;
 		msg = formatArgRequester(msg, con, parsedArgs);
 		if (msg == null) return;
@@ -206,7 +221,7 @@ public interface AdvancedCustomCommand extends CustomCommand {
 				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(id);
 
 
-				if(!cond.isTrue(con.player,con.args)) return;
+				if(con.isPlayer() && cond.isTrue(con.player, con.args)) return;
 				msg = msg.replace(msg.substring(0,ind+1),"");
 
 			}

@@ -12,7 +12,7 @@ public class MessagesConfig extends TitanConfig {
 	public Method enum_values;
 	public Method messages_put;
 
-	Class<? extends MessagesEnum> enumer;
+	final Class<? extends MessagesEnum> enumer;
 
 	public MessagesConfig(JavaPlugin plugin, Class<? extends MessagesEnum> en) {
 		super("messages.yml", plugin);

@@ -10,82 +10,82 @@ import org.bukkit.entity.Player;
 
 public class CommandContext {
 
-	final public CommandSender sender;
-	final public Player player;
-	public String[] args;
+    final public CommandSender sender;
+    final public Player player;
+    public String[] args;
 
-	public boolean foundError = false;
+    public boolean foundError = false;
 
 
-	public CommandContext(CommandSender sender, Player player, String[] args) {
-		this.sender = sender;
-		this.player = player;
-		this.args = args;
-	}
+    public CommandContext(CommandSender sender, Player player, String[] args) {
+        this.sender = sender;
+        this.player = player;
+        this.args = args;
+    }
 
-	public static CommandContext of(CommandSender sender,  String[] args) {
-		Player p = null;
-		if (sender instanceof Player) {
-			p = (Player) sender;
-		}
-		return new CommandContext(sender, p, args);
-	}
+    public static CommandContext of(CommandSender sender, String[] args) {
+        Player p = null;
+        if (sender instanceof Player) {
+            p = (Player) sender;
+        }
+        return new CommandContext(sender, p, args);
+    }
 
-	public boolean isPlayer() {
-		return player != null;
-	}
+    public boolean isPlayer() {
+        return player != null;
+    }
 
-	public void tell(String... msg) {
+    public void tell(String... msg) {
 
-		Common.tell(sender, msg);
-	}
+        Common.tell(sender, msg);
+    }
 
-	public <T> T readArg(int index, Class<T> clazz, T defaults) {
+    public <T> T readArg(int index, Class<T> clazz, T defaults) {
 
-		String arg = args[index];
-		if (clazz == int.class || clazz == Integer.class) {
-			int i = readInt(arg);
-			return i == -1 ? defaults : clazz.cast(i);
-		} else if (clazz == OfflinePlayer.class) {
-			return clazz.cast(Bukkit.getOfflinePlayer(arg));
-		} else if (clazz == Player.class) {
-			Player p = Bukkit.getPlayer(arg);
-			if (p == null) {
-				if (defaults == null) {
-					tell(Messages.Player_Is_Not_Online.getReplaced("{arg}", arg));
-					foundError = true;
-					return null;
-				} else {
-					return defaults;
-				}
-			}
-			return clazz.cast(p);
-		}
-		return defaults;
-	}
+        String arg = args[index];
+        if (clazz == int.class || clazz == Integer.class) {
+            int i = readInt(arg);
+            return i == -1 ? defaults : clazz.cast(i);
+        } else if (clazz == OfflinePlayer.class) {
+            return clazz.cast(Bukkit.getOfflinePlayer(arg));
+        } else if (clazz == Player.class) {
+            Player p = Bukkit.getPlayer(arg);
+            if (p == null) {
+                if (defaults == null) {
+                    tell(Messages.Player_Is_Not_Online.getReplaced("{arg}", arg));
+                    foundError = true;
+                    return null;
+                } else {
+                    return defaults;
+                }
+            }
+            return clazz.cast(p);
+        }
+        return defaults;
+    }
 
-	public OfflinePlayer readOfflinePlayer(String arg) {
-		return Bukkit.getOfflinePlayer(arg);
-	}
+    public OfflinePlayer readOfflinePlayer(String arg) {
+        return Bukkit.getOfflinePlayer(arg);
+    }
 
-	public Player reaPlayer(String arg) {
-		Player p = Bukkit.getPlayer(arg);
-		if (p == null) {
+    public Player reaPlayer(String arg) {
+        Player p = Bukkit.getPlayer(arg);
+        if (p == null) {
 
-			tell(Messages.Player_Is_Not_Online.getReplaced("{arg}", arg));
-			foundError = true;
-			return null;
+            tell(Messages.Player_Is_Not_Online.getReplaced("{arg}", arg));
+            foundError = true;
+            return null;
 
-		}
-		return p;
-	}
+        }
+        return p;
+    }
 
-	public int readInt(String arg) {
-		if (!Util.isInteger(arg)) {
-			foundError = true;
-			return -1;
-		}
+    public int readInt(String arg) {
+        if (!Util.isInteger(arg)) {
+            foundError = true;
+            return -1;
+        }
 
-		return Integer.parseInt(arg);
-	}
+        return Integer.parseInt(arg);
+    }
 }

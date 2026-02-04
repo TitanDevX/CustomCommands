@@ -7,14 +7,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class TitanConfig  {
 
 
-	JavaPlugin plugin;
-	File file;
-	protected YamlConfiguration config;
+	final JavaPlugin plugin;
+	final File file;
+	protected final YamlConfiguration config;
 
 	String pathPrefix;
 	public TitanConfig(String fileName, JavaPlugin plugin) {
@@ -39,7 +40,7 @@ public class TitanConfig  {
 	}
 
 	public Set<String> singleLayerKeySet(String path){
-		return config.getConfigurationSection(getPathPrefix() + path).getKeys(false);
+		return Objects.requireNonNull(config.getConfigurationSection(getPathPrefix() + path)).getKeys(false);
 	}
 	public Object get(String path){
 		return config.get(getPathPrefix() + path);

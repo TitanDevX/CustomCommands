@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Replacer {
 
-	Map<String, String> result = new HashMap<>();
+	final Map<String, String> result = new HashMap<>();
 
 	public Replacer(String... strs) {
 

@@ -7,7 +7,7 @@ public class Tags {
 	public enum Command {
 		CONSOLE(), PLAYER, PLAYER_CERTAIN(1), ALL_ONLINE(),
 		ALL_ONLINE_CONSOLE;
-		int argsAmount;
+		final int argsAmount;
 
 		Command(int argsAmount) {
 			this.argsAmount = argsAmount;
@@ -17,7 +17,7 @@ public class Tags {
 			this.argsAmount = 0;
 		}
 
-		public static Object[] EMPTY_OBJECTS_ARRAY = new Object[0];
+		public static final Object[] EMPTY_OBJECTS_ARRAY = new Object[0];
 
 		public static Object[] getCommandTagData(String cmd) {
 			Command tag = null;
@@ -48,7 +48,7 @@ public class Tags {
 	}
 	public enum Message {
 		BROADCAST, SEND_OTHER(1);
-		int argsAmount;
+		final int argsAmount;
 
 		Message(int argsAmount) {
 			this.argsAmount = argsAmount;
@@ -58,7 +58,7 @@ public class Tags {
 			this.argsAmount = 0;
 		}
 
-		public static Object[] EMPTY_OBJECTS_ARRAY = new Object[0];
+		public static final Object[] EMPTY_OBJECTS_ARRAY = new Object[0];
 
 		public static Object[] getCommandTagData(String cmd) {
 			Message tag = null;

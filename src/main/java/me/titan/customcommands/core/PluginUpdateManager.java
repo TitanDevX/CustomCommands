@@ -17,19 +17,17 @@ import java.util.function.Consumer;
 public class PluginUpdateManager {
 
 	private static final List<String> features = Arrays.asList(
-			"Fixed bugs with command cooldown."
-			, "Added custom commands in game edit commands!",
-			"Changed default commands.yml",
-			"Added bypass permission for cmd cooldown.",
-			"Other Bugs fixing."
+			"Fixed bugs with console execution"
+			, "Removed annoying debug messages",
+			"Assured 1.17 support",
+			"Other Bugs fixing.",
+			"Released on 13th June, 2021"
 	);
 	public static boolean updated = false;
-	private final Json json;
-	String lastVersion;
+    String lastVersion;
 
 	private PluginUpdateManager(Json json) {
-		this.json = json;
-		String current = CustomCommandsPlugin.getPlugin().getDescription().getVersion();
+        String current = CustomCommandsPlugin.getPlugin().getDescription().getVersion();
 
 		updated = false;
 		if (!json.contains("LastVersion")) {
@@ -77,7 +75,7 @@ public class PluginUpdateManager {
 
 
 		int c = compare(current, vr);
-		return c >= 0;
+		return c < 0;
 	}
 	public static int compare(String v1, String v2){
 
@@ -95,7 +93,7 @@ public class PluginUpdateManager {
 			}else if(l2 < i && l1 >= i){
 				return 1;
 			}
-			if(l2 < i && l1 < i){
+			if(l2 < i){
 				return 0;
 			}
 			int arg1 = Integer.parseInt(args1[i]);

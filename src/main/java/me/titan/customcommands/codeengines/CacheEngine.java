@@ -12,8 +12,8 @@ import java.util.*;
 
 public class CacheEngine {
 
-	public static Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
-	public static Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+	public static final Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
+	public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
 	Map<String, Set<Class<?>>> playersMethodCache = new HashMap<>();
 	// player.isOnline. player.teleport
@@ -38,12 +38,10 @@ public class CacheEngine {
 					type = "W";
 				}
 
-			} else if (type.equals("P")) {
-
 			}
 
 
-		}
+        }
 		return null;
 	}
 
@@ -77,8 +75,7 @@ public class CacheEngine {
 				currentLocation = new StringBuilder(arg);
 				locArgs++;
 				maxLocArgs = 4;
-				continue;
-			} else if (arg.startsWith("L2:") && (currentLocation.length() == 0)) {
+            } else if (arg.startsWith("L2:") && (currentLocation.length() == 0)) {
 				arg = arg.replace("L2:", "");
 				currentLocation = new StringBuilder(arg);
 				locArgs++;
@@ -102,17 +99,12 @@ public class CacheEngine {
 					classesList.add(int.class);
 					objectsList.add(Integer.parseInt(arg));
 					currentListsIndex++;
-				} else if (true) { //(Valid.isDecimal(arg.replace("__", "."))) {
+				} else { //(Valid.isDecimal(arg.replace("__", "."))) {
 
 					classesList.add(Double.class);
 					objectsList.add(Double.parseDouble(arg.replace("__", ".")));
 					deprecatedTypesIndexes.put(Double.class, currentListsIndex);
 
-					currentListsIndex++;
-				} else {
-					classesList.add(String.class);
-					objectsList.add(arg);
-					deprecatedTypesIndexes.put(String.class, currentListsIndex);
 					currentListsIndex++;
 				}
 

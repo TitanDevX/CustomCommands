@@ -21,6 +21,8 @@ public enum Messages implements MessagesEnum {
 			, "&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-&4-&6-"),
 	Player_Is_Not_Online("&cPlayer {arg} is not online!"),
 	Cannot_Use_Command_Limited("&4You are not allowed to run this command more than {cmdUses} times!"),
+	You_Can_Use_This_Command_In("&cYou can use this command again in {time}."),
+
 	Cooldown("&4&lERROR &cplease wait {time}!");
 
 
@@ -28,14 +30,14 @@ public enum Messages implements MessagesEnum {
 
 	boolean isList;
 
-	List<String> defaults = new ArrayList<>();
+	final List<String> defaults = new ArrayList<>();
 
 	Messages(String path, String... defaults) {
 		this.path = path;
 		this.defaults.addAll(Arrays.asList(defaults));
 	}
 
-	public static Map<Messages, List<String>> messages = new HashMap<>();
+	public static final Map<Messages, List<String>> messages = new HashMap<>();
 
 	Messages(boolean isList, String... defaults) {
 		this.path = name().replace("__", ".");
@@ -66,10 +68,7 @@ public enum Messages implements MessagesEnum {
 	}
 
 	public String get() {
-//		if(messages.isEmpty()){
-//			((CustomCommandsPlugin) Bukkit.getPluginManager().getPlugin("CustomCommands")).getCommandsConfig().init();
-//		}
-		return getList().get(0);
+        return getList().get(0);
 
 	}
 
@@ -87,7 +86,7 @@ public enum Messages implements MessagesEnum {
 			msgs = defaults;
 		}
 		if (msgs == null) {
-			msgs = Arrays.asList("&kAbCd&r&bSending this default message because no default message has been set for message " + name() + "!");
+			msgs = Collections.singletonList("&kAbCd&r&bSending this default message because no default message has been set for message " + name() + "!");
 		}
 		return msgs;
 	}

@@ -3,8 +3,8 @@ package me.titan.customcommands.utils;
 
 public class ObjectsSet<FIRST, SECOND> {
 
-	FIRST first;
-	SECOND second;
+	final FIRST first;
+	final SECOND second;
 	public ObjectsSet(FIRST first, SECOND second){
 		this.first = first;
 		this.second = second;

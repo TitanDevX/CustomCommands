@@ -56,6 +56,9 @@ CustomAdvancedCommand:
   # Optional, the default value for this is -1 (unlimited).
   Uses: 2
 
+  # This will reset uses per player of this command every a period of time.
+  ResetUsesEvery: 1 hour
+
   # Limit the use of this command per permission, overrides 'Uses' value if the player has one of the permissions.
   # Optional.
   UsesPerPermission:

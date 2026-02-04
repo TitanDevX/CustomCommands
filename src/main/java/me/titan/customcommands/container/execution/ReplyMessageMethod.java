@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class ReplyMessageMethod {
 
-	public static Map<String, ReplyMessageMethod> commandMethods = new HashMap<>();
+	public static final Map<String, ReplyMessageMethod> commandMethods = new HashMap<>();
 
 	static {
 		DefaultReplyMessageMethods.load();
@@ -44,7 +44,7 @@ public abstract class ReplyMessageMethod {
 			}
 		};
 
-		ReplyMessageMethod instance;
+		final ReplyMessageMethod instance;
 
 		DefaultReplyMessageMethods() {
 			instance = new ReplyMessageMethod(name()) {

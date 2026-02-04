@@ -15,13 +15,13 @@ public abstract class TitanCommand extends Command {
 
 	public static String[] EMPTY_STRING_ARRAY = new String[0];
 	public final CommandRequirements requirements = new CommandRequirements();
-	List<TitanSubCommand> actualSubCommands = new ArrayList<>();
-	Map<String, TitanSubCommand> subCommands = new HashMap<>();
+	final List<TitanSubCommand> actualSubCommands = new ArrayList<>();
+	final Map<String, TitanSubCommand> subCommands = new HashMap<>();
 
 	boolean changed;
 	String cachedUsage;
 
-	int drag = 0;
+	final int drag = 0;
 	//cmd sub1 sub2 <arg0> <arg1> cmd
 
 	protected TitanCommand(String name) {
@@ -31,7 +31,7 @@ public abstract class TitanCommand extends Command {
 	}
 
 	@Override
-	public final boolean register(CommandMap commandMap) {
+	public final boolean register(@NotNull CommandMap commandMap) {
 		boolean b = super.register(commandMap);
 		if (!b) return false;
 		registerSubCommands();
@@ -57,7 +57,7 @@ public abstract class TitanCommand extends Command {
 
 	public void doExecute(CommandContext con){
 		CommandRequirements.CmdCheckResult checkResult = requirements.check(con.sender, con.args);
-		if (!checkPerms(con.sender, getPermission())) return;
+		if (checkPerms(con.sender, getPermission())) return;
 
 		if (checkResult.notPlayer) {
 			Common.tell(con.sender, Messages.Must_Be_Player.get());
@@ -79,13 +79,13 @@ public abstract class TitanCommand extends Command {
 				Common.tell(con.sender, getHelpMessage(con.sender));
 				return;
 			}
-			String sub = con.args[0+drag].toLowerCase();
+			String sub = con.args[drag].toLowerCase();
 			if (!subCommands.containsKey(sub)) {
 				Common.tell(con.sender, getHelpMessage(con.sender));
 				return;
 			}
 			TitanSubCommand cmd = subCommands.get(sub);
-			if (!checkPerms(con.sender, cmd.getPermission())) return;
+			if (checkPerms(con.sender, cmd.getPermission())) return;
 			con.args = Arrays.copyOfRange(con.args, 1+drag, con.args.length);
 			CommandRequirements.CmdCheckResult subCheckResult = cmd.requirements.check(con.sender, con.args);
 			if (subCheckResult.notPlayer) {
@@ -103,7 +103,7 @@ public abstract class TitanCommand extends Command {
 		changed = false;
 	}
 	@Override
-	public final boolean execute(CommandSender sender, String commandLabel, String[] args) {
+	public final boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
 		CommandContext con = CommandContext.of(sender, args);
 
 		doExecute(con);
@@ -121,9 +121,9 @@ public abstract class TitanCommand extends Command {
 			} else {
 				Common.tell(sender, getPermissionMessage());
 			}
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public void notifyChange() {
@@ -203,19 +203,19 @@ public abstract class TitanCommand extends Command {
 	}
 
 	@Override
-	public String getUsage() {
+	public @NotNull String getUsage() {
 
 
 		StringBuilder req = new StringBuilder();
 		StringBuilder opt = new StringBuilder();
 
 		for (String a : requirements.requiredArgsCopy) {
-			req.append((req.length() == 0 ? "" : " ") + "<" + a + ">");
+			req.append(req.length() == 0 ? "" : " ").append("<").append(a).append(">");
 		}
 		if (!requirements.optionalArgs.isEmpty()) {
 			req.append(" ");
 			for (String a : requirements.optionalArgs) {
-				opt.append((opt.length() == 0 ? "" : " ") + "<" + a + ">");
+				opt.append(opt.length() == 0 ? "" : " ").append("<").append(a).append(">");
 			}
 		}
 		usageMessage = "/" + getLabel() + " " + req + opt;
@@ -237,7 +237,7 @@ public abstract class TitanCommand extends Command {
 			if (!subCommands.isEmpty()) {
 				List<String> strs = new ArrayList<>();
 				for (String str : subCommands.keySet()) {
-					if (str.startsWith(args[0+drag])) {
+					if (str.startsWith(args[drag])) {
 						strs.add(str);
 					}
 					//strs.add(str);

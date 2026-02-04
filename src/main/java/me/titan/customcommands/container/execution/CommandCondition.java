@@ -46,43 +46,43 @@ public class CommandCondition {
 				}
 			}
 			if(av.contains("{arg:")){
-				return false;
+				return true;
 			}
 
 			boolean b = false;
 			if(type == ConditionType.PAPI_INT){
 				if(comp.isEmpty()){
-					return Double.parseDouble(av) == Double.parseDouble( v);
+					return Double.parseDouble(av) != Double.parseDouble(v);
 				}else if(comp.equals(">")){
-					return Double.parseDouble(av) >= Double.parseDouble( v);
+					return !(Double.parseDouble(av) >= Double.parseDouble(v));
 
 				}else if(comp.equals("!")){
-					return Double.parseDouble(av) != Double.parseDouble( v);
+					return Double.parseDouble(av) == Double.parseDouble(v);
 				}else {
-					return Double.parseDouble(av) <= Double.parseDouble( v);
+					return !(Double.parseDouble(av) <= Double.parseDouble(v));
 				}
 
 			}else if(type == ConditionType.PAPI_STRING){
 				if(comp.isEmpty()){
-					return av.equals(v);
-				}else if(comp.equals("!")){
 					return !av.equals(v);
+				}else if(comp.equals("!")){
+					return av.equals(v);
 				}
 
 			}else {
 				if(comp.isEmpty()){
-					return Boolean.parseBoolean(av) == Boolean.parseBoolean(v);
-				}else if(comp.equals("!")){
 					return Boolean.parseBoolean(av) != Boolean.parseBoolean(v);
+				}else if(comp.equals("!")){
+					return Boolean.parseBoolean(av) == Boolean.parseBoolean(v);
 				}
 
 			}
 
 
 		}else if(type == ConditionType.HAS_PERMISSION){
-			return p.hasPermission(value.trim());
+			return !p.hasPermission(value.trim());
 		}
-		return true;
+		return false;
 
 	}
 

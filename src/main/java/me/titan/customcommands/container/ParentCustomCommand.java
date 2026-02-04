@@ -16,7 +16,7 @@ public class ParentCustomCommand extends TitanCommand implements CustomCommand {
 	List<String> helpMessageFooter = null;
 
 
-	List<SubCustomCommand> subCustomCommands = new ArrayList<>();
+	final List<SubCustomCommand> subCustomCommands = new ArrayList<>();
 
 	public ParentCustomCommand(String label) {
 		super(label);

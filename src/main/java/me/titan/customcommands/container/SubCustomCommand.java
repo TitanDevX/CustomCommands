@@ -35,6 +35,8 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 	long cooldown;
 	int id;
 	int uses = -1;
+	long usesResetTime;
+
 	Map<String, Integer> usesPerPerm;
 
 	public SubCustomCommand(String name) {
@@ -47,7 +49,17 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 		this.id = id;
 	}
 
-	public static String[] EMPTY_STRING_ARRAY = new String[0];
+	public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+	@Override
+	public long getUsesResetTime() {
+		return usesResetTime;
+	}
+
+	@Override
+	public void setUsesResetTime(long usesResetTime) {
+		this.usesResetTime = usesResetTime;
+	}
 
 	@Override
 	public long getCooldown() {
@@ -228,11 +240,9 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 		if (isParent()) return;
 
 
-		Map<Integer, Object> parsedArgs = new HashMap<>();
-
 		if (con.isPlayer()) {
 			PlayerCache pc = PlayerCache.getPlayerCache(con.player);
-			if (!pc.checkUses(this)) {
+			if (pc.checkUses(this)) {
 				Common.tell(con.sender,
 						Messages.Cannot_Use_Command_Limited.
 								getReplaced("{cmdUses}", pc.getUsesAd(this) + ""));
@@ -240,15 +250,17 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 			}
 			pc.IncreaseUses(this);
 			long cooldown = pc.checkCooldown(this);
-			if(cooldown != -1){
+			if (cooldown != -1) {
 				con.tell(Messages.Cooldown.getReplaced("{time}", Util.formatTime(cooldown)));
-				return ;
+				return;
 			}
-			for(int conId : getConditions()){
+
+			for (int conId : getConditions()) {
 
 				CommandCondition cond = CustomCommandsPlugin.getPlugin().getConditionsConfig().getConditions().get(conId);
-				if(!cond.isTrue(con.player,con.args)) {
-					if(cond.getMessage() != null)
+
+				if (cond.isTrue(con.player, con.args)) {
+					if (cond.getMessage() != null)
 						con.tell(cond.getMessage());
 					return;
 
@@ -257,13 +269,15 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 			}
 
 		}
+		Map<String, Object> parsedArgs = new HashMap<>();
+
 		int i = 0;
 		for (Map.Entry<Integer, Map.Entry<String, String>> en : getRequiredArgsMap().entrySet()) {
 
 			if (con.foundError) return;
 
 			String type = en.getValue().getValue();
-			parsedArgs.put(i, resolveArg(type, i, con));
+			parsedArgs.put(i + ":" + en.getValue().getKey(), resolveArg(type, i, con));
 
 
 			i++;
@@ -279,29 +293,28 @@ public class SubCustomCommand extends TitanSubCommand implements AdvancedCustomC
 			if (con.foundError || con.args.length <= i) break;
 
 			String type = en.getValue().getValue();
-			parsedArgs.put(i, resolveArg(type, i, con));
+			parsedArgs.put(i + ":" + en.getValue().getKey(), resolveArg(type, i, con));
 
 
 			i++;
 
 		}
+		if (con.isPlayer())
+			PlayerCache.getPlayerCache(con.player).getCommandCooldowns().put(getId(),System.currentTimeMillis()/1000);
 
-		if(con.isPlayer())
-		 PlayerCache.getPlayerCache(con.player).getCommandCooldowns().put(getId(),System.currentTimeMillis()/1000);
-		int optionalStarting = getRawRequiredArgs().size();
 
 		// getItem <player> <item> [gg]
 		// give {arg:0} {arg:1}
 
 		new ExecuteOperation(getExecuteCommands()) {
 			@Override
-			public void doAction(String item, CommandContext con, Map<Integer, Object> parsedArgs) {
+			public void doAction(String item, CommandContext con, Map<String, Object> parsedArgs) {
 				SubCustomCommand.this.doCmd(item, con, parsedArgs, this);
 			}
 		}.start(con, parsedArgs);
-		new ExecuteOperation(getReplyMessages()) {
+        new ExecuteOperation(getReplyMessages()) {
 			@Override
-			public void doAction(String item, CommandContext con, Map<Integer, Object> parsedArgs) {
+			public void doAction(String item, CommandContext con, Map<String, Object> parsedArgs) {
 				SubCustomCommand.this.sendMessage(item, con, parsedArgs, this);
 			}
 		}.start(con, parsedArgs);

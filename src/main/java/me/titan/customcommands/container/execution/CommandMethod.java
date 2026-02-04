@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class CommandMethod {
 
-	public static Map<String, CommandMethod> commandMethods = new HashMap<>();
+	public static final Map<String, CommandMethod> commandMethods = new HashMap<>();
 	String name;
 
 	static {
@@ -43,7 +43,7 @@ public abstract class CommandMethod {
 			}
 		};
 
-		CommandMethod instance;
+		final CommandMethod instance;
 
 		DefaultCommandMethods() {
 			instance = new CommandMethod(name()) {

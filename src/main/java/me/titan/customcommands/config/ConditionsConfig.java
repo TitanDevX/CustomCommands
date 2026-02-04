@@ -12,7 +12,7 @@ public class ConditionsConfig extends TitanConfig {
 
 
 
-	Map<Integer, CommandCondition> conditions = new HashMap<>();
+	final Map<Integer, CommandCondition> conditions = new HashMap<>();
 	public ConditionsConfig(JavaPlugin plugin) {
 		super("conditions.yml", plugin);
 		init();
